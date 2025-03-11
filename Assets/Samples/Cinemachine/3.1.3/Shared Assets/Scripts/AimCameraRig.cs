@@ -29,7 +29,7 @@ namespace Unity.Cinemachine.Samples
         /// want it to work everywhere.
         void IInputAxisOwner.GetInputAxes(List<IInputAxisOwner.AxisDescriptor> axes)
         {
-            axes.Add(new () { DrivenAxis = () => ref AimMode, Name = "Aim" });
+            axes.Add(new () { DrivenAxis = () => ref AimMode, Name = "Idle" });
         }
 
         protected override void Start()

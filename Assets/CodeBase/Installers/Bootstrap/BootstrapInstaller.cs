@@ -3,9 +3,11 @@ using CodeBase.Gameplay.AbilitySystem;
 using CodeBase.Gameplay.AbilitySystem.StatSystem.StatModifiers;
 using CodeBase.Gameplay.Cameras;
 using CodeBase.Gameplay.Cameras.Shake;
+using CodeBase.Gameplay.Common;
 using CodeBase.Gameplay.Common.Damage;
 using CodeBase.Gameplay.Common.Services.Raycast;
 using CodeBase.Gameplay.Common.Time;
+using CodeBase.Gameplay.Common.Timer;
 using CodeBase.Gameplay.Effects;
 using CodeBase.Gameplay.Enemies;
 using CodeBase.Gameplay.Enemies.Factory;
@@ -19,7 +21,7 @@ using CodeBase.Gameplay.Quest.Services;
 using CodeBase.Gameplay.Shootables.Factory;
 using CodeBase.Gameplay.Shootables.Services;
 using CodeBase.Gameplay.Shootables.States;
-using CodeBase.Gameplay.Shootables.States.Transitions;
+using CodeBase.Gameplay.Shootables.States.Conditionals;
 using CodeBase.Gameplay.Shootables.Switcher;
 using CodeBase.Gameplay.Sounds;
 using CodeBase.Gameplay.TargetSelectors;
@@ -63,6 +65,8 @@ namespace CodeBase.Installers.Bootstrap
             BindShootStateMachineAndStates();
             BindHeroStateMachineAndStates();
 
+            Container.BindInterfacesTo<UpdateService>().AsSingle();
+            
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this);
         }
@@ -95,7 +99,26 @@ namespace CodeBase.Installers.Bootstrap
             Container.BindInterfacesAndSelfTo<AimIdleState>().AsSingle(); 
             Container.BindInterfacesAndSelfTo<IdleState>().AsSingle(); 
             Container.BindInterfacesAndSelfTo<ReloadState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<IdleFocusState>().AsSingle();
 
+            BindShootTransition();
+
+            Container.BindInterfacesAndSelfTo<CanAimShootCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CanNoAimShootCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CanReloadCondition>().AsSingle();
+            Container.BindInterfacesTo<ConditionalFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<MovingOnGroundCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<NeedReloadingCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<NoMouseButtonInputCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<OnGroundCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<IsAimingCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<HasAxisInputConditional>().AsSingle();
+            Container.BindInterfacesAndSelfTo<IsShootingCondition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<HasIdleFocusCondition>().AsSingle();
+        }
+
+        private void BindShootTransition()
+        {
             Container.BindInterfacesAndSelfTo<ReloadTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<AimIdleTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<MovementTransition>().AsSingle();
@@ -103,6 +126,7 @@ namespace CodeBase.Installers.Bootstrap
             Container.BindInterfacesAndSelfTo<AimShootTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<IdleTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<AimMovementTransition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<IdleFocusTransition>().AsSingle();
             
             Container.Bind<ITransitionFactory>().To<TransitionFactory>().AsSingle();
         }
@@ -115,6 +139,7 @@ namespace CodeBase.Installers.Bootstrap
         private void BindGameplayServices()
         {
             Container.Bind<ITargetSelector>().To<TargetSelector>().AsSingle();
+            Container.BindInterfacesTo<TimerService>().AsTransient();
             Container.Bind<ITimeService>().To<UnityTimeService>().AsSingle();
             Container.Bind<IDamageService>().To<DamageService>().AsSingle();
             Container.BindInterfacesTo<StatService>().AsSingle();
@@ -141,6 +166,7 @@ namespace CodeBase.Installers.Bootstrap
         {
             Container.Bind<IShootFactory>().To<ShootFactory>().AsSingle();
             Container.BindInterfacesTo<ShootService>().AsSingle();
+            Container.BindInterfacesTo<ShootReloadService>().AsSingle();
         }
 
         private void BindHeroServices()

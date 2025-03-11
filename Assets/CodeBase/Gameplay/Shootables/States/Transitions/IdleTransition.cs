@@ -1,13 +1,19 @@
-﻿namespace CodeBase.Gameplay.Shootables.States.Transitions
+﻿using CodeBase.Gameplay.Shootables.States.Conditionals;
+
+namespace CodeBase.Gameplay.Shootables.States
 {
-    public sealed class IdleTransition : BaseShootTransition,ITransition
+    public sealed class IdleTransition : BaseShootTransition
     {
-        public bool ShouldTransition()
+        protected override void OnAddCondition()
         {
-            return NoPressedInput() || !OnGround() && NoMouseButtonInput();
+            base.OnAddCondition();
+            
+            AddConditional<IsShootingCondition>(true);
+            //AddConditional<IsAimingCondition>(true);
+            //AddConditional<HasAxisInputConditional>(true);
         }
 
-        public void MoveToTargetState()
+        public override void MoveToTargetState()
         {
             ShootStateMachine.Enter<IdleState>();
         }

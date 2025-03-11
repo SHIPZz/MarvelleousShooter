@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
 
@@ -21,7 +20,6 @@ namespace CodeBase.Gameplay.Shootables.States
 
         public void Enter()
         {
-            _shootService.Aimer.Aim();
             _shootService.CurrentShoot.StartShooting();
         }
 
@@ -30,8 +28,7 @@ namespace CodeBase.Gameplay.Shootables.States
             if (!_inputService.IsAiming())
                 _shootService.Aimer.StopAim();
 
-            if (!_inputService.IsShooting())
-                _shootService.CurrentShoot.StopShooting();
+            _shootService.CurrentShoot.StopShooting();
         }
     }
 }

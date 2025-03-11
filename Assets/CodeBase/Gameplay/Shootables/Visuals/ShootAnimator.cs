@@ -21,6 +21,8 @@ namespace CodeBase.Gameplay.Shootables.Visuals
         IdleFocus = 11,
         AimShoot = 12,
         Get = 13,
+        AimIdle = 14,
+        AimWalk = 15,
     }
 
     public enum TransitionTypeId
@@ -60,11 +62,13 @@ namespace CodeBase.Gameplay.Shootables.Visuals
         public ClipTransition GetClip(AnimationTypeId id) => _animationClips.GetValueOrDefault(id);
 
         public AnimancerComponent Animancer => _animancer;
-        
+
+        public bool AnimationPlaying(AnimationTypeId id) => _animationStates[id].IsPlaying;
+
         private void Awake()
         {
             InitLayers();
-            
+
             FillAnimationStates();
         }
 
@@ -76,65 +80,36 @@ namespace CodeBase.Gameplay.Shootables.Visuals
             if (!_animationClips.TryGetValue(animationTypeId, out var clip))
                 throw new Exception("no animation");
 
-            AnimancerState state = _animancer.Play(clip, fadeDuration,fadeMode);
+            AnimancerState state = _animancer.Play(clip, fadeDuration, fadeMode);
 
             _animationStates[animationTypeId] = state;
 
             await state;
         }
 
-        [Button]
-        public async UniTask StopAnimation(AnimationTypeId animationTypeId, int layer, float fadeDuration = 0.2f)
-        {
-            // if (_animationStates.TryGetValue(animationTypeId, out AnimancerState state))
-            // {
-            //     _layers[layer].StartFade(0, fadeDuration);
-            //     await UniTask.WaitForSeconds(fadeDuration);
-            // }
-        }
-
         public UniTask StartShooting() => StartAnimation(AnimationTypeId.Shoot, ShootingLayer, 0.1f);
-
-        public void StopShooting() => StopAnimation(AnimationTypeId.Shoot, ShootingLayer, 0.1f);
 
         public UniTask StartReloading() => StartAnimation(AnimationTypeId.Reload, ReloadLayer);
 
-        public void StopReloading() => StopAnimation(AnimationTypeId.Reload, ReloadLayer);
-        
-        public UniTask StartGetting() => StartAnimation(AnimationTypeId.Get, BaseLayer,0.2f);
-
-        public UniTask StopGetting() => StopAnimation(AnimationTypeId.Get, BaseLayer,0.2f);
+        public UniTask StartGetting() => StartAnimation(AnimationTypeId.Get, BaseLayer, 0.2f);
 
         public UniTask StartWalking() => StartAnimation(AnimationTypeId.Walk, MovementLayer);
 
-        public void StopWalking() => StopAnimation(AnimationTypeId.Walk, MovementLayer);
-
         public UniTask StartRunning() => StartAnimation(AnimationTypeId.Run, MovementLayer);
-
-        public void StopRunning() => StopAnimation(AnimationTypeId.Run, MovementLayer);
 
         public void SetMoveSpeed(float moveSpeed) => _animancer.Parameters.SetValue(_moveSpeed, moveSpeed);
 
-        public UniTask StartAim() => PlayLayerTransition(AimLayer, TransitionTypeId.AimMove);
+        public UniTask StartAim() => StartAnimation(AnimationTypeId.AimIdle, AimLayer);
 
-        public void StopAim() => _layers[AimLayer].StartFade(0, fadeDuration: 0.1f);
-
+        public UniTask StartAimWalk() => StartAnimation(AnimationTypeId.AimWalk, AimLayer);
 
         public UniTask StartIdleFocus() => StartAnimation(AnimationTypeId.IdleFocus, IdleLayer, 0.2f);
 
         public UniTask StartAimShooting() => StartAnimation(AnimationTypeId.AimShoot, ShootingLayer);
 
-        public void StopAimShooting() => StopAnimation(AnimationTypeId.AimShoot, AimLayer);
-
-        public void StopIdleFocus() => StopAnimation(AnimationTypeId.IdleFocus, IdleLayer, 0.2f);
-        
         public UniTask StartIdle() => StartAnimation(AnimationTypeId.Idle, IdleLayer, 0.2f);
 
-        public void StopIdle() => StopAnimation(AnimationTypeId.Idle, IdleLayer, 0.2f);
-
-        public UniTask StartHiding() => StartAnimation(AnimationTypeId.Hide, HideLayer,0.2f);
-        
-        public UniTask StopHiding() => StopAnimation(AnimationTypeId.Hide, HideLayer, 0.2f);
+        public UniTask StartHiding() => StartAnimation(AnimationTypeId.Hide, HideLayer, 0.2f);
 
         private UniTask PlayLayerTransition(int layerId, TransitionTypeId transitionId, float fadeDuration = 0.25f) =>
             _layers[layerId].Play(_transitionAssets[transitionId], fadeDuration).ToUniTask();

@@ -20,6 +20,7 @@ namespace CodeBase.Gameplay.Input
         private readonly Subject<Unit> _rightMouseButtonDown = new Subject<Unit>();
         private readonly Subject<Unit> _rightMouseButtonUp = new Subject<Unit>();
         private readonly Subject<Unit> _reloadPressed = new Subject<Unit>();
+        private readonly Subject<Unit> _gunFocusRequested = new Subject<Unit>();
         private readonly Subject<bool> _axisInput = new Subject<bool>();
 
         public IObservable<Unit> OnLeftMouseButtonDown => _leftMouseButtonDown;
@@ -28,6 +29,8 @@ namespace CodeBase.Gameplay.Input
         public IObservable<Unit> OnRightMouseButtonUp => _rightMouseButtonUp;
         public IObservable<Unit> OnReloadPressed => _reloadPressed;
         public IObservable<bool> OnHasAxisAxisInput => _axisInput;
+        
+        public IObservable<Unit> OnGunFocusRequested => _gunFocusRequested;
 
         public IObservable<ShootInputTypeId> OnShootSelected => _shootSelected;
 
@@ -48,6 +51,9 @@ namespace CodeBase.Gameplay.Input
 
             if (ReloadPressed)
                 _reloadPressed?.OnNext(Unit.Default);
+            
+            if(GunFocusPressed)
+                _gunFocusRequested?.OnNext(default);
 
             CheckLeftMouseButton();
             CheckRightMouseButton();
@@ -70,6 +76,7 @@ namespace CodeBase.Gameplay.Input
 
         public bool HasAxisInput() => GetHorizontalAxis() != 0 || GetVerticalAxis() != 0;
 
+
         public float GetVerticalAxis() => UnityEngine.Input.GetAxis("Vertical");
 
         public float GetHorizontalAxis() => UnityEngine.Input.GetAxis("Horizontal");
@@ -88,6 +95,7 @@ namespace CodeBase.Gameplay.Input
 
         public bool IsAiming() =>
             UnityEngine.Input.GetMouseButton(1);
+
 
         public bool GetRightMouseButtonDown() => UnityEngine.Input.GetMouseButtonDown(1);
 
@@ -148,5 +156,7 @@ namespace CodeBase.Gameplay.Input
                     _shootSelected?.OnNext(shootInputTypeId);
             }
         }
+
+        private static bool GunFocusPressed => UnityEngine.Input.GetKey(KeyCode.F);
     }
 }

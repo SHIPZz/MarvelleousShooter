@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
 
@@ -20,7 +19,7 @@ namespace CodeBase.Gameplay.Shootables.States
 
         public void Enter()
         {
-            _shootService.Aimer.Aim();
+            _shootService.Aimer.Idle();
             _heroService.HeroMovement.StopAll();
         }
 

@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.Shootables.Factory
                     .With(x => x.GetComponent<DamageDealer>().Init(config.DamagePerHit))
                     .With(x => x.ShootInterval = config.ShootInterval)
                     .With(x => x.Id = config.ShootTypeId)
-                    .With(x => x.MarkShootingActive(false))
+                    .With(x => x.MarkShootingAvailable(true))
                     .With(x => x.ShowInputKey = config.ShowKey)
                 ;
 
@@ -49,8 +49,6 @@ namespace CodeBase.Gameplay.Shootables.Factory
             var animator = SetupAnimator(createdShoot, reloadAmmoCount);
 
             createdShoot.GetComponent<OnShootAnimationPlayer>().Init(config);
-
-            _shootService.IsShootingAvailable = true;
             
             return createdShoot.With(x => x.Init(config.ShootDistance, config.Mask));
         }

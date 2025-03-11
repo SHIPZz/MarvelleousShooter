@@ -4,7 +4,6 @@ using CodeBase.Extensions;
 using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -31,10 +30,9 @@ namespace CodeBase.Gameplay.Shootables.States
 
         public async void Enter(Shoot targetGun)
         {
+            _shootService.MarkShootingAvailable(false);
             TransitionAvailable = false;
             
-            _shootService.IsShootingAvailable = false;
-
             try
             {
                 _targetGun = targetGun;
@@ -76,7 +74,7 @@ namespace CodeBase.Gameplay.Shootables.States
         {
             _cancellationToken.Cleanup();
             _previousGun.ShootAnimator.Animancer.Stop();
-            _shootService.IsShootingAvailable = true;
+            _shootService.MarkShootingAvailable(true);
         }
 
         private void ResetToken()

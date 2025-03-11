@@ -1,10 +1,10 @@
 ﻿using Zenject;
 
-namespace CodeBase.Gameplay.Shootables.States.Transitions
+namespace CodeBase.Gameplay.Shootables.States
 {
     public interface ITransitionFactory
     {
-        T Get<T>() where T : class, ITransition;
+        T Get<T>() where T : BaseShootTransition;
     }
 
     public class TransitionFactory : ITransitionFactory
@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Shootables.States.Transitions
             _diContainer = diContainer;
         }
         
-        public T Get<T>() where T : class, ITransition
+        public T Get<T>() where T : BaseShootTransition
         {
             return _diContainer.Resolve<T>();
         }

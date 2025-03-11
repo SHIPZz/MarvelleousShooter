@@ -26,7 +26,7 @@ namespace CodeBase.Gameplay.Heroes.Services
 
         public HeroMovement HeroMovement => _heroMovement;
 
-        public bool IsOnGround => _characterMovement.isOnGround;
+        public bool IsOnGround =>  _characterMovement.isOnGround;
 
         public HeroService(ILevelDataProvider levelDataProvider,
             IHeroFactory heroFactory,

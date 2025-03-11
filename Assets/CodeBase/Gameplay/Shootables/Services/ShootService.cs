@@ -13,12 +13,14 @@ namespace CodeBase.Gameplay.Shootables.Services
 {
     public class ShootService : IShootService, IDisposable
     {
-        private CancellationTokenSource _cancellationToken = new();
         private readonly ShootConfigs _shootConfigs;
+        private readonly IInputService _inputService;
+        private CancellationTokenSource _cancellationToken = new();
         private ReloadAmmoCount _reloadAmmoCount;
         private Recoil _recoil;
         private int _ammoCountFromConfig;
-        private IInputService _inputService;
+        private AmmoCount _ammoCount;
+        private ShootConfig _config;
 
         public ShootService(ShootConfigs shootConfigs, IInputService inputService)
         {
@@ -33,11 +35,13 @@ namespace CodeBase.Gameplay.Shootables.Services
         public bool StopShootAfterAnimPlayed { get; private set; }
         public bool CanRunAndShooting { get; private set; }
 
-        public bool IsPlayingAnimation(AnimationTypeId animationTypeId) => Animator.IsPlaying(animationTypeId);
-
         public ShootAnimator Animator { get; set; }
+        
+        public ReloadAmmoCount ReloadAmmoCount => _reloadAmmoCount;
 
         public bool IsReloading { get; set; }
+        
+        public bool IsFocusing { get; set; }
 
         public bool Reloadable { get; private set; }
 
@@ -45,14 +49,15 @@ namespace CodeBase.Gameplay.Shootables.Services
         
         public bool IsAiming => _inputService.IsAiming() && CanShootWithAim;
 
-        public bool SameAmmoCount => AmmoCount.Value == _ammoCountFromConfig;
+        public bool SameAmmoCount => _ammoCount.Value == _ammoCountFromConfig;
 
-        public bool IsShootingAvailable { get; set; }
-        
+        public bool IsShooting => CurrentShoot.IsShooting;
+        public bool IsShootingAvailable => CurrentShoot.IsShootingAvailable;
+
         public OnShootAnimationPlayer OnShootAnimationPlayer { get; private set; }
-
-        public AmmoCount AmmoCount { get; private set; }
-
+        
+        public bool CanAim => _config != null && _config.CanAim;
+        public bool HasIdleFocus => _config != null && _config.HasIdleFocus;
         public bool NoAmmo => _reloadAmmoCount != null && _reloadAmmoCount.NoAmmo;
 
         public void SetCurrentShoot(Shoot shoot)
@@ -61,44 +66,30 @@ namespace CodeBase.Gameplay.Shootables.Services
             Animator = shoot.GetComponent<ShootAnimator>();
             Aimer = shoot.GetComponent<ShootAimer>();
             _reloadAmmoCount = shoot.GetComponent<ReloadAmmoCount>();
-            AmmoCount = shoot.GetComponent<AmmoCount>();
+            _ammoCount = shoot.GetComponent<AmmoCount>();
             OnShootAnimationPlayer = shoot.GetComponent<OnShootAnimationPlayer>();
             _recoil = shoot.GetComponent<Recoil>();
 
-            ShootConfig shootConfig = _shootConfigs.GetById(shoot.Id);
-            Reloadable = shootConfig.Reloadable;
+             _config = _shootConfigs.GetById(shoot.Id);
+            
+            Reloadable = _config.Reloadable;
 
             if (!Reloadable)
                 IsReloading = false;
 
-            CanShootWithAim = shootConfig.CanShotWithAim;
-            CanRunAndShooting = shootConfig.CanRunAndShoot;
-            _ammoCountFromConfig = shootConfig.AmmoCount;
-            StopShootAfterAnimPlayed = shootConfig.NeedFullAnimationPlay;
+            CanShootWithAim = _config.CanAim;
+            CanRunAndShooting = _config.CanRunAndShoot;
+            _ammoCountFromConfig = _config.AmmoCount;
+            StopShootAfterAnimPlayed = _config.NeedFullAnimationPlay;
         }
 
-        public void Reload(Action onComplete = null)
-        {
-            ReloadAsync(_ammoCountFromConfig,onComplete).Forget();
-        }
+        public void MarkShootingAvailable(bool isAvailable) => CurrentShoot.MarkShootingAvailable(isAvailable);
 
-        public void StopReloading()
-        {
-            if (!_cancellationToken.IsCancellationRequested)
-                _cancellationToken?.Cancel();
+        public void Reload(Action onComplete = null) => ReloadAsync(_ammoCountFromConfig,onComplete).Forget();
 
-            _cancellationToken?.Dispose();
-        }
+        public float GetDistance() => _config.ShootDistance;
 
-        public float GetDistance()
-        {
-            return _shootConfigs.GetById(CurrentShoot.Id).ShootDistance;
-        }
-
-        public LayerMask GetMask()
-        {
-            return _shootConfigs.GetById(CurrentShoot.Id).Mask;
-        }
+        public LayerMask GetMask() => _config.Mask;
 
         private async UniTaskVoid ReloadAsync(int ammoCount, Action onComplete = null)
         {
@@ -120,8 +111,7 @@ namespace CodeBase.Gameplay.Shootables.Services
             {
                 Animator.StartReloading();
                 await _reloadAmmoCount.DoAsync(_cancellationToken.Token);
-                Animator.StopReloading();
-                AmmoCount?.Increase(ammoCount);
+                _ammoCount?.Increase(ammoCount);
                 IsReloading = false;
                 onComplete?.Invoke();
             }

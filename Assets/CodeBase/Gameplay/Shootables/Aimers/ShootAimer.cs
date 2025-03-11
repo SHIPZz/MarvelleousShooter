@@ -24,20 +24,15 @@ namespace CodeBase.Gameplay.Shootables.Aimers
                 .Subscribe(_ => AimShoot()).AddTo(this);
         }
 
-        public void Aim()
+        public void Idle()
         {
-            if(_isAiming)
-                return;
-            
             _shootAnimator.StartAim();
             _isAiming = true;
         }
 
-        public void StopAim()
-        {
-            _shootAnimator.StopAim();
-            _isAiming = false;
-        }
+        public void Walk() => _shootAnimator.StartAimWalk();
+
+        public void StopAim() => _isAiming = false;
 
         private void AimShoot() => _shootAnimator.StartAimShooting();
     }

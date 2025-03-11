@@ -20,13 +20,13 @@ namespace CodeBase.Gameplay.Shootables.Configs
         public ShootInputTypeId ShowKey;
 
         public bool Reloadable = true;
-        public bool CanHaveAmmo;
         
         public bool NeedFullAnimationPlay;
 
-        public bool CanShotWithAim = true;
+        public bool CanAim = true;
         public bool CanRunAndShoot;
         public float ShootDistance = 100f;
         public LayerMask Mask;
+        public bool HasIdleFocus;
     }
 }

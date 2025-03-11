@@ -1,11 +1,8 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
-using CodeBase.InfraStructure.States.StateMachine.Async;
-using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Gameplay.Shootables.States
 {
@@ -15,25 +12,22 @@ namespace CodeBase.Gameplay.Shootables.States
             IHeroService heroService, ITransitionFactory transitionFactory) : base(inputService, shootService,
             shootStateMachine, heroService, transitionFactory)
         {
-            
+            AddTransition<IdleTransition>();
+            AddTransition<AimMovementTransition>();
+            AddTransition<AimIdleTransition>();
+            AddTransition<MovementTransition>();
+            AddTransition<ShootTransition>();
         }
 
         public void Enter()
         {
+            TransitionAvailable = false;
             TryReload();
         }
 
         public void Exit()
         {
-            
-        }
-
-        private void EnterIdleState()
-        {
-            if (_shootService.IsAiming)
-                _shootStateMachine.Enter<AimMovementState>();
-            else
-                _shootStateMachine.Enter<MovementState>();
+            _shootService.CurrentShoot.MarkShootingAvailable(true);
         }
 
         private void TryReload()
@@ -46,8 +40,8 @@ namespace CodeBase.Gameplay.Shootables.States
                 _heroService.HeroMovement.StopAll();
                 _shootService.Aimer.StopAim();
                 _shootService.CurrentShoot.StopShooting();
-
-                _shootService.Reload(onComplete: EnterIdleState);
+                _shootService.CurrentShoot.MarkShootingAvailable(false);
+                _shootService.Reload(onComplete: () => TransitionAvailable = true);
             }
         }
     }

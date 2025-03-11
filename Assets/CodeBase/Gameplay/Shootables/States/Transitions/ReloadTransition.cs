@@ -1,36 +1,21 @@
-﻿using UniRx;
+﻿using CodeBase.Gameplay.Shootables.States.Conditionals;
+using UniRx;
 
-namespace CodeBase.Gameplay.Shootables.States.Transitions
+namespace CodeBase.Gameplay.Shootables.States
 {
-    public sealed class ReloadTransition : BaseShootTransition,ITransition
+    public sealed class ReloadTransition : BaseShootTransition
     {
         private bool _reloadRequested;
 
-        public override void Initialize()
+        protected override void OnAddCondition()
         {
-            base.Initialize();
-
-            InputService.OnReloadPressed.Subscribe(_ => ProcessReloadRequest()).AddTo(CompositeDisposable);
+            AddConditional<CanReloadCondition>();
+            AddConditional<NeedReloadingCondition>();
         }
 
-        public bool ShouldTransition()
+        public override void MoveToTargetState()
         {
-            return ShootService.NoAmmo
-                   && !ShootService.IsReloading
-                   && ShootService.Reloadable
-                   || _reloadRequested;
-        }
-
-        public void MoveToTargetState()
-        {
-            _reloadRequested = false;
             ShootStateMachine.Enter<ReloadState>();
-        }
-
-        private void ProcessReloadRequest()
-        {
-            if (!ShootService.SameAmmoCount && !ShootService.IsReloading && ShootService.Reloadable)
-                _reloadRequested = true;
         }
     }
 }

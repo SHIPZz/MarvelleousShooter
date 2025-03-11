@@ -1,10 +1,9 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
-using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Shootables.States
 {
@@ -36,6 +35,7 @@ namespace CodeBase.Gameplay.Shootables.States
 
         private void AnimateRunning()
         {
+            Debug.Log($"run");
             if (_inputService.IsRunningPressed())
                 _heroService.HeroMovement.Run();
         }
@@ -44,8 +44,11 @@ namespace CodeBase.Gameplay.Shootables.States
         {
             
         }
+        
         public void Enter()
         {
+            AnimateWalking();
+            AnimateRunning();
         }
     }
 }

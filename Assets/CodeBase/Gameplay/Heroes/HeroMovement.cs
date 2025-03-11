@@ -23,10 +23,6 @@ namespace CodeBase.Gameplay.Heroes
         private float _animatorSpeed;
         private float _targetAnimatorSpeed;
 
-        private bool _isMoving;
-        private bool _stopped;
-        private bool _isIdle;
-
         private void Update()
         {
             _animatorSpeed = Mathf.Lerp(_animatorSpeed, _targetAnimatorSpeed, _animateSpeed * _timeService.DeltaTime);
@@ -38,7 +34,6 @@ namespace CodeBase.Gameplay.Heroes
             EnableMovement();
             _shootAnimator.StartWalking();
             _targetAnimatorSpeed = WalkingAnimSpeed;
-            _isMoving = true;
         }
 
         public void Run()
@@ -47,7 +42,6 @@ namespace CodeBase.Gameplay.Heroes
 
             _shootAnimator.StartRunning();
             _targetAnimatorSpeed = RunningAnimSpeed;
-            _isMoving = true;
         }
 
         public void StopAll()
@@ -58,35 +52,19 @@ namespace CodeBase.Gameplay.Heroes
         private void StopMoving()
         {
             _targetAnimatorSpeed = 0;
-            _isMoving = false;
-            _isIdle = false;
-            _stopped = true;
         }
 
         public void EnableMovement()
         {
             if (!_characterMovement.enabled)
                 _characterMovement.enabled = true;
-
-            _stopped = false;
         }
 
         public void Idle()
         {
-            if (_isIdle)
-                return;
-
             StopMoving();
 
             _shootAnimator.StartIdle();
-            _isIdle = true;
-            _stopped = false;
-        }
-
-        public void StopIdle()
-        {
-            _stopped = true;
-            _isIdle = false;
         }
     }
 }

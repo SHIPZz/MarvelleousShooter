@@ -1,13 +1,10 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
+using CodeBase.Gameplay.Shootables.States.Conditionals;
 using CodeBase.Gameplay.Shootables.Visuals;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
-using CodeBase.InfraStructure.States.StateMachine.Async;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace CodeBase.Gameplay.Shootables.States
 {
@@ -39,7 +36,6 @@ namespace CodeBase.Gameplay.Shootables.States
         public void Enter()
         {
             TransitionAvailable = false;
-            _shootService.Aimer.StopAim();
             _heroService.HeroMovement.StopAll();
             _shoot.StartShooting();
         }

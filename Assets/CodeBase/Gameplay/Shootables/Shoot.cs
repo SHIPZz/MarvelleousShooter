@@ -35,7 +35,9 @@ namespace CodeBase.Gameplay.Shootables
         
         private OnShootAnimationPlayer _onShootAnimationPlayer;
 
-        [ShowInInspector] public bool IsActive { get; private set; }
+        [ShowInInspector] public bool IsShooting { get; private set; }
+        
+        [ShowInInspector] public bool IsShootingAvailable { get; private set; }
 
         [field: SerializeField] public float ShootInterval { get; set; }
         [field: SerializeField] public bool NeedAnimationComplete { get; set; }
@@ -66,16 +68,16 @@ namespace CodeBase.Gameplay.Shootables
 
         public void StopShooting()
         {
-            MarkShootingActive(false);
+            IsShooting = false;
             _recoil.ResetRecoil();
             _shootStopEvent?.OnNext(this);
-            Debug.Log($"@@@ shooting anim finished");
+            Debug.Log($"@@@ shooting finished");
         }
 
         public void StartShooting()
         {
             Debug.Log($"@@@: do shoot");
-            MarkShootingActive(true);
+            IsShooting = true;
             _lastShootTime = Time.time;
 
             Vector3 direction = _cameraProvider.Camera.transform.forward;
@@ -88,7 +90,10 @@ namespace CodeBase.Gameplay.Shootables
             _raycastService.ClearRaycastHits();
         }
 
-        public void MarkShootingActive(bool isAvailable) => IsActive = isAvailable;
+        public void MarkShootingAvailable(bool isAvailable)
+        {
+            IsShootingAvailable = isAvailable;
+        }
 
         public void MakeRecoil()
         {
@@ -98,7 +103,8 @@ namespace CodeBase.Gameplay.Shootables
         private bool CanShoot()
         {
             return Time.time >= _lastShootTime + ShootInterval 
-                   && IsActive
+                   && IsShooting
+                   && IsShootingAvailable
                    && _onShootAnimationPlayer.AnimationFinished();
         }
 
@@ -107,7 +113,7 @@ namespace CodeBase.Gameplay.Shootables
             _shootEvent?.OnNext(this);
             _damageDealer.Do(raycastHits.Length, raycastHits);
             _shootHitsEvent?.OnNext(raycastHits);
-            IsActive = true;
+            IsShooting = true;
         }
     }
 }

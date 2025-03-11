@@ -1,15 +1,21 @@
-﻿namespace CodeBase.Gameplay.Shootables.States.Transitions
- {
-     public class AimIdleTransition : BaseShootTransition,ITransition
-     {
-         public virtual bool ShouldTransition()
-         {
-             return  IsAimingWithoutShootInput() || IsAirAiming();
-         }
- 
-         public virtual void MoveToTargetState()
-         {
-             ShootStateMachine.Enter<AimIdleState>();
-         }
-     }
- }
+﻿using CodeBase.Gameplay.Shootables.States.Conditionals;
+
+namespace CodeBase.Gameplay.Shootables.States
+{
+    public sealed class AimIdleTransition : BaseShootTransition
+    {
+        protected override void OnAddCondition()
+        {
+            base.OnAddCondition();
+
+            AddConditional<MovingOnGroundCondition>(true);
+            AddConditional<IsAimingCondition>();
+            AddConditional<IsShootingCondition>(true);
+        }
+
+        public override void MoveToTargetState()
+        {
+            ShootStateMachine.Enter<AimIdleState>();
+        }
+    }
+}

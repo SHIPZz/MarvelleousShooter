@@ -24,7 +24,7 @@ namespace Unity.Cinemachine.Samples
         [Tooltip("Input Axis for firing.  Value is 0 or 1")]
         public InputAxis Fire = InputAxis.DefaultMomentary;
         
-        [Tooltip("Target to Aim towards. If null, the aim is defined by the forward vector of this gameObject.")]
+        [Tooltip("Target to Idle towards. If null, the aim is defined by the forward vector of this gameObject.")]
         public AimTargetManager AimTargetManager;
 
         [Tooltip("Event that's triggered when firing.")]

@@ -1,13 +1,18 @@
-﻿namespace CodeBase.Gameplay.Shootables.States.Transitions
+﻿using CodeBase.Gameplay.Shootables.States.Conditionals;
+
+namespace CodeBase.Gameplay.Shootables.States
 {
-    public sealed class ShootTransition : BaseShootTransition,ITransition
+    public sealed class ShootTransition : BaseShootTransition
     {
-        public bool ShouldTransition()
+        protected override void OnAddCondition()
         {
-            return CanNoAimShoot() || CanShootOnAir();
+            base.OnAddCondition();
+            
+            AddConditional<IsShootingCondition>();
+            AddConditional<IsAimingCondition>(true);
         }
 
-        public void MoveToTargetState()
+        public override void MoveToTargetState()
         {
             ShootStateMachine.Enter<ShootState>();
         }

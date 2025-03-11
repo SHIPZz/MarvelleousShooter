@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Common.Timer;
 using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Transitions;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;
 using UnityEngine;
@@ -18,14 +18,14 @@ namespace CodeBase.Gameplay.Shootables.States
         protected readonly IHeroService _heroService;
         protected readonly ITransitionFactory _transitionFactory;
 
-        private readonly List<ITransition> _transitions = new();
+        private readonly List<BaseShootTransition> _transitions = new();
 
         protected virtual bool TransitionAvailable { get; set; } = true;
-        
+
         protected BaseShootState(IInputService inputService,
             IShootService shootService,
             IShootStateMachine shootStateMachine,
-            IHeroService heroService, 
+            IHeroService heroService,
             ITransitionFactory transitionFactory)
         {
             _inputService = inputService;
@@ -37,37 +37,40 @@ namespace CodeBase.Gameplay.Shootables.States
 
         public void Initialize()
         {
-            _transitions.Add(_transitionFactory.Get<ReloadTransition>());
+            AddImportantTransitions();
         }
 
         public void Update()
         {
-            foreach (ITransition transition in _transitions)
+            OnUpdate();
+            SetUpTransitionAvailability();
+
+            foreach (BaseShootTransition transition in _transitions)
             {
                 if (transition.ShouldTransition() && TransitionAvailable)
                 {
+                    Debug.Log($"{transition.GetType()} - move to state");
                     transition.MoveToTargetState();
                     return;
                 }
             }
-
-            OnUpdate();
-            SetUpTransitionAvailability();
         }
 
         protected virtual void OnUpdate() { }
 
-        protected virtual void SetUpTransitionAvailability()
-        {
-            
-        }
+        protected virtual void SetUpTransitionAvailability() { }
 
-        protected void AddTransition<T>() where T : class, ITransition
+        protected void AddTransition<T>() where T : BaseShootTransition
         {
-            ITransition transition = _transitionFactory.Get<T>();
+            var transition = _transitionFactory.Get<T>();
 
             if (!_transitions.Contains(transition))
                 _transitions.Add(transition);
+        }
+
+        private void AddImportantTransitions()
+        {
+            _transitions.Add(_transitionFactory.Get<ReloadTransition>());
         }
     }
 }
