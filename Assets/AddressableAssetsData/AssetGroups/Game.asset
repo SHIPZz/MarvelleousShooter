@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Game
+  m_EditorClassIdentifier: 
+  m_GroupName: Game
+  m_GUID: 2b09dba4fc14d40438674dc5171355b6
+  m_SerializeEntries:
+  - m_GUID: 0038ddfc3788da545a5dfbfc460c110b
+    m_Address: Game
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - remote
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d79a3dc351ceff488046a6fb0388174
+    m_Address: Assets/ImportResources/Epic Toon FX
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - remote
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65e233d7c0a88d048800134ac6a97391
+    m_Address: Assets/Low Poly Weapons VOL.1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - remote
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e30841e450bd7334fa0352261b62bb07, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4cccd62fe80fe374d9323dbf476b0d4e, type: 2}
+    - {fileID: 11400000, guid: 89bb65aaae2924748991a51e8c609efc, type: 2}
