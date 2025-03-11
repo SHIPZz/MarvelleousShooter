@@ -120,6 +120,7 @@ namespace CodeBase.Installers.Bootstrap
         private void BindShootTransition()
         {
             Container.BindInterfacesAndSelfTo<ReloadTransition>().AsSingle();
+            Container.BindInterfacesAndSelfTo<JumpTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<AimIdleTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<MovementTransition>().AsSingle();
             Container.BindInterfacesAndSelfTo<ShootTransition>().AsSingle();

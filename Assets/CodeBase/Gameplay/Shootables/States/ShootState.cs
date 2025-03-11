@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Heroes.Services;
 using CodeBase.Gameplay.Input;
 using CodeBase.Gameplay.Shootables.Services;
-using CodeBase.Gameplay.Shootables.States.Conditionals;
 using CodeBase.Gameplay.Shootables.Visuals;
 using CodeBase.InfraStructure.States.StateInfrastructure;
 using CodeBase.InfraStructure.States.StateMachine;

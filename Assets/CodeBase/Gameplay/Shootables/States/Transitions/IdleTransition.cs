@@ -9,8 +9,17 @@ namespace CodeBase.Gameplay.Shootables.States
             base.OnAddCondition();
             
             AddConditional<IsShootingCondition>(true);
-            //AddConditional<IsAimingCondition>(true);
-            //AddConditional<HasAxisInputConditional>(true);
+            AddConditional<IsAimingCondition>(true);
+            AddConditional<HasAxisInputConditional>(true);
+        }
+
+        protected override void OnAddOrCondition()
+        {
+            base.OnAddOrCondition();
+            
+            AddOrConditional<OnGroundCondition>(true);
+            AddOrConditional<IsShootingCondition>(true);
+            AddOrConditional<IsAimingCondition>(true);
         }
 
         public override void MoveToTargetState()

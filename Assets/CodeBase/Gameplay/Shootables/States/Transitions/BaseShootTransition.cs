@@ -15,6 +15,7 @@ public abstract class BaseShootTransition : IInitializable, IDisposable
     protected CompositeDisposable CompositeDisposable = new();
 
     private readonly List<ICondition> _conditions = new();
+    private readonly List<ICondition> _orConditions = new();
 
     [Inject] protected IShootService ShootService;
     [Inject] protected IInputService InputService;
@@ -26,6 +27,7 @@ public abstract class BaseShootTransition : IInitializable, IDisposable
     public virtual void Initialize()
     {
         OnAddCondition();
+        OnAddOrCondition();
     }
 
     protected bool ConditionMet<T>() where T : ICondition => ConditionalFactory.Get<T>().IsMet();
@@ -34,8 +36,26 @@ public abstract class BaseShootTransition : IInitializable, IDisposable
     {
         AddConditional<NeedReloadingCondition>(true);
     }
+    
+    protected virtual void OnAddOrCondition()
+    {
+        
+    }
 
     protected T GetCondition<T>() where T : ICondition => ConditionalFactory.Get<T>();
+    
+    protected void AddOrConditional<T>(bool isInverted = false) where T : ICondition
+    {
+        ICondition targetCondition = ConditionalFactory.Get<T>();
+
+        if (_orConditions.Contains(targetCondition))
+            return;
+
+        if (isInverted)
+            targetCondition = new InvertedCondition(targetCondition);
+
+        _orConditions.Add(targetCondition);
+    }
 
     protected void AddConditional<T>(bool isInverted = false) where T : ICondition
     {
@@ -52,7 +72,7 @@ public abstract class BaseShootTransition : IInitializable, IDisposable
 
     public abstract void MoveToTargetState();
 
-    public virtual bool ShouldTransition() => _conditions.All(x => x.IsMet());
+    public virtual bool ShouldTransition() => _conditions.All(x => x.IsMet()) || (_orConditions.Count > 0 && _orConditions.All(x => x.IsMet()));
 
     public virtual void Dispose() => CompositeDisposable?.Dispose();
 }
