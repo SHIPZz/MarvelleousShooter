@@ -9,6 +9,8 @@ namespace CodeBase.Gameplay.Shootables.States
             base.OnAddCondition();
             
             AddConditional<NoMouseButtonInputCondition>();
+            AddConditional<IsShootingCondition>(true);
+            AddConditional<IsAimingCondition>(true);
             AddConditional<MovingOnGroundCondition>();
             AddConditional<OnGroundCondition>();
         }

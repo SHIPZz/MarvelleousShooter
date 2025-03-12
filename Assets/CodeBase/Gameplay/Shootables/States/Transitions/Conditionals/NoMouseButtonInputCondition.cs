@@ -11,6 +11,6 @@ namespace CodeBase.Gameplay.Shootables.States.Conditionals
             _inputService = inputService;
         }
 
-        public bool IsMet() => !_inputService.IsShooting() && !_inputService.IsAiming();
+        public bool IsMet() => !_inputService.IsShooting() || !_inputService.IsAiming();
     }
 }

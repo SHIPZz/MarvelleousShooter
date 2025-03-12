@@ -14,11 +14,14 @@ namespace CodeBase.Gameplay.Shootables.Factory
         private readonly ShootConfigs _shootConfigs;
         private readonly IInstantiator _instantiator;
         private readonly IShootService _shootService;
+        private IShootFocusService _shootFocusService;
 
         public ShootFactory(IInstantiator instantiator,
             IShootService shootService,
+            IShootFocusService shootFocusService,
             ShootConfigs shootConfigs)
         {
+            _shootFocusService = shootFocusService;
             _shootService = shootService;
             _instantiator = instantiator;
             _shootConfigs = shootConfigs;
@@ -37,6 +40,7 @@ namespace CodeBase.Gameplay.Shootables.Factory
                     .With(x => x.GetComponent<DamageDealer>().Init(config.DamagePerHit))
                     .With(x => x.ShootInterval = config.ShootInterval)
                     .With(x => x.Id = config.ShootTypeId)
+                    .With(x => _shootFocusService.AddFocusGun(x), when: config.HasIdleFocus)
                     .With(x => x.MarkShootingAvailable(true))
                     .With(x => x.ShowInputKey = config.ShowKey)
                 ;

@@ -104,7 +104,6 @@ namespace CodeBase.Installers.Bootstrap
             BindShootTransition();
 
             Container.BindInterfacesAndSelfTo<CanAimShootCondition>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CanNoAimShootCondition>().AsSingle();
             Container.BindInterfacesAndSelfTo<CanReloadCondition>().AsSingle();
             Container.BindInterfacesTo<ConditionalFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<MovingOnGroundCondition>().AsSingle();
@@ -167,6 +166,7 @@ namespace CodeBase.Installers.Bootstrap
         {
             Container.Bind<IShootFactory>().To<ShootFactory>().AsSingle();
             Container.BindInterfacesTo<ShootService>().AsSingle();
+            Container.BindInterfacesTo<ShootFocusService>().AsSingle();
             Container.BindInterfacesTo<ShootReloadService>().AsSingle();
         }
 

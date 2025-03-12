@@ -22,15 +22,15 @@ namespace CodeBase.Gameplay.Shootables.States
             ITransitionFactory transitionFactory)
             : base(inputService, shootService, shootStateMachine, heroService, transitionFactory)
         {
-            AddTransition<MovementTransition>();
-            AddTransition<AimMovementTransition>();
             AddTransition<AimIdleTransition>();
+            AddTransition<IdleFocusTransition>();
             AddTransition<IdleTransition>();
+            AddTransition<MovementTransition>();
+            AddTransition<ShootTransition>();
         }
 
         public async void Enter(Shoot targetGun)
         {
-            _shootService.MarkShootingAvailable(false);
             TransitionAvailable = false;
             
             try
@@ -40,6 +40,9 @@ namespace CodeBase.Gameplay.Shootables.States
                 ResetToken();
 
                 _previousGun = _shootService.CurrentShoot;
+                
+                _targetGun.MarkShootingAvailable(false);
+                _previousGun.MarkShootingAvailable(false);
 
                 _previousGun.StopShooting();
                 _targetGun.StopShooting();

@@ -14,6 +14,7 @@ namespace CodeBase.Gameplay.Shootables.States
         {
             AddTransition<MovementTransition>();
             AddTransition<ShootTransition>();
+            AddTransition<IdleFocusTransition>();
             AddTransition<AimIdleTransition>();
         }
 
