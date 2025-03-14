@@ -64,6 +64,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.idea
+
 Assets/ImportResources
 Assets/NeoFPS
 Assets/Scenes

@@ -15,6 +15,13 @@
         "com.unity.modules.animation": "1.0.0"
       }
     },
+    "com.rsg.promises": {
+      "version": "https://github.com/debox-dev/RSG_Promises.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "614405153bedbd99f87630d924b699b3186447d5"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

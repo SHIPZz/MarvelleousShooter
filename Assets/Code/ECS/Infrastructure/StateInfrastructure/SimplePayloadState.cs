@@ -1,0 +1,27 @@
+﻿using RSG;
+
+namespace Code.ECS.Infrastructure.StateInfrastructure
+{
+    public class SimplePayloadState<TPayload> : IPayloadState<TPayload>
+    {
+        public virtual void Enter(TPayload payload)
+        {
+      
+        }
+
+        protected virtual void Exit()
+        {
+      
+        }
+
+        IPromise IPromiseExitableState.BeginExit()
+        {
+            Exit();
+            return Promise.Resolved();
+        }
+
+        void IPromiseExitableState.EndExit()
+        {
+        }
+    }
+}
