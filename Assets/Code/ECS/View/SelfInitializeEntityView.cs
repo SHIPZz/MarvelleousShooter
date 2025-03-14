@@ -1,5 +1,5 @@
-﻿using Code.ECS.Common.Services;
-using Code.ECS.Entity;
+﻿using Code.ECS.Common.Entity;
+using Code.ECS.Common.Services;
 using UnityEngine;
 using Zenject;
 

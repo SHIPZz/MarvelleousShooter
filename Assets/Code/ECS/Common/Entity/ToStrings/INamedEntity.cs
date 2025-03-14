@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace Code.ECS.Entity.ToStrings
+namespace Code.ECS.Common.Entity.ToStrings
 {
   public interface INamedEntity : IEntity
   {

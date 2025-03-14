@@ -1,6 +1,6 @@
 using Code.Data.Services;
 using Code.ECS;
-using Code.ECS.Entity;
+using Code.ECS.Common.Entity;
 using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
 using Code.Extensions;

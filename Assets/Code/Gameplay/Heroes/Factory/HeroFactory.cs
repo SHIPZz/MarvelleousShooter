@@ -1,6 +1,6 @@
 ﻿using Code.Data.Services;
+using Code.ECS.Common.Entity;
 using Code.ECS.Common.Services;
-using Code.ECS.Entity;
 using Code.ECS.View;
 using Code.ECS.View.Factory;
 using Code.Extensions;

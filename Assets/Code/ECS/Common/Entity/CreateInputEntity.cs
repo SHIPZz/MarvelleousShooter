@@ -1,4 +1,4 @@
-﻿namespace Code.ECS.Entity
+﻿namespace Code.ECS.Common.Entity
 {
     public static class CreateInputEntity
     {
