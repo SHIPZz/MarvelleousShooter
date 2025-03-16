@@ -8,12 +8,14 @@ using Code.Gameplay.AbilitySystem;
 using Code.Gameplay.Cameras;
 using Code.Gameplay.Enemies.Services;
 using Code.Gameplay.Heroes;
+using Code.Gameplay.Heroes.Factory;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
 using Code.Gameplay.Shootables.Factory;
 using Code.Gameplay.Shootables.Services;
 using Code.InfraStructure.States.StateMachine;
 using Code.SaveData;
+using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
 
 namespace Code.InfraStructure.States.States
@@ -23,36 +25,31 @@ namespace Code.InfraStructure.States.States
         private readonly ILevelDataProvider _levelDataProvider;
         private readonly ICameraProvider _cameraProvider;
         private readonly IAbilityService _abilityService;
-        private readonly IHeroService _heroService;
+        private readonly IHeroFactory _heroFactory;
         private readonly IShootFactory _shootFactory;
         private readonly IWorldDataService _worldDataService;
-        private readonly IShootService _shootService;
-        private readonly IHeroShootHolderService _heroShootHolderService;
-        private IHeroStateMachine _heroStateMachine;
-        private ISystemFactory _systemFactory;
+        private readonly ISystemFactory _systemFactory;
+        private readonly IHeroRepository _heroRepository;
+        
         private BattleFeature _battleFeature;
 
         public GameState(ILevelDataProvider levelDataProvider,
             ICameraProvider cameraProvider, 
             IAbilityService abilityService, 
-            IShootService shootService,
-            IHeroShootHolderService heroShootHolderService,
             IWorldDataService worldDataService,
             IShootFactory shootFactory,
-            IHeroStateMachine heroStateMachine,
             ISystemFactory systemFactory,
-            IHeroService heroService)
+            IHeroRepository heroRepository, 
+            IHeroFactory heroFactory)
         {
+            _heroRepository = heroRepository;
+            _heroFactory = heroFactory;
             _systemFactory = systemFactory;
-            _heroStateMachine = heroStateMachine;
-            _heroShootHolderService = heroShootHolderService;
-            _shootService = shootService;
             _worldDataService = worldDataService;
             _shootFactory = shootFactory;
             _levelDataProvider = levelDataProvider;
             _cameraProvider = cameraProvider;
             _abilityService = abilityService;
-            _heroService = heroService;
         }
 
         public override void Enter()
@@ -66,14 +63,20 @@ namespace Code.InfraStructure.States.States
             _abilityService.Init();
             WorldData worldData = _worldDataService.Get();
 
-            GameEntity hero = _heroService.CreateHero();
+            GameEntity hero = _heroFactory.Create(null,_levelDataProvider.StartPoint.position,Quaternion.identity);
             
             InitCamera(hero.CameraHolder);
             
-            _shootFactory.Create(hero.CameraHolder.GetComponent<Hero>().WeaponHolder, worldData.PlayerData.LastWeaponId);
+            GameEntity shoot =_shootFactory
+                .Create(hero.CameraHolder.GetComponent<Hero>().WeaponHolder, worldData.PlayerData.LastWeaponId)
+                .With(x => x.isHeroGun = true)
+                ;
             
-            _heroStateMachine.EnterAsync<HeroInitState>();
-
+            hero.AddAnimancerAnimator(shoot.AnimancerAnimator); 
+            
+            _heroRepository.SetCurrentGun(shoot);
+            
+            
             foreach (EnemySpawner enemySpawner in _levelDataProvider.EnemySpawners)
                 enemySpawner.Spawn();
         }
@@ -92,6 +95,9 @@ namespace Code.InfraStructure.States.States
         
         public void Update()
         {
+            if(_battleFeature ==null)
+                return;
+            
             _battleFeature.Execute();
             _battleFeature.Cleanup();
         }

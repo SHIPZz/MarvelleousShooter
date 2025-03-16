@@ -7,6 +7,10 @@ namespace Code.ECS.Gameplay.Features.Input
         public InputFeature(ISystemFactory systems)
         {
             Add(systems.Create<EmitShootInputSystem>());
+            Add(systems.Create<EmitAimInputSystem>());
+            Add(systems.Create<EmitAxisInputSystem>());
+            Add(systems.Create<EmitReloadInputSystem>());
+            Add(systems.Create<EmitRunningInputSystem>());
         }
     }
 }

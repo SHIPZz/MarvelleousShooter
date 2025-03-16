@@ -9,5 +9,6 @@ namespace Code.Gameplay.Heroes.Configs
     {
         public EntityBehaviour Prefab;
         public ShootTypeId InitialWeapon;
+        public float Hp = 100f;
     }
 }

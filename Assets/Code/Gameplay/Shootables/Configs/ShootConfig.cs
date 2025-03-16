@@ -1,4 +1,5 @@
 ﻿using Code.ECS.View;
+using Code.Gameplay.Effects;
 using Code.Gameplay.Heroes.Enums;
 using Code.Gameplay.Shootables.Recoils;
 using Sirenix.OdinInspector;
@@ -29,5 +30,6 @@ namespace Code.Gameplay.Shootables.Configs
         public float ShootDistance = 100f;
         public LayerMask Mask;
         public bool HasIdleFocus;
+        public EffectTypeId HitEffectTypeId = EffectTypeId.GoldSmallFireImpact;
     }
 }

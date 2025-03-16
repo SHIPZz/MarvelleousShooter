@@ -2,7 +2,6 @@
 using Code.Gameplay.Heroes.Enums;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.Input;
-using Code.Gameplay.Shootables.States;
 using Code.InfraStructure.States.StateMachine;
 using UniRx;
 using Zenject;
@@ -42,7 +41,7 @@ namespace Code.Gameplay.Shootables.Switcher
 
             if (!_heroShootHolderService.IsAlreadyActive(shoot))
             { 
-                _shootStateMachine.Enter<SwitchGunState, Shoot>(shoot);
+                // _shootStateMachine.Enter<SwitchGunState, Shoot>(shoot);
             }
         }
     }

@@ -8,7 +8,6 @@
                 return entity;
 
             entity.ReplaceAmmoCountLeft(entity.AmmoCount);
-            entity.ReplaceAmmoCountCurrent(entity.AmmoCount);
 
             return entity;
         }

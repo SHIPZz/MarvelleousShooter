@@ -33,6 +33,19 @@ namespace Code.Gameplay.Common.Services.Raycast
             return hitCount;
         }
         
+        public int GetTargetHitsNonAlloc(out RaycastHit[] hits, Vector3 origin, Vector3 direction, float distance, LayerMask mask)
+        {
+            Ray ray = new Ray(origin, direction);
+
+            int hitCount = Physics.RaycastNonAlloc(ray, _raycastHits, distance, mask);
+
+            System.Array.Sort(_raycastHits, 0, hitCount, new RaycastHitComparer());
+
+            hits = _raycastHits;
+
+            return hitCount;
+        }
+        
         public void ClearRaycastHits()
         {
             for (int i = 0; i < _raycastHits.Length; i++)

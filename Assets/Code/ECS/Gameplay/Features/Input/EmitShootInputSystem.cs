@@ -20,7 +20,6 @@ namespace Code.ECS.Gameplay.Features.Input
             foreach (InputEntity input in _input)
             {
                 input.isShootingPressed = _inputService.IsShooting();
-                input.isAimingPressed = _inputService.IsAiming();
             }
         }
     }

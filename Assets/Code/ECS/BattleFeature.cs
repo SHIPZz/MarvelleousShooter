@@ -1,4 +1,8 @@
-﻿using Code.ECS.Gameplay.Features.Input;
+﻿using Code.ECS.Gameplay.Features.CharacterStats.Systems;
+using Code.ECS.Gameplay.Features.Heroes;
+using Code.ECS.Gameplay.Features.Input;
+using Code.ECS.Gameplay.Features.Lifetime;
+using Code.ECS.Gameplay.Features.Movement;
 using Code.ECS.Gameplay.Features.Shoots;
 using Code.ECS.Systems;
 using Code.ECS.View;
@@ -12,6 +16,11 @@ namespace Code.ECS
             Add(systems.Create<InputFeature>());
             Add(systems.Create<ShootFeature>());
             Add(systems.Create<BindViewFeature>());
+            Add(systems.Create<LifetimeFeature>());
+            Add(systems.Create<MovementFeature>());
+            Add(systems.Create<HeroFeature>());
+            // Add(systems.Create<StatsFeature>());
+            
             //
             // Add(systems.Create<ScaleFeature>());
             // Add(systems.Create<HeroFeature>());

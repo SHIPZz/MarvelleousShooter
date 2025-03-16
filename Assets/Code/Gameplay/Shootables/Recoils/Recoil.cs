@@ -1,8 +1,7 @@
-﻿using Code.Gameplay.Cameras;
+﻿using Code.ECS.Common.Time;
+using Code.Gameplay.Cameras;
 using Code.Gameplay.Cameras.Shake;
 using Code.Gameplay.Common.Animations;
-using Code.Gameplay.Common.Time;
-using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.Input;
 using UnityEngine;
 using Zenject;
@@ -25,16 +24,13 @@ namespace Code.Gameplay.Shootables.Recoils
         private float _verticalRecoil;
         private float _totalHorizontalRecoil;
         private float _totalVerticalRecoil;
-        private IHeroService _heroService;
 
         [Inject]
         private void Construct(ICameraProvider cameraProvider,
             ICameraShakeService cameraShakeService,
             IInputService inputService,
-            IHeroService heroService,
             ITimeService timeService)
         {
-            _heroService = heroService;
             _inputService = inputService;
             _cameraShakeService = cameraShakeService;
             _timeService = timeService;

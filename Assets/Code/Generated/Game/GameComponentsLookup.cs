@@ -27,35 +27,166 @@ public static class GameComponentsLookup {
     public const int ViewPrefab = 16;
     public const int WorldPosition = 17;
     public const int CameraHolder = 18;
-    public const int Enemy = 19;
-    public const int Hero = 20;
-    public const int Aimable = 21;
-    public const int Aiming = 22;
-    public const int AimingRequested = 23;
-    public const int AmmoAvailable = 24;
-    public const int AmmoCount = 25;
-    public const int AmmoCountCurrent = 26;
-    public const int AmmoCountLeft = 27;
-    public const int AvailableShoots = 28;
-    public const int CurrentShootTypeId = 29;
-    public const int GunHasFocus = 30;
-    public const int LastShootTime = 31;
-    public const int NeedAnimationComplete = 32;
-    public const int Reloadable = 33;
-    public const int Reloading = 34;
-    public const int Shootable = 35;
-    public const int ShootAnimationFinished = 36;
-    public const int ShootDistance = 37;
-    public const int ShootHolder = 38;
-    public const int Shooting = 39;
-    public const int ShootingAvailable = 40;
-    public const int ShootingReady = 41;
-    public const int ShootingRequested = 42;
-    public const int ShootInterval = 43;
-    public const int ShootTypeId = 44;
-    public const int ShowInputKey = 45;
+    public const int BaseStats = 19;
+    public const int StatChange = 20;
+    public const int StatModifiers = 21;
+    public const int Cooldown = 22;
+    public const int CooldownLeft = 23;
+    public const int CooldownUp = 24;
+    public const int Dead = 25;
+    public const int DeathAnimationDuration = 26;
+    public const int DeathProcessing = 27;
+    public const int ApplyEffectOnEndPointReached = 28;
+    public const int ApplyStatusOnEndPointReached = 29;
+    public const int DamageEffect = 30;
+    public const int Effect = 31;
+    public const int EffectSetups = 32;
+    public const int EffectTypeId = 33;
+    public const int EffectValue = 34;
+    public const int HealEffect = 35;
+    public const int Processed = 36;
+    public const int ProducerId = 37;
+    public const int PullEffect = 38;
+    public const int TargetId = 39;
+    public const int EnchantHolder = 40;
+    public const int EnchantTypeId = 41;
+    public const int ExplosiveEnchant = 42;
+    public const int HexEnchant = 43;
+    public const int PoisonEnchant = 44;
+    public const int Enemy = 45;
+    public const int FollowDistanceLeft = 46;
+    public const int FollowingUp = 47;
+    public const int FollowMaxDistance = 48;
+    public const int FollowNewCloseTarget = 49;
+    public const int FollowTargetId = 50;
+    public const int LastFollowTargets = 51;
+    public const int CharacterMovement = 52;
+    public const int Hero = 53;
+    public const int HeroGun = 54;
+    public const int Alive = 55;
+    public const int CurrentHp = 56;
+    public const int HpRestored = 57;
+    public const int MaxHp = 58;
+    public const int RestoreHp = 59;
+    public const int Collected = 60;
+    public const int Experience = 61;
+    public const int LootTypeId = 62;
+    public const int PickupRadius = 63;
+    public const int Pullable = 64;
+    public const int Pulling = 65;
+    public const int AnimationCurve = 66;
+    public const int AnimationDuration = 67;
+    public const int CanRun = 68;
+    public const int DestructOnMovingFinished = 69;
+    public const int ElapsedTime = 70;
+    public const int EndPoint = 71;
+    public const int EndPointReached = 72;
+    public const int HeightUpdated = 73;
+    public const int Idle = 74;
+    public const int IdleAvailable = 75;
+    public const int Movable = 76;
+    public const int MovementAnimAvailable = 77;
+    public const int Moving = 78;
+    public const int MovingAvailable = 79;
+    public const int NeedRandomEndPoint = 80;
+    public const int OnGround = 81;
+    public const int OrbitCenterFollowTarget = 82;
+    public const int OrbitCenterPosition = 83;
+    public const int OrbitPhase = 84;
+    public const int OrbitRadius = 85;
+    public const int RotateAlongDirection = 86;
+    public const int Running = 87;
+    public const int RunningAvailable = 88;
+    public const int Speed = 89;
+    public const int StartHeight = 90;
+    public const int TurnAlongDirection = 91;
+    public const int UpdateHeightBySinCurve = 92;
+    public const int Walking = 93;
+    public const int DestructOnMaxPullTargetReached = 94;
+    public const int MaxPullTargetHold = 95;
+    public const int MinCountToPullTargets = 96;
+    public const int PullAnchorTargetId = 97;
+    public const int PullingDetector = 98;
+    public const int PullInRadius = 99;
+    public const int PullProducerId = 100;
+    public const int PullTargetConsistently = 101;
+    public const int PullTargetHolder = 102;
+    public const int PullTargetHolderStatuses = 103;
+    public const int PullTargetLayerMask = 104;
+    public const int PullTargetList = 105;
+    public const int Aimable = 106;
+    public const int Aiming = 107;
+    public const int AimingRequested = 108;
+    public const int AmmoAvailable = 109;
+    public const int AmmoCount = 110;
+    public const int AmmoCountLeft = 111;
+    public const int AmmoDecreased = 112;
+    public const int AvailableShoots = 113;
+    public const int CanRunAndShoot = 114;
+    public const int CurrentShootTypeId = 115;
+    public const int GunHasFocus = 116;
+    public const int HitEffectTypeId = 117;
+    public const int Hits = 118;
+    public const int LastShootTime = 119;
+    public const int NeedAnimationComplete = 120;
+    public const int Reloadable = 121;
+    public const int Reloading = 122;
+    public const int ReloadingFinished = 123;
+    public const int ReloadRequested = 124;
+    public const int ReloadTime = 125;
+    public const int ReloadTimeEnded = 126;
+    public const int ReloadTimeLeft = 127;
+    public const int Shootable = 128;
+    public const int ShootAnimationFinished = 129;
+    public const int ShootDistance = 130;
+    public const int ShootHolder = 131;
+    public const int Shooting = 132;
+    public const int ShootingAvailable = 133;
+    public const int ShootingReady = 134;
+    public const int ShootingRequested = 135;
+    public const int ShootInterval = 136;
+    public const int ShootTypeId = 137;
+    public const int ShowInputKey = 138;
+    public const int Affected = 139;
+    public const int Applied = 140;
+    public const int ApplierStatusLink = 141;
+    public const int CurrentHpStatus = 142;
+    public const int Duration = 143;
+    public const int Freeze = 144;
+    public const int Invulnerable = 145;
+    public const int InvulnerableStatus = 146;
+    public const int MaxHpIncrease = 147;
+    public const int Period = 148;
+    public const int PeriodicDamageStatus = 149;
+    public const int Poison = 150;
+    public const int ScaleIncrease = 151;
+    public const int SpeedUp = 152;
+    public const int Status = 153;
+    public const int StatusCreator = 154;
+    public const int StatusSetups = 155;
+    public const int StatusTypeId = 156;
+    public const int TimeLeft = 157;
+    public const int TimeSinceLastTick = 158;
+    public const int Unapplied = 159;
+    public const int Vampirism = 160;
+    public const int CollectingAvailable = 161;
+    public const int CollectingTargetsContinuously = 162;
+    public const int CollectTargetsInterval = 163;
+    public const int CollectTargetsLayerMask = 164;
+    public const int CollectTargetsTimer = 165;
+    public const int IgnoreBuffer = 166;
+    public const int Ignored = 167;
+    public const int LastCollectedId = 168;
+    public const int OverflowProcessedTargetsBuffer = 169;
+    public const int ProcessedTargetsBuffer = 170;
+    public const int Radius = 171;
+    public const int Reached = 172;
+    public const int ReadyToCollectOnMovingFinished = 173;
+    public const int ReadyToCollectTargets = 174;
+    public const int TargetLimit = 175;
+    public const int TargetsBuffer = 176;
 
-    public const int TotalComponents = 46;
+    public const int TotalComponents = 177;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -77,22 +208,115 @@ public static class GameComponentsLookup {
         "ViewPrefab",
         "WorldPosition",
         "CameraHolder",
+        "BaseStats",
+        "StatChange",
+        "StatModifiers",
+        "Cooldown",
+        "CooldownLeft",
+        "CooldownUp",
+        "Dead",
+        "DeathAnimationDuration",
+        "DeathProcessing",
+        "ApplyEffectOnEndPointReached",
+        "ApplyStatusOnEndPointReached",
+        "DamageEffect",
+        "Effect",
+        "EffectSetups",
+        "EffectTypeId",
+        "EffectValue",
+        "HealEffect",
+        "Processed",
+        "ProducerId",
+        "PullEffect",
+        "TargetId",
+        "EnchantHolder",
+        "EnchantTypeId",
+        "ExplosiveEnchant",
+        "HexEnchant",
+        "PoisonEnchant",
         "Enemy",
+        "FollowDistanceLeft",
+        "FollowingUp",
+        "FollowMaxDistance",
+        "FollowNewCloseTarget",
+        "FollowTargetId",
+        "LastFollowTargets",
+        "CharacterMovement",
         "Hero",
+        "HeroGun",
+        "Alive",
+        "CurrentHp",
+        "HpRestored",
+        "MaxHp",
+        "RestoreHp",
+        "Collected",
+        "Experience",
+        "LootTypeId",
+        "PickupRadius",
+        "Pullable",
+        "Pulling",
+        "AnimationCurve",
+        "AnimationDuration",
+        "CanRun",
+        "DestructOnMovingFinished",
+        "ElapsedTime",
+        "EndPoint",
+        "EndPointReached",
+        "HeightUpdated",
+        "Idle",
+        "IdleAvailable",
+        "Movable",
+        "MovementAnimAvailable",
+        "Moving",
+        "MovingAvailable",
+        "NeedRandomEndPoint",
+        "OnGround",
+        "OrbitCenterFollowTarget",
+        "OrbitCenterPosition",
+        "OrbitPhase",
+        "OrbitRadius",
+        "RotateAlongDirection",
+        "Running",
+        "RunningAvailable",
+        "Speed",
+        "StartHeight",
+        "TurnAlongDirection",
+        "UpdateHeightBySinCurve",
+        "Walking",
+        "DestructOnMaxPullTargetReached",
+        "MaxPullTargetHold",
+        "MinCountToPullTargets",
+        "PullAnchorTargetId",
+        "PullingDetector",
+        "PullInRadius",
+        "PullProducerId",
+        "PullTargetConsistently",
+        "PullTargetHolder",
+        "PullTargetHolderStatuses",
+        "PullTargetLayerMask",
+        "PullTargetList",
         "Aimable",
         "Aiming",
         "AimingRequested",
         "AmmoAvailable",
         "AmmoCount",
-        "AmmoCountCurrent",
         "AmmoCountLeft",
+        "AmmoDecreased",
         "AvailableShoots",
+        "CanRunAndShoot",
         "CurrentShootTypeId",
         "GunHasFocus",
+        "HitEffectTypeId",
+        "Hits",
         "LastShootTime",
         "NeedAnimationComplete",
         "Reloadable",
         "Reloading",
+        "ReloadingFinished",
+        "ReloadRequested",
+        "ReloadTime",
+        "ReloadTimeEnded",
+        "ReloadTimeLeft",
         "Shootable",
         "ShootAnimationFinished",
         "ShootDistance",
@@ -103,7 +327,45 @@ public static class GameComponentsLookup {
         "ShootingRequested",
         "ShootInterval",
         "ShootTypeId",
-        "ShowInputKey"
+        "ShowInputKey",
+        "Affected",
+        "Applied",
+        "ApplierStatusLink",
+        "CurrentHpStatus",
+        "Duration",
+        "Freeze",
+        "Invulnerable",
+        "InvulnerableStatus",
+        "MaxHpIncrease",
+        "Period",
+        "PeriodicDamageStatus",
+        "Poison",
+        "ScaleIncrease",
+        "SpeedUp",
+        "Status",
+        "StatusCreator",
+        "StatusSetups",
+        "StatusTypeId",
+        "TimeLeft",
+        "TimeSinceLastTick",
+        "Unapplied",
+        "Vampirism",
+        "CollectingAvailable",
+        "CollectingTargetsContinuously",
+        "CollectTargetsInterval",
+        "CollectTargetsLayerMask",
+        "CollectTargetsTimer",
+        "IgnoreBuffer",
+        "Ignored",
+        "LastCollectedId",
+        "OverflowProcessedTargetsBuffer",
+        "ProcessedTargetsBuffer",
+        "Radius",
+        "Reached",
+        "ReadyToCollectOnMovingFinished",
+        "ReadyToCollectTargets",
+        "TargetLimit",
+        "TargetsBuffer"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -126,22 +388,115 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Common.ViewPrefab),
         typeof(Code.ECS.Common.WorldPosition),
         typeof(Code.ECS.Gameplay.Features.Cameras.CameraHolderComponent),
+        typeof(Code.ECS.Gameplay.Features.CharacterStats.BaseStats),
+        typeof(Code.ECS.Gameplay.Features.CharacterStats.StatChange),
+        typeof(Code.ECS.Gameplay.Features.CharacterStats.StatModifiers),
+        typeof(Code.ECS.Gameplay.Features.Cooldown.Cooldown),
+        typeof(Code.ECS.Gameplay.Features.Cooldown.CooldownLeft),
+        typeof(Code.ECS.Gameplay.Features.Cooldown.CooldownUp),
+        typeof(Code.ECS.Gameplay.Features.Death.Dead),
+        typeof(Code.ECS.Gameplay.Features.Death.DeathAnimationDuration),
+        typeof(Code.ECS.Gameplay.Features.Death.DeathProcessing),
+        typeof(Code.ECS.Gameplay.Features.Effects.ApplyEffectOnEndPointReached),
+        typeof(Code.ECS.Gameplay.Features.Effects.ApplyStatusOnEndPointReached),
+        typeof(Code.ECS.Gameplay.Features.Effects.DamageEffect),
+        typeof(Code.ECS.Gameplay.Features.Effects.Effect),
+        typeof(Code.ECS.Gameplay.Features.Effects.EffectSetups),
+        typeof(Code.ECS.Gameplay.Features.Effects.EffectTypeIdComponent),
+        typeof(Code.ECS.Gameplay.Features.Effects.EffectValue),
+        typeof(Code.ECS.Gameplay.Features.Effects.HealEffect),
+        typeof(Code.ECS.Gameplay.Features.Effects.Processed),
+        typeof(Code.ECS.Gameplay.Features.Effects.ProducerId),
+        typeof(Code.ECS.Gameplay.Features.Effects.PullEffect),
+        typeof(Code.ECS.Gameplay.Features.Effects.TargetId),
+        typeof(Code.ECS.Gameplay.Features.Enchants.EnchantHolderComponent),
+        typeof(Code.ECS.Gameplay.Features.Enchants.EnchantTypeIdComponent),
+        typeof(Code.ECS.Gameplay.Features.Enchants.ExplosiveEnchant),
+        typeof(Code.ECS.Gameplay.Features.Enchants.HexEnchant),
+        typeof(Code.ECS.Gameplay.Features.Enchants.PoisonEnchant),
         typeof(Code.ECS.Gameplay.Features.Enemies.Enemy),
+        typeof(Code.ECS.Gameplay.Features.Follow.FollowDistanceLeft),
+        typeof(Code.ECS.Gameplay.Features.Follow.FollowingUp),
+        typeof(Code.ECS.Gameplay.Features.Follow.FollowMaxDistance),
+        typeof(Code.ECS.Gameplay.Features.Follow.FollowNewCloseTarget),
+        typeof(Code.ECS.Gameplay.Features.Follow.FollowTargetId),
+        typeof(Code.ECS.Gameplay.Features.Follow.LastFollowTargets),
+        typeof(Code.ECS.Gameplay.Features.Heroes.CharacterMovementComponent),
         typeof(Code.ECS.Gameplay.Features.Heroes.Hero),
+        typeof(Code.ECS.Gameplay.Features.Heroes.HeroGun),
+        typeof(Code.ECS.Gameplay.Features.Lifetime.Alive),
+        typeof(Code.ECS.Gameplay.Features.Lifetime.CurrentHp),
+        typeof(Code.ECS.Gameplay.Features.Lifetime.HpRestored),
+        typeof(Code.ECS.Gameplay.Features.Lifetime.MaxHp),
+        typeof(Code.ECS.Gameplay.Features.Lifetime.RestoreHp),
+        typeof(Code.ECS.Gameplay.Features.Loot.Collected),
+        typeof(Code.ECS.Gameplay.Features.Loot.Experience),
+        typeof(Code.ECS.Gameplay.Features.Loot.LootTypeIdComponent),
+        typeof(Code.ECS.Gameplay.Features.Loot.PickupRadius),
+        typeof(Code.ECS.Gameplay.Features.Loot.Pullable),
+        typeof(Code.ECS.Gameplay.Features.Loot.Pulling),
+        typeof(Code.ECS.Gameplay.Features.Movement.AnimationCurveComponent),
+        typeof(Code.ECS.Gameplay.Features.Movement.AnimationDuration),
+        typeof(Code.ECS.Gameplay.Features.Movement.CanRun),
+        typeof(Code.ECS.Gameplay.Features.Movement.DestructOnMovingFinished),
+        typeof(Code.ECS.Gameplay.Features.Movement.ElapsedTime),
+        typeof(Code.ECS.Gameplay.Features.Movement.EndPoint),
+        typeof(Code.ECS.Gameplay.Features.Movement.EndPointReached),
+        typeof(Code.ECS.Gameplay.Features.Movement.HeightUpdated),
+        typeof(Code.ECS.Gameplay.Features.Movement.Idle),
+        typeof(Code.ECS.Gameplay.Features.Movement.IdleAvailable),
+        typeof(Code.ECS.Gameplay.Features.Movement.Movable),
+        typeof(Code.ECS.Gameplay.Features.Movement.MovementAnimAvailable),
+        typeof(Code.ECS.Gameplay.Features.Movement.Moving),
+        typeof(Code.ECS.Gameplay.Features.Movement.MovingAvailable),
+        typeof(Code.ECS.Gameplay.Features.Movement.NeedRandomEndPoint),
+        typeof(Code.ECS.Gameplay.Features.Movement.OnGround),
+        typeof(Code.ECS.Gameplay.Features.Movement.OrbitCenterFollowTarget),
+        typeof(Code.ECS.Gameplay.Features.Movement.OrbitCenterPosition),
+        typeof(Code.ECS.Gameplay.Features.Movement.OrbitPhase),
+        typeof(Code.ECS.Gameplay.Features.Movement.OrbitRadius),
+        typeof(Code.ECS.Gameplay.Features.Movement.RotateAlongDirection),
+        typeof(Code.ECS.Gameplay.Features.Movement.Running),
+        typeof(Code.ECS.Gameplay.Features.Movement.RunningAvailable),
+        typeof(Code.ECS.Gameplay.Features.Movement.Speed),
+        typeof(Code.ECS.Gameplay.Features.Movement.StartHeight),
+        typeof(Code.ECS.Gameplay.Features.Movement.TurnAlongDirection),
+        typeof(Code.ECS.Gameplay.Features.Movement.UpdateHeightBySinCurve),
+        typeof(Code.ECS.Gameplay.Features.Movement.Walking),
+        typeof(Code.ECS.Gameplay.Features.Pull.DestructOnMaxPullTargetReached),
+        typeof(Code.ECS.Gameplay.Features.Pull.MaxPullTargetHold),
+        typeof(Code.ECS.Gameplay.Features.Pull.MinCountToPullTargets),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullAnchorTargetId),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullingDetector),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullInRadius),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullProducerId),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullTargetConsistently),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullTargetHolder),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullTargetHolderStatuses),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullTargetLayerMask),
+        typeof(Code.ECS.Gameplay.Features.Pull.PullTargetList),
         typeof(Code.ECS.Gameplay.Features.Shoots.Aimable),
         typeof(Code.ECS.Gameplay.Features.Shoots.Aiming),
         typeof(Code.ECS.Gameplay.Features.Shoots.AimingRequested),
         typeof(Code.ECS.Gameplay.Features.Shoots.AmmoAvailable),
         typeof(Code.ECS.Gameplay.Features.Shoots.AmmoCount),
-        typeof(Code.ECS.Gameplay.Features.Shoots.AmmoCountCurrent),
         typeof(Code.ECS.Gameplay.Features.Shoots.AmmoCountLeft),
+        typeof(Code.ECS.Gameplay.Features.Shoots.AmmoDecreased),
         typeof(Code.ECS.Gameplay.Features.Shoots.AvailableShoots),
+        typeof(Code.ECS.Gameplay.Features.Shoots.CanRunAndShoot),
         typeof(Code.ECS.Gameplay.Features.Shoots.CurrentShootTypeId),
         typeof(Code.ECS.Gameplay.Features.Shoots.GunHasFocus),
+        typeof(Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId),
+        typeof(Code.ECS.Gameplay.Features.Shoots.Hits),
         typeof(Code.ECS.Gameplay.Features.Shoots.LastShootTime),
         typeof(Code.ECS.Gameplay.Features.Shoots.NeedAnimationComplete),
         typeof(Code.ECS.Gameplay.Features.Shoots.Reloadable),
         typeof(Code.ECS.Gameplay.Features.Shoots.Reloading),
+        typeof(Code.ECS.Gameplay.Features.Shoots.ReloadingFinished),
+        typeof(Code.ECS.Gameplay.Features.Shoots.ReloadRequested),
+        typeof(Code.ECS.Gameplay.Features.Shoots.ReloadTime),
+        typeof(Code.ECS.Gameplay.Features.Shoots.ReloadTimeEnded),
+        typeof(Code.ECS.Gameplay.Features.Shoots.ReloadTimeLeft),
         typeof(Code.ECS.Gameplay.Features.Shoots.Shootable),
         typeof(Code.ECS.Gameplay.Features.Shoots.ShootAnimationFinished),
         typeof(Code.ECS.Gameplay.Features.Shoots.ShootDistance),
@@ -152,6 +507,44 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Shoots.ShootingRequested),
         typeof(Code.ECS.Gameplay.Features.Shoots.ShootInterval),
         typeof(Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent),
-        typeof(Code.ECS.Gameplay.Features.Shoots.ShowInputKeyComponent)
+        typeof(Code.ECS.Gameplay.Features.Shoots.ShowInputKeyComponent),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Affected),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Applied),
+        typeof(Code.ECS.Gameplay.Features.Statuses.ApplierStatusLink),
+        typeof(Code.ECS.Gameplay.Features.Statuses.CurrentHpStatus),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Duration),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Freeze),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Invulnerable),
+        typeof(Code.ECS.Gameplay.Features.Statuses.InvulnerableStatus),
+        typeof(Code.ECS.Gameplay.Features.Statuses.MaxHpIncrease),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Period),
+        typeof(Code.ECS.Gameplay.Features.Statuses.PeriodicDamageStatus),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Poison),
+        typeof(Code.ECS.Gameplay.Features.Statuses.ScaleIncrease),
+        typeof(Code.ECS.Gameplay.Features.Statuses.SpeedUp),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Status),
+        typeof(Code.ECS.Gameplay.Features.Statuses.StatusCreator),
+        typeof(Code.ECS.Gameplay.Features.Statuses.StatusSetupsComponent),
+        typeof(Code.ECS.Gameplay.Features.Statuses.StatusTypeIdComponent),
+        typeof(Code.ECS.Gameplay.Features.Statuses.TimeLeft),
+        typeof(Code.ECS.Gameplay.Features.Statuses.TimeSinceLastTick),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Unapplied),
+        typeof(Code.ECS.Gameplay.Features.Statuses.Vampirism),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.CollectingAvailable),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.CollectingTargetsContinuously),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.CollectTargetsInterval),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.CollectTargetsLayerMask),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.CollectTargetsTimer),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.IgnoreBuffer),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.Ignored),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.LastCollectedId),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.OverflowProcessedTargetsBuffer),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.ProcessedTargetsBuffer),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.Radius),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.Reached),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.ReadyToCollectOnMovingFinished),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.ReadyToCollectTargets),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.TargetLimit),
+        typeof(Code.ECS.Gameplay.Features.TargetCollection.TargetsBuffer)
     };
 }

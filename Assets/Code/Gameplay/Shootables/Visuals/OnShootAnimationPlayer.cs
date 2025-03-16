@@ -12,7 +12,6 @@ namespace Code.Gameplay.Shootables.Visuals
     public class OnShootAnimationPlayer : MonoBehaviour
     {
         [SerializeField] private AnimancerAnimatorPlayer _animancer;
-        [SerializeField] private Shoot _shoot;
         [SerializeField] private List<AnimationTypeId> _targetAnimations;
         [SerializeField] private EntityBehaviour _entityBehaviour;
 
@@ -23,8 +22,6 @@ namespace Code.Gameplay.Shootables.Visuals
         private bool _animationFinished;
 
         private bool _isAiming => _inputService.IsAiming();
-
-        private void Start() => _shoot.ShootEvent.Subscribe(_ => PlayShootAnimation()).AddTo(this);
 
         public void Init(ShootConfig shootConfig)
         {

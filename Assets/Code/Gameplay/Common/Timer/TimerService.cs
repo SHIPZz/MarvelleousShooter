@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Gameplay.Common.Time;
+using Code.ECS.Common.Time;
 using UniRx;
 using Zenject;
 

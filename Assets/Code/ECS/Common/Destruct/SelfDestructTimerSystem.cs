@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Common.Time;
+using Code.ECS.Common.Time;
 using Entitas;
 
 namespace Code.ECS.Common.Destruct

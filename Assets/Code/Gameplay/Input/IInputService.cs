@@ -32,5 +32,6 @@ namespace Code.Gameplay.Input
     bool GetRightMouseButtonDown();
     bool GetRightMouseButtonUp();
     bool HasMouseAxis();
+    Vector3 GetAxis();
   }
 }

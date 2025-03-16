@@ -21,6 +21,9 @@ namespace Code.Gameplay.Animations
             FillAnimationStates();
         }
 
+        public bool IsPlaying(AnimationTypeId animationTypeId) => _animationStates.ContainsKey(animationTypeId) 
+                                                                  && _animationStates[animationTypeId].IsPlaying;
+        
         public AnimancerState GetState(AnimationTypeId animationTypeId) =>
             _animationStates.GetValueOrDefault(animationTypeId);
         

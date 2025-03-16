@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Extensions;
+using UnityEngine;
 using Zenject;
 
 namespace Code.Gameplay.Effects
@@ -26,7 +27,8 @@ namespace Code.Gameplay.Effects
            if (useOwnPosition)
                at = effect.transform.position;
 
-           return _instantiator.InstantiatePrefabForComponent<Effect>(effect, at, rotation, parent);
+           return _instantiator.InstantiatePrefabForComponent<Effect>(effect, at, rotation, parent)
+               .With(x => x.Play());
         }
    
     }

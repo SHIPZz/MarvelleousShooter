@@ -1,0 +1,30 @@
+﻿using System.Collections.Generic;
+using Code.Gameplay.Animations;
+using Entitas;
+
+namespace Code.ECS.Gameplay.Features.Shoots.Systemsm.Visuals
+{
+    public class PlayAnimationOnShootSystem : ReactiveSystem<GameEntity>
+    {
+        public PlayAnimationOnShootSystem(IContext<GameEntity> game) : base(game) { }
+
+        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
+            context.CreateCollector(GameMatcher.Shooting.Added());
+
+        protected override bool Filter(GameEntity entity) => entity.isShootingAvailable
+                                                             && entity.isShootingRequested;
+
+        protected override void Execute(List<GameEntity> entities)
+        {
+            foreach (GameEntity entity in entities)
+            {
+                entity.AnimancerAnimator.StartAnimation(entity.isAiming
+                    ? AnimationTypeId.AimShoot
+                    : AnimationTypeId.Shoot);
+                
+                // entity.isShootAnimationFinished = false;
+
+            }
+        }
+    }
+}

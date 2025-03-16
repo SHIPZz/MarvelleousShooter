@@ -8,5 +8,6 @@ namespace Code.Gameplay.Common.Services.Raycast
         Vector3 GetRayDirection(Vector3 origin, Vector3 direction);
         int GetTargetHitsNonAlloc(out RaycastHit[] hits, Vector3 origin, Vector3 direction);
         void ClearRaycastHits();
+        int GetTargetHitsNonAlloc(out RaycastHit[] hits, Vector3 origin, Vector3 direction, float distance, LayerMask mask);
     }
 }

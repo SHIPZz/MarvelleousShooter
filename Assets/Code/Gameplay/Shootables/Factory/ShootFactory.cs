@@ -19,22 +19,16 @@ namespace Code.Gameplay.Shootables.Factory
     {
         private readonly ShootConfigs _shootConfigs;
         private readonly IInstantiator _instantiator;
-        private readonly IShootService _shootService;
-        private IShootFocusService _shootFocusService;
         private IEntityViewFactory _entityViewFactory;
         private IIdentifierService _identifierService;
 
         public ShootFactory(IInstantiator instantiator,
-            IShootService shootService,
-            IShootFocusService shootFocusService,
             IIdentifierService identifierService,
             IEntityViewFactory entityViewFactory,
             ShootConfigs shootConfigs)
         {
             _identifierService = identifierService;
             _entityViewFactory = entityViewFactory;
-            _shootFocusService = shootFocusService;
-            _shootService = shootService;
             _instantiator = instantiator;
             _shootConfigs = shootConfigs;
         }
@@ -54,15 +48,19 @@ namespace Code.Gameplay.Shootables.Factory
                 .PutOnAmmo()
                 .AddDamage(config.DamagePerHit)
                 .AddParent(parent)
+                .AddHits(null)
                 .AddShootDistance(config.ShootDistance)
                 .AddLayerMask(config.Mask)
+                .AddHitEffectTypeId(config.HitEffectTypeId)
                 .AddShowInputKey(config.ShowKey)
                 .With(x => x.isShootingReady = true)
                 .With(x => x.isShootingAvailable = true)
                 .With(x => x.isShootable = true)
+                .With(x => x.isReloadable = true)
                 .With(x => x.isAmmoAvailable = true)
                 .With(x => x.isAimable = config.CanAim)
                 .With(x => x.isShootAnimationFinished = true, when: !config.NeedFullAnimationPlay)
+                .With(x => x.isCanRunAndShoot = config.CanRunAndShoot)
                 .With(x => x.isNeedAnimationComplete = config.NeedFullAnimationPlay)
                 .ReplaceLastShootTime(0)
                 .AddShootInterval(config.ShootInterval)
@@ -72,8 +70,10 @@ namespace Code.Gameplay.Shootables.Factory
             
             createdShoot.GetComponent<OnShootAnimationPlayer>().Init(config);
             
-            _shootService.SetCurrentShoot(createdShoot.GetComponent<Shoot>());
-
+            // float reloadDuration = shootEntity.View.gameObject.GetComponent<AnimancerAnimatorPlayer>().GetState(AnimationTypeId.Reload).Duration;
+            shootEntity.AddReloadTime(2.8f);
+            shootEntity.AddReloadTimeLeft(2.8f);
+            
             createdShoot.Entity.Transform.parent = parent;
             createdShoot.Entity.Transform.localPosition = config.Position;
             createdShoot.Entity.Transform.localRotation = Quaternion.Euler(config.Rotation);
@@ -86,7 +86,7 @@ namespace Code.Gameplay.Shootables.Factory
             AnimancerAnimatorPlayer shootAnimator = createdShoot.GetComponent<AnimancerAnimatorPlayer>();
 
             return shootAnimator
-                    .With(animator => _shootService.Animator = animator)
+                    // .With(animator => _shootService.Animator = animator)
                     .With(animator => reloadAmmoCount.SetReloadTime(animator.GetState(AnimationTypeId.Reload).Duration),
                         when: reloadAmmoCount != null)
                 ;

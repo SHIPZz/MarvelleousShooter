@@ -12,7 +12,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.ShootInterval,
-                    GameMatcher.ShootAnimationFinished,
                     GameMatcher.LastShootTime
                 ));
         }
@@ -27,7 +26,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 
         private bool CanShoot(GameEntity entity)
         {
-            return Time.time >= entity.LastShootTime + entity.ShootInterval;
+            return Time.time >= entity.LastShootTime + entity.ShootInterval 
+                   && entity.isShootAnimationFinished
+                   && !entity.isReloading
+                   ;
         }
     }
 }

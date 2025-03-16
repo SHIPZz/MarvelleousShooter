@@ -6,7 +6,14 @@ namespace Code.Gameplay.Heroes.Services
     {
         private readonly Dictionary<HeroTypeId, GameEntity> _heroes = new();
         
+        public GameEntity CurrentGun { get; private set; }
+
         public GameEntity Load() => _heroes[HeroTypeId.Main];
+
+        public void SetCurrentGun(GameEntity entity)
+        {
+            CurrentGun = entity;
+        }
 
         public void Add(GameEntity hero) => _heroes[HeroTypeId.Main] = hero;
     }
