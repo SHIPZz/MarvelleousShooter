@@ -14,7 +14,6 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Shootable,
-                    GameMatcher.ShootingAvailable,
                     GameMatcher.HeroGun));
         }
 
@@ -23,7 +22,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             foreach (GameEntity hero in _heroes)
             foreach (GameEntity heroGun in _entities)
             {
-                hero.isIdleAvailable = !heroGun.isShooting || !heroGun.isShootingRequested;
+                hero.isIdleAvailable = !heroGun.isShootingContinuously;
             }
         }
     }

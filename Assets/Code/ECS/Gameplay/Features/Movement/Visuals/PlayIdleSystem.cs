@@ -4,16 +4,21 @@ using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals
 {
-    public class AnimateIdleSystem : ReactiveSystem<GameEntity>
+    public class PlayIdleSystem : ReactiveSystem<GameEntity>
     {
-        public AnimateIdleSystem(IContext<GameEntity> game) : base(game) { }
+        public PlayIdleSystem(IContext<GameEntity> game) : base(game) { }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.Idle.Added());
+            context.CreateCollector(GameMatcher.Idle.Added(),
+                GameMatcher.IdleAvailable.Added(),
+                GameMatcher.MovementAnimAvailable.Added()
+                );
 
         protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
+                                                             && entity.isMovementAnimAvailable
+                                                             && entity.isIdle
                                                              && entity.isIdleAvailable
-                                                             && entity.isMovementAnimAvailable;
+                                                             ;
 
         protected override void Execute(List<GameEntity> entities)
         {

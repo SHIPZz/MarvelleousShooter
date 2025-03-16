@@ -8,7 +8,8 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
 
         public SetHeroRunningByOnGroundSystem(GameContext game)
         {
-            _heroes = game.GetGroup(GameMatcher.AllOf(GameMatcher.Hero, GameMatcher.CanRun));
+            _heroes = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Hero, GameMatcher.CanRun));
         }
 
         public void Execute()

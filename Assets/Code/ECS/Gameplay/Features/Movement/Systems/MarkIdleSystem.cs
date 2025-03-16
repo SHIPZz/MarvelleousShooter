@@ -19,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isIdle = !entity.isMoving;
+                entity.isIdle = !entity.isWalking && !entity.isRunning;
             }
         }
     }

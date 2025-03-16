@@ -58,6 +58,7 @@ namespace Code.Gameplay.Shootables.Factory
                 .With(x => x.isShootable = true)
                 .With(x => x.isReloadable = true)
                 .With(x => x.isAmmoAvailable = true)
+                .With(x => x.isAimingAvailable = config.CanAim)
                 .With(x => x.isAimable = config.CanAim)
                 .With(x => x.isShootAnimationFinished = true, when: !config.NeedFullAnimationPlay)
                 .With(x => x.isCanRunAndShoot = config.CanRunAndShoot)

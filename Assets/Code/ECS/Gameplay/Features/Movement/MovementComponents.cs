@@ -40,6 +40,8 @@ namespace Code.ECS.Gameplay.Features.Movement
     [Game] public class IdleAvailable : IComponent {  }
     
     [Game] public class MovementAnimAvailable : IComponent {  }
+    
+    [Game] public class RunningAnimAvailable : IComponent {  }
 
     [Game] public class TurnAlongDirection : IComponent {  }
     

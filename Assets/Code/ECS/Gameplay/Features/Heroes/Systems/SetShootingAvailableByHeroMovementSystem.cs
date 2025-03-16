@@ -16,7 +16,8 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                 .GetGroup(GameMatcher.AllOf(
                         GameMatcher.Shootable, 
                         GameMatcher.HeroGun)
-                    .NoneOf(GameMatcher.CanRunAndShoot,GameMatcher.Reloading));
+                    .NoneOf(GameMatcher.CanRunAndShoot,
+                        GameMatcher.Reloading));
         }
 
         public void Execute()

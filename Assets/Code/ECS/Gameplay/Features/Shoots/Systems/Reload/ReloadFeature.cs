@@ -1,4 +1,5 @@
-﻿using Code.ECS.Gameplay.Features.Shoots.Systems.Reload.Visuals;
+﻿using Code.ECS.Gameplay.Features.Heroes.Systems;
+using Code.ECS.Gameplay.Features.Shoots.Systems.Reload.Visuals;
 using Code.ECS.Systems;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload

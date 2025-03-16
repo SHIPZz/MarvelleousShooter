@@ -4,18 +4,17 @@ using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals
 {
-    public class AnimateMovingSystem : ReactiveSystem<GameEntity>
+    public class PlayMovingSystem : ReactiveSystem<GameEntity>
     {
-        public AnimateMovingSystem(IContext<GameEntity> game) : base(game) { }
+        public PlayMovingSystem(IContext<GameEntity> game) : base(game) { }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.Moving.AddedOrRemoved());
+            context.CreateCollector(GameMatcher.Walking.Added(),
+                GameMatcher.MovementAnimAvailable.Added());
 
         protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
-                                                             && entity.isMovingAvailable
-                                                             && !entity.isRunning
                                                              && entity.isMovementAnimAvailable
-                                                             && entity.isMoving
+                                                             && entity.isWalking
                                                              ;
 
         protected override void Execute(List<GameEntity> entities)

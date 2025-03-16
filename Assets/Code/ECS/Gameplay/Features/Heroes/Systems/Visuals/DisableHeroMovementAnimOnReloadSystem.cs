@@ -2,20 +2,20 @@
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems
 {
-    public class DisableHeroMovementAnimOnShootSystem : IExecuteSystem
+    public class DisableHeroMovementAnimOnReloadSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _guns;
         private readonly IGroup<GameEntity> _heroes;
 
-        public DisableHeroMovementAnimOnShootSystem(GameContext game)
+        public DisableHeroMovementAnimOnReloadSystem(GameContext game)
         {
             _heroes = game.GetGroup(GameMatcher.Hero);
-
+            
             _guns = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Shootable,
-                    GameMatcher.HeroGun
-                ));
+                    GameMatcher.Reloadable, 
+                    GameMatcher.HeroGun 
+                    ).NoneOf(GameMatcher.Aiming));
         }
 
         public void Execute()
@@ -23,8 +23,10 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             foreach (GameEntity hero in _heroes)
             foreach (GameEntity gun in _guns)
             {
-                if (gun.isShootingRequested && gun.isShootingAvailable)
-                    hero.isMovementAnimAvailable = false;
+                if(gun.isShootingContinuously)
+                    return;
+                
+                hero.isMovementAnimAvailable = !gun.isReloading;
             }
         }
     }

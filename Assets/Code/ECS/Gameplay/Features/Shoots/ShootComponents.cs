@@ -11,6 +11,8 @@ namespace Code.ECS.Gameplay.Features.Shoots
     
     [Game] public class Shooting : IComponent { }
     
+    [Game] public class ShootingContinuously : IComponent { }
+    
     [Game] public class CanRunAndShoot : IComponent { }
     
     [Game] public class ShootingRequested : IComponent { }
@@ -40,6 +42,8 @@ namespace Code.ECS.Gameplay.Features.Shoots
     [Game] public class AimingRequested : IComponent { }
     
     [Game] public class Aiming : IComponent { }
+    
+    [Game] public class AimingAvailable : IComponent { }
     
     [Game] public class ShootHolder : IComponent { }
     

@@ -2,7 +2,7 @@
 using Code.Gameplay.Animations;
 using Entitas;
 
-namespace Code.ECS.Gameplay.Features.Shoots.Systemsm.Visuals
+namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 {
     public class PlayAnimationOnShootSystem : ReactiveSystem<GameEntity>
     {
@@ -11,19 +11,13 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systemsm.Visuals
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Shooting.Added());
 
-        protected override bool Filter(GameEntity entity) => entity.isShootingAvailable
-                                                             && entity.isShootingRequested;
+        protected override bool Filter(GameEntity entity) => entity.isShootingContinuously;
 
         protected override void Execute(List<GameEntity> entities)
         {
             foreach (GameEntity entity in entities)
             {
-                entity.AnimancerAnimator.StartAnimation(entity.isAiming
-                    ? AnimationTypeId.AimShoot
-                    : AnimationTypeId.Shoot);
-                
-                // entity.isShootAnimationFinished = false;
-
+                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Shoot, 0.1f);
             }
         }
     }
