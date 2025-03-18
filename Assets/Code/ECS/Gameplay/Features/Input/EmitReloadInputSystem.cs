@@ -11,7 +11,7 @@ namespace Code.ECS.Gameplay.Features.Input
         public EmitReloadInputSystem(InputContext input, IInputService inputService)
         {
             _inputService = inputService;
-            _input = input.GetGroup(InputMatcher.Input);
+            _input = input.GetGroup(InputMatcher.AllOf(InputMatcher.Input,InputMatcher.ReloadAvailable));
         }
 
         public void Execute()

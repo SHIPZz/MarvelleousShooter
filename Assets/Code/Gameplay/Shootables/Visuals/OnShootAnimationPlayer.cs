@@ -33,6 +33,16 @@ namespace Code.Gameplay.Shootables.Visuals
                     .GetState(animationTypeId)
                     .Events(this).OnEnd += SetAnimFinished;
             }
+
+            _animancer.AnimationRequested.Subscribe(id => SetAnimFinished(id)).AddTo(this);
+        }
+
+        private void SetAnimFinished(AnimationTypeId id)
+        {
+            if(_targetAnimations.Contains(id))
+                return;
+            
+            SetAnimFinished();
         }
 
         private void OnDestroy()

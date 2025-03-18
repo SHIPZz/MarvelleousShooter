@@ -5,6 +5,7 @@ using Code.Gameplay.Shootables.Visuals;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using UniRx;
 using UnityEngine;
 
 namespace Code.Gameplay.Animations
@@ -16,13 +17,17 @@ namespace Code.Gameplay.Animations
         
         private readonly Dictionary<AnimationTypeId, AnimancerState> _animationStates = new();
 
+        private readonly Subject<AnimationTypeId> _animationRequested = new();
+
+        public IObservable<AnimationTypeId> AnimationRequested => _animationRequested;
+
         private void Awake()
         {
             FillAnimationStates();
         }
 
         public bool IsPlaying(AnimationTypeId animationTypeId) => _animationStates.ContainsKey(animationTypeId) 
-                                                                  && _animationStates[animationTypeId].IsPlaying;
+                                                                  && _animationStates[animationTypeId].NormalizedTime < 1f;
         
         public AnimancerState GetState(AnimationTypeId animationTypeId) =>
             _animationStates.GetValueOrDefault(animationTypeId);
@@ -32,15 +37,17 @@ namespace Code.Gameplay.Animations
         {
             Debug.Log($"@@@ anim type start - {animationTypeId}");
             if (!_animationClips.TryGetValue(animationTypeId, out var clip))
-                throw new Exception("no animation");
+                throw new Exception($"no animation for {animationTypeId}");
 
+            ReportAnimationRequested(animationTypeId);
+            
             AnimancerState state = _animancer.Play(clip, fadeDuration, fadeMode);
 
             _animationStates[animationTypeId] = state;
 
             await state;
         }
-        
+
         private void FillAnimationStates()
         {
             foreach (var animationType in _animationClips.Keys)
@@ -51,6 +58,11 @@ namespace Code.Gameplay.Animations
                     _animationStates[animationType] = state;
                 }
             }
+        }
+
+        private void ReportAnimationRequested(AnimationTypeId animationTypeId)
+        {
+            _animationRequested?.OnNext(animationTypeId);
         }
     }
 }

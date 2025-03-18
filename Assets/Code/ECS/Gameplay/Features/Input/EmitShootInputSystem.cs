@@ -12,7 +12,9 @@ namespace Code.ECS.Gameplay.Features.Input
         public EmitShootInputSystem(InputContext input, IInputService inputService)
         {
             _inputService = inputService;
-            _input = input.GetGroup(InputMatcher.Input);
+            _input = input.GetGroup(InputMatcher.AllOf(
+                InputMatcher.Input,
+                InputMatcher.ShootingAvailable));
         }
 
         public void Execute()

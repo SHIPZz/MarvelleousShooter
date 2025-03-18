@@ -1,3 +1,4 @@
+using System;
 using Code.Data.Services;
 using Code.ECS;
 using Code.ECS.Common.Entity;
@@ -11,6 +12,7 @@ using Code.Gameplay.Heroes;
 using Code.Gameplay.Heroes.Factory;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
+using Code.Gameplay.Shootables;
 using Code.Gameplay.Shootables.Factory;
 using Code.Gameplay.Shootables.Services;
 using Code.InfraStructure.States.StateMachine;
@@ -20,7 +22,7 @@ using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
 
 namespace Code.InfraStructure.States.States
 {
-    public class GameState : SimpleState, IUpdateable
+    public class GameState : SimpleState, IUpdateable, IDisposable
     {
         private readonly ILevelDataProvider _levelDataProvider;
         private readonly ICameraProvider _cameraProvider;
@@ -56,6 +58,11 @@ namespace Code.InfraStructure.States.States
         {
             CreateInputEntity.Empty().isInput = true;
 
+            CreateEntity.Empty()
+                .With(x => x.isShootSwitchingReady = true)
+                .With(x => x.isShootSwitchingAvailable = true)
+                .With(x => x.isSwitchable = true);
+
             _battleFeature = _systemFactory.Create<BattleFeature>();
             
             _battleFeature.Initialize();
@@ -66,13 +73,23 @@ namespace Code.InfraStructure.States.States
             GameEntity hero = _heroFactory.Create(null,_levelDataProvider.StartPoint.position,Quaternion.identity);
             
             InitCamera(hero.CameraHolder);
+
+            Transform weaponHolder = hero.CameraHolder.GetComponent<Hero>().WeaponHolder;
             
             GameEntity shoot =_shootFactory
-                .Create(hero.CameraHolder.GetComponent<Hero>().WeaponHolder, worldData.PlayerData.LastWeaponId)
+                .Create(weaponHolder, worldData.PlayerData.LastWeaponId, hero.Id)
                 .With(x => x.isHeroGun = true)
+                .With(x => x.isActive = true)
                 ;
             
-            hero.AddAnimancerAnimator(shoot.AnimancerAnimator); 
+            GameEntity knife =_shootFactory
+                    .Create(weaponHolder, ShootTypeId.Knife, hero.Id)
+                    .With(x => x.isHeroGun = true)
+                    .With(x => x.isViewActive = false)
+                ;
+            
+            hero.AddAnimancerAnimator(shoot.AnimancerAnimator);
+            hero.AddCurrentGunId(shoot.Id);
             
             _heroRepository.SetCurrentGun(shoot);
             
@@ -100,6 +117,11 @@ namespace Code.InfraStructure.States.States
             
             _battleFeature.Execute();
             _battleFeature.Cleanup();
+        }
+
+        public void Dispose()
+        {
+            _battleFeature.TearDown();
         }
     }
 }

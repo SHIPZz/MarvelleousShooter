@@ -58,6 +58,8 @@ namespace Code.Gameplay.Heroes.Factory
                 .With(x => x.isRunningAvailable = true)
                 .With(x => x.isMovingAvailable = true)
                 .With(x => x.isIdleAvailable = true)
+                .With(x => x.isViewActive = true)
+                .With(x => x.isShootHolder = true)
                 .With(x => x.isCanRun = true)
                 .AddViewPrefab(prefab);
             

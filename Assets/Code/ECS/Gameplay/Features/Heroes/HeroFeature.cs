@@ -11,17 +11,23 @@ namespace Code.ECS.Gameplay.Features.Heroes
         {
             Add(systems.Create<MarkHeroRunningSystem>());
             Add(systems.Create<MarkHeroOnGroundSystem>());
-            Add(systems.Create<SetHeroRunningByOnGroundSystem>());
-            Add(systems.Create<DisableHeroRunningAvailableOnShootSystem>());
-            Add(systems.Create<SetHeroIdleAvailableOnShooting>());
+            
+            Add(systems.Create<DisableHeroIdleOnShooting>());
+
             Add(systems.Create<PlayHeroAimAnimationSystem>());
             Add(systems.Create<PlayHeroAimShootAnimationSystem>());
-            Add(systems.Create<DisableHeroMovementAnimOnShootSystem>());
-            Add(systems.Create<DisableHeroMovementAnimationOnAimingSystem>());
-            Add(systems.Create<SetShootingAvailableByHeroMovementSystem>());
-            Add(systems.Create<SetHeroRunningAnimAvailableOnReloadSystem>());
-            Add(systems.Create<SetHeroRunningAvailableOnAimingSystem>());
-            Add(systems.Create<ReplaceHeroSpeedSystem>());
+            
+            Add(systems.Create<DisableHeroMovementAnimOnGunActionSystem>());
+            Add(systems.Create<DisableHeroMovementAnimOnGunSwitchingSystem>());
+            
+            Add(systems.Create<SetupHeroGunOnSwitchingSystem>());
+
+            Add(systems.Create<DisableHeroRunningOnGunActionSystem>());
+            Add(systems.Create<DisableHeroRunningAnimOnGunActionSystem>());
+            
+            Add(systems.Create<MarkShootingAvailableOnNoRunningSystem>());
+
+            Add(systems.Create<ReplaceHeroSpeedOnInputSystem>());
         }
     }
 }

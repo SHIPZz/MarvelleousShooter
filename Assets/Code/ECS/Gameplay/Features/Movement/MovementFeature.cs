@@ -11,9 +11,13 @@ namespace Code.ECS.Gameplay.Features.Movement
             Add(systemFactory.Create<MarkIdleSystem>());
             Add(systemFactory.Create<MarkMovingSystem>());
             Add(systemFactory.Create<MarkWalkingSystem>());
+            
             Add(systemFactory.Create<MarkMovingUnAvailableOnNoGroundSystem>());
             Add(systemFactory.Create<SetSpeedZeroOnNoGroundSystem>());
+            
             Add(systemFactory.Create<DisableMovingOnNoGround>());
+            Add(systemFactory.Create<DisableRunningOnNoGroundSystem>());
+            
             Add(systemFactory.Create<PlayIdleSystem>());
             Add(systemFactory.Create<PlayMovingSystem>());
             Add(systemFactory.Create<PlayRunningSystem>());

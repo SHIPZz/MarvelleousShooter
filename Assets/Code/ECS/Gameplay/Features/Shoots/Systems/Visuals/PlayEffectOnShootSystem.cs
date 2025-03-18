@@ -12,6 +12,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 
         protected override bool Filter(GameEntity entity) => entity.isShootable
                                                              && entity.isShooting
+                                                             && entity.isActive
                                                              && entity.hasEffectPlayer;
 
         protected override void Execute(List<GameEntity> entities)

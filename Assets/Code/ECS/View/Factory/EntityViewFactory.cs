@@ -16,6 +16,16 @@ namespace Code.ECS.View.Factory
             _assetProvider = assetProvider;
         }
         
+        public EntityBehaviour CreateViewForEntityFromPrefab(GameEntity entity,Transform parent)
+        {
+            EntityBehaviour view = _instantiator.InstantiatePrefabForComponent<EntityBehaviour>(entity.ViewPrefab, _farAway,
+                Quaternion.identity, parent);
+            
+            view.SetEntity(entity);
+            
+            return view;
+        }
+        
         public EntityBehaviour CreateViewForEntityFromPath(GameEntity entity)
         {
             var prefab = _assetProvider.LoadAsset<EntityBehaviour>(entity.ViewPath);

@@ -1,25 +1,27 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Entitas;
 using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems
 {
     public class SetLastShootTimeOnShootingSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _shoots;
 
         public SetLastShootTimeOnShootingSystem(GameContext game)
         {
-            _entities = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable, 
-                GameMatcher.Shooting
-                ));
+           _shoots = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shooting, 
+                GameMatcher.Shootable,
+                GameMatcher.Active));
         }
 
         public void Execute()
         {
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity shoot in _shoots)
             {
-                entity.ReplaceLastShootTime(Time.time);
+                shoot.ReplaceLastShootTime(Time.time);
             }
         }
     }
+    
 }

@@ -23,6 +23,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                     GameMatcher.Shooting,
                     GameMatcher.AmmoAvailable,
                     GameMatcher.ShootDistance,
+                    GameMatcher.CanRaycast,
                     GameMatcher.Hits,
                     GameMatcher.LayerMask,
                     GameMatcher.Shootable

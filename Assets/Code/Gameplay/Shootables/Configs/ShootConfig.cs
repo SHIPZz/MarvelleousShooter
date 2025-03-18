@@ -31,5 +31,6 @@ namespace Code.Gameplay.Shootables.Configs
         public LayerMask Mask;
         public bool HasIdleFocus;
         public EffectTypeId HitEffectTypeId = EffectTypeId.GoldSmallFireImpact;
+        public bool CanRaycast = true;
     }
 }

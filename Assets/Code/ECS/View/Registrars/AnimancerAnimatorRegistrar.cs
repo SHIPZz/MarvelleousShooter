@@ -10,6 +10,14 @@ namespace Code.ECS.View.Registrars
         public override void RegisterComponents()
         {
             Entity.AddAnimancerAnimator(_animancerAnimatorPlayer);
+            
+            if(!Entity.isReloadable)
+                return;
+
+            var reloadAnimDuration = _animancerAnimatorPlayer.GetState(AnimationTypeId.Reload).Duration;
+            
+            Entity.AddReloadTime(reloadAnimDuration);
+            Entity.AddReloadTimeLeft(reloadAnimDuration);
         }
 
         public override void UnregisterComponents()

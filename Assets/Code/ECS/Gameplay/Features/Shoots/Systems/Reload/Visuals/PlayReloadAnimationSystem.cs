@@ -11,7 +11,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload.Visuals
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Reloading.Added());
 
-        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator;
+        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
+                                                             && entity.isActive
+                                                             && entity.isReloadable;
 
         protected override void Execute(List<GameEntity> entities)
         {

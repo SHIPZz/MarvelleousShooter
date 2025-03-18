@@ -19,6 +19,8 @@ namespace Code.ECS.Gameplay.Features.Movement
 
     [Game] public class Moving : IComponent {  }
     
+    [Game] public class NoGround : IComponent {  }
+    
     [Game] public class Movable : IComponent {  }
     
     [Game] public class Walking : IComponent {  }

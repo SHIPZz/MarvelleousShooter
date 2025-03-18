@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems
 {
@@ -17,7 +16,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                     GameMatcher.AmmoAvailable,
                     GameMatcher.ShootDistance,
                     GameMatcher.LayerMask,
-                    GameMatcher.Shootable));
+                    GameMatcher.Shootable
+                    ));
         }
 
         public void Execute()

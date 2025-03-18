@@ -8,33 +8,48 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int AimingPressed = 0;
-    public const int Axis = 1;
-    public const int HasAxis = 2;
-    public const int Input = 3;
-    public const int ReloadingPressed = 4;
-    public const int RunningPressed = 5;
-    public const int ShootingPressed = 6;
+    public const int AimingAvailable = 0;
+    public const int AimingPressed = 1;
+    public const int Axis = 2;
+    public const int GunChangePressed = 3;
+    public const int HasAxis = 4;
+    public const int Input = 5;
+    public const int ReloadAvailable = 6;
+    public const int ReloadingPressed = 7;
+    public const int RunningPressed = 8;
+    public const int SelectedShoot = 9;
+    public const int ShootingAvailable = 10;
+    public const int ShootingPressed = 11;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
+        "AimingAvailable",
         "AimingPressed",
         "Axis",
+        "GunChangePressed",
         "HasAxis",
         "Input",
+        "ReloadAvailable",
         "ReloadingPressed",
         "RunningPressed",
+        "SelectedShoot",
+        "ShootingAvailable",
         "ShootingPressed"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Code.ECS.Gameplay.Features.Input.AimingAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.AimingPressed),
         typeof(Code.ECS.Gameplay.Features.Input.Axis),
+        typeof(Code.ECS.Gameplay.Features.Input.GunChangePressed),
         typeof(Code.ECS.Gameplay.Features.Input.HasAxis),
         typeof(Code.ECS.Gameplay.Features.Input.Input),
+        typeof(Code.ECS.Gameplay.Features.Input.ReloadAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.ReloadingPressed),
         typeof(Code.ECS.Gameplay.Features.Input.RunningPressed),
+        typeof(Code.ECS.Gameplay.Features.Input.SelectedShoot),
+        typeof(Code.ECS.Gameplay.Features.Input.ShootingAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.ShootingPressed)
     };
 }

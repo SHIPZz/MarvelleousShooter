@@ -1,7 +1,9 @@
 ﻿using Code.ECS.Gameplay.Features.Heroes.Systems;
 using Code.ECS.Gameplay.Features.Shoots.Systems;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Aiming;
+using Code.ECS.Gameplay.Features.Shoots.Systems.Ammo;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Reload;
+using Code.ECS.Gameplay.Features.Shoots.Systems.Switching;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Visuals;
 using Code.ECS.Systems;
 
@@ -13,10 +15,13 @@ namespace Code.ECS.Gameplay.Features.Shoots
         {
             Add(systemFactory.Create<MarkShootingRequestedOnInputSystem>());
             Add(systemFactory.Create<MarkShootingReadySystem>());
+            
             Add(systemFactory.Create<ShootOnReadySystem>());
+            Add(systemFactory.Create<ShootWithoutAmmoOnReadySystem>());
+            
             Add(systemFactory.Create<MarkShootingContinuouslySystem>());
             Add(systemFactory.Create<CastRaycastOnShootingSystem>());
-            Add(systemFactory.Create<AlignEffectOnRaycastHitSystem>());
+            Add(systemFactory.Create<AlignEffectOnHitSystem>());
 
             Add(systemFactory.Create<ReloadFeature>());
             Add(systemFactory.Create<AimingFeature>());
@@ -28,8 +33,6 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<SetLastShootTimeOnShootingSystem>());
             Add(systemFactory.Create<CalculateAmmoCountOnShootSystem>());
             Add(systemFactory.Create<MarkAmmoAvailableSystem>());
-            
-            Add(systemFactory.Create<StopShootingOnNoInputSystem>());
             
             Add(systemFactory.Create<CleanupShootRaycastHitsSystem>());
             Add(systemFactory.Create<CleanupShootingSystem>());

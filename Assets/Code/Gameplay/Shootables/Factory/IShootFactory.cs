@@ -4,6 +4,6 @@ namespace Code.Gameplay.Shootables.Factory
 {
     public interface IShootFactory
     {
-        GameEntity Create(Transform parent, ShootTypeId shootTypeId);
+        GameEntity Create(Transform parent, ShootTypeId shootTypeId, int ownerId);
     }
 }

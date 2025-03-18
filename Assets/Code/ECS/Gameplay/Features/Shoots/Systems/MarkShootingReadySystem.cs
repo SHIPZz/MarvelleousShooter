@@ -12,6 +12,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.ShootInterval,
+                    GameMatcher.ShootingRequested,
+                    GameMatcher.Active,
+                    GameMatcher.ViewActive,
                     GameMatcher.LastShootTime
                 ));
         }

@@ -25,6 +25,10 @@ namespace Code.ECS.Gameplay.Features.Shoots
     
     [Game] public class Reloadable : IComponent { }
     
+    [Game] public class CanRaycast : IComponent { }
+    
+    [Game] public class ShootWithoutAmmo : IComponent { }
+    
     [Game] public class ReloadRequested : IComponent { }
     
     [Game] public class ReloadTime : IComponent { public float Value; }
@@ -56,6 +60,8 @@ namespace Code.ECS.Gameplay.Features.Shoots
     [Game] public class Hits : IComponent { public RaycastHit[] Value; }
     
     [Game] public class ShootInterval : IComponent { public float Value; }
+    
+    [Game] public class OwnerId : IComponent { public int Value; }
     
     [Game] public class CurrentShootTypeId : IComponent { public ShootTypeId Value; }
     

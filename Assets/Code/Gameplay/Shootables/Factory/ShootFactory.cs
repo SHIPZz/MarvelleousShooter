@@ -4,6 +4,7 @@ using Code.ECS.View;
 using Code.ECS.View.Factory;
 using Code.Extensions;
 using Code.Gameplay.Animations;
+using Code.Gameplay.Effects;
 using Code.Gameplay.Shootables.Configs;
 using Code.Gameplay.Shootables.Extensions;
 using Code.Gameplay.Shootables.Services;
@@ -33,64 +34,50 @@ namespace Code.Gameplay.Shootables.Factory
             _shootConfigs = shootConfigs;
         }
 
-        public GameEntity Create(Transform parent, ShootTypeId shootTypeId)
+        public GameEntity Create(Transform parent, ShootTypeId shootTypeId, int ownerId)
         {
             ShootConfig config = _shootConfigs.GetById(shootTypeId);
             EntityBehaviour prefab = config.Prefab;
 
-
-           GameEntity shootEntity = CreateEntity
-                .Empty()
-                .AddWorldPosition(Vector3.zero)
-                .AddId(_identifierService.Next())
-                .AddViewPrefab(prefab)
-                .AddAmmoCount(config.AmmoCount)
-                .PutOnAmmo()
-                .AddDamage(config.DamagePerHit)
-                .AddParent(parent)
-                .AddHits(null)
-                .AddShootDistance(config.ShootDistance)
-                .AddLayerMask(config.Mask)
-                .AddHitEffectTypeId(config.HitEffectTypeId)
-                .AddShowInputKey(config.ShowKey)
-                .With(x => x.isShootingReady = true)
-                .With(x => x.isShootingAvailable = true)
-                .With(x => x.isShootable = true)
-                .With(x => x.isReloadable = true)
-                .With(x => x.isAmmoAvailable = true)
-                .With(x => x.isAimingAvailable = config.CanAim)
-                .With(x => x.isAimable = config.CanAim)
-                .With(x => x.isShootAnimationFinished = true, when: !config.NeedFullAnimationPlay)
-                .With(x => x.isCanRunAndShoot = config.CanRunAndShoot)
-                .With(x => x.isNeedAnimationComplete = config.NeedFullAnimationPlay)
-                .ReplaceLastShootTime(0)
-                .AddShootInterval(config.ShootInterval)
+            GameEntity shootEntity = CreateEntity
+                    .Empty()
+                    .AddWorldPosition(Vector3.zero)
+                    .AddOwnerId(ownerId)
+                    .AddId(_identifierService.Next())
+                    .AddViewPrefab(prefab)
+                    .AddDamage(config.DamagePerHit)
+                    .AddHits(null)
+                    .AddShootDistance(config.ShootDistance)
+                    .AddLayerMask(config.Mask)
+                    .AddShowInputKey(config.ShowKey)
+                    .ReplaceLastShootTime(0)
+                    .AddShootInterval(config.ShootInterval)
+                    .With(x => x.isShootingReady = true)
+                    .With(x => x.AddAmmoCount(config.AmmoCount), when: config.AmmoCount > 0)
+                    .PutOnAmmo()
+                    .With(x => x.AddHitEffectTypeId(config.HitEffectTypeId), when: config.HitEffectTypeId != EffectTypeId.Unknown)
+                    .With(x => x.isShootingAvailable = true)
+                    .With(x => x.isShootable = true)
+                    .With(x => x.isCanRaycast = config.CanRaycast)
+                    .With(x => x.isReloadable = config.Reloadable)
+                    .With(x => x.isAmmoAvailable = true, when: config.AmmoCount > 0)
+                    .With(x => x.isShootWithoutAmmo = true, when: config.AmmoCount <= 0)
+                    .With(x => x.isAimingAvailable = config.CanAim)
+                    .With(x => x.isAimable = config.CanAim)
+                    .With(x => x.isViewActive = true)
+                    .With(x => x.isShootAnimationFinished = true)
+                    .With(x => x.isCanRunAndShoot = config.CanRunAndShoot)
+                    .With(x => x.isNeedAnimationComplete = config.NeedFullAnimationPlay)
                 ;
 
-            EntityBehaviour createdShoot = _entityViewFactory.CreateViewForEntityFromPrefab(shootEntity);
-            
+            EntityBehaviour createdShoot = _entityViewFactory.CreateViewForEntityFromPrefab(shootEntity,parent);
+
             createdShoot.GetComponent<OnShootAnimationPlayer>().Init(config);
-            
-            // float reloadDuration = shootEntity.View.gameObject.GetComponent<AnimancerAnimatorPlayer>().GetState(AnimationTypeId.Reload).Duration;
-            shootEntity.AddReloadTime(2.8f);
-            shootEntity.AddReloadTimeLeft(2.8f);
-            
-            createdShoot.Entity.Transform.parent = parent;
+
             createdShoot.Entity.Transform.localPosition = config.Position;
             createdShoot.Entity.Transform.localRotation = Quaternion.Euler(config.Rotation);
 
             return shootEntity;
-        }
-
-        private AnimancerAnimatorPlayer SetupAnimator(Shoot createdShoot, ReloadAmmoCount reloadAmmoCount)
-        {
-            AnimancerAnimatorPlayer shootAnimator = createdShoot.GetComponent<AnimancerAnimatorPlayer>();
-
-            return shootAnimator
-                    // .With(animator => _shootService.Animator = animator)
-                    .With(animator => reloadAmmoCount.SetReloadTime(animator.GetState(AnimationTypeId.Reload).Duration),
-                        when: reloadAmmoCount != null)
-                ;
         }
     }
 }
