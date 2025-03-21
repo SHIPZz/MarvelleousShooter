@@ -32,10 +32,9 @@ namespace Code.Gameplay.Animations
                 return false;
 
             AnimancerState state = _animationStates[animationTypeId];
-            return state.IsPlaying && state.Time < state.Length;
+            
+            return state.IsPlayingAndNotEnding();
         }
-        
-        public float NormalizedTime(AnimationTypeId id) => _animationStates[id].NormalizedTime;
         
         public AnimancerState GetState(AnimationTypeId animationTypeId) =>
             _animationStates.GetValueOrDefault(animationTypeId);
