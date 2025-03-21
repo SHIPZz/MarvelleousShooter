@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-namespace Code.ECS.Gameplay.Features.Input
+namespace Code.ECS.Gameplay.Features.Input.Systems
 {
     public class DisableReloadInputOnGunActionsSystem : IExecuteSystem
     {

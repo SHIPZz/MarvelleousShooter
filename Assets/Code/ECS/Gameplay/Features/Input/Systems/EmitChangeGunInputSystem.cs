@@ -1,10 +1,9 @@
-﻿using System;
-using Code.Gameplay.Heroes.Enums;
+﻿using Code.Gameplay.Heroes.Enums;
 using Code.Gameplay.Input;
 using Entitas;
 using UniRx;
 
-namespace Code.ECS.Gameplay.Features.Input
+namespace Code.ECS.Gameplay.Features.Input.Systems
 {
     public class EmitChangeGunInputSystem : IExecuteSystem, IInitializeSystem, ITearDownSystem
     {

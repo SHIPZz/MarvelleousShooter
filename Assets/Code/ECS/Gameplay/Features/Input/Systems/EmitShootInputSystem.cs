@@ -1,8 +1,7 @@
 ﻿using Code.Gameplay.Input;
 using Entitas;
-using UnityEngine;
 
-namespace Code.ECS.Gameplay.Features.Input
+namespace Code.ECS.Gameplay.Features.Input.Systems
 {
     public class EmitShootInputSystem : IExecuteSystem
     {

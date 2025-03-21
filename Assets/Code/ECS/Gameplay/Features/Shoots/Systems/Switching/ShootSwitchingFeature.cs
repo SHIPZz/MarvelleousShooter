@@ -14,6 +14,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching
             
             Add(systems.Create<SetTargetRequestedGunOnSwitchingSystem>());
             
+            Add(systems.Create<ClearVisualProcessingOnQuickSwitchingSystem>());
+            
             Add(systems.Create<MarkSwitchingStartedSystem>());
             
             Add(systems.Create<HideGunOnSwitchingStartedSystem>());

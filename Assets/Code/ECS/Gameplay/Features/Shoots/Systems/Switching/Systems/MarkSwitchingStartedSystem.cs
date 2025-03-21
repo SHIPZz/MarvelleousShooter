@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 {
@@ -18,9 +17,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                Debug.Log($"{entity.isHidingProcessing} - hiding");
-                Debug.Log($"{entity.isShowingProcessing} - showing");
                 entity.isSwitchingProcessed = false;
+                entity.isSwitchingProcessing = true;
                 entity.isSwitchingStarted = true;
             }
         }

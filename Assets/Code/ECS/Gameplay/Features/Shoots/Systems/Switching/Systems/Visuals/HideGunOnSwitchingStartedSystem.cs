@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.Gameplay.Animations;
 using Entitas;
+using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
 {
@@ -14,10 +15,12 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
         public HideGunOnSwitchingStartedSystem(GameContext game)
         {
             _game = game;
-            _entities = game.GetGroup(GameMatcher.AllOf(GameMatcher.SwitchingStarted)
+            _entities = game.GetGroup(GameMatcher
+                .AllOf(GameMatcher.SwitchingStarted)
                 .NoneOf(GameMatcher.HidingProcessed));
 
-            _shootHolders = game.GetGroup(GameMatcher.AllOf(GameMatcher.ShootHolder, 
+            _shootHolders = game.GetGroup(GameMatcher
+                .AllOf(GameMatcher.ShootHolder, 
                 GameMatcher.CurrentGunId));
         }
 
@@ -27,6 +30,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             foreach (GameEntity shootHolder in _shootHolders)
             {
                 GameEntity gun = _game.GetEntityWithId(shootHolder.CurrentGunId);
+
+                Debug.Log($"@@@ {gun.View.gameObject.name} hide");
                 
                 ShowAnimation(entity, gun);
 

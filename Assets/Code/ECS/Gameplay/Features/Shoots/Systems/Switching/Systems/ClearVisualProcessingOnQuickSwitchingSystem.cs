@@ -3,27 +3,32 @@ using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 {
-    public class MarkSwitchingFinishedOnShowingProcessedSystem : IExecuteSystem
+    public class ClearVisualProcessingOnQuickSwitchingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(2);
 
-        public MarkSwitchingFinishedOnShowingProcessedSystem(GameContext game)
+        public ClearVisualProcessingOnQuickSwitchingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Switchable,
+                .AllOf(
                     GameMatcher.SwitchingStarted,
-                    GameMatcher.ShowingProcessed));
+                    GameMatcher.Switchable,
+                    GameMatcher.ShowingProcessing,
+                    GameMatcher.ShootSwitchingRequested
+                    )
+                .NoneOf(GameMatcher.SameGunSelected))
+                ;
         }
 
         public void Execute()
         {
             foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
-                entity.isSwitchingProcessed = true;
-                entity.isSwitchingStarted = false;
-
                 entity.isHidingProcessed = false;
+                entity.isHidingProcessing = false;
+                
+                entity.isShowingProcessing = false;
                 entity.isShowingProcessed = false;
             }
         }

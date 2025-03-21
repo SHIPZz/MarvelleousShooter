@@ -14,6 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
                 .AllOf(
                     GameMatcher.ShootSwitchingRequested,
                     GameMatcher.ShootSwitchingAvailable,
+                    GameMatcher.Switchable,
                     GameMatcher.TargetInputGun));
             
             _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable,

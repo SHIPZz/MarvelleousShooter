@@ -12,8 +12,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             _shootHolders = game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.ShootHolder));
 
-            _switchables = game.GetGroup(GameMatcher.AllOf(GameMatcher.Switchable,
-                GameMatcher.TargetSwitchGunId,GameMatcher.ShowingProcessed));
+            _switchables = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Switchable,
+                GameMatcher.TargetSwitchGunId,
+                GameMatcher.HidingProcessed));
         }
 
         public void Execute()
