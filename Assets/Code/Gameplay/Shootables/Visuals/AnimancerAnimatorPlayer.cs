@@ -26,8 +26,16 @@ namespace Code.Gameplay.Animations
             FillAnimationStates();
         }
 
-        public bool IsPlaying(AnimationTypeId animationTypeId) => _animationStates.ContainsKey(animationTypeId) 
-                                                                  && _animationStates[animationTypeId].NormalizedTime < 1f;
+        public bool IsPlaying(AnimationTypeId animationTypeId)
+        {
+            if (!_animationStates.ContainsKey(animationTypeId))
+                return false;
+
+            AnimancerState state = _animationStates[animationTypeId];
+            return state.IsPlaying && state.Time < state.Length;
+        }
+        
+        public float NormalizedTime(AnimationTypeId id) => _animationStates[id].NormalizedTime;
         
         public AnimancerState GetState(AnimationTypeId animationTypeId) =>
             _animationStates.GetValueOrDefault(animationTypeId);

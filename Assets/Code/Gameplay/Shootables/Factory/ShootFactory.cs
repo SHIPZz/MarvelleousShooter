@@ -3,16 +3,12 @@ using Code.ECS.Common.Services;
 using Code.ECS.View;
 using Code.ECS.View.Factory;
 using Code.Extensions;
-using Code.Gameplay.Animations;
 using Code.Gameplay.Effects;
 using Code.Gameplay.Shootables.Configs;
 using Code.Gameplay.Shootables.Extensions;
-using Code.Gameplay.Shootables.Services;
 using Code.Gameplay.Shootables.Visuals;
 using UnityEngine;
 using Zenject;
-
-// ReSharper disable All
 
 namespace Code.Gameplay.Shootables.Factory
 {
@@ -73,8 +69,6 @@ namespace Code.Gameplay.Shootables.Factory
                 ;
 
             EntityBehaviour createdShoot = _entityViewFactory.CreateViewForEntityFromPrefab(shootEntity,parent);
-
-            createdShoot.GetComponent<OnShootAnimationPlayer>().Init(config);
 
             createdShoot.Entity.Transform.localPosition = config.Position;
             createdShoot.Entity.Transform.localRotation = Quaternion.Euler(config.Rotation);

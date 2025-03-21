@@ -6,7 +6,6 @@ using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
 using Code.Extensions;
-using Code.Gameplay.AbilitySystem;
 using Code.Gameplay.Cameras;
 using Code.Gameplay.Enemies.Services;
 using Code.Gameplay.Heroes;
@@ -15,8 +14,6 @@ using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
 using Code.Gameplay.Shootables;
 using Code.Gameplay.Shootables.Factory;
-using Code.Gameplay.Shootables.Services;
-using Code.InfraStructure.States.StateMachine;
 using Code.SaveData;
 using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
@@ -27,7 +24,6 @@ namespace Code.InfraStructure.States.States
     {
         private readonly ILevelDataProvider _levelDataProvider;
         private readonly ICameraProvider _cameraProvider;
-        private readonly IAbilityService _abilityService;
         private readonly IHeroFactory _heroFactory;
         private readonly IShootFactory _shootFactory;
         private readonly IWorldDataService _worldDataService;
@@ -38,7 +34,6 @@ namespace Code.InfraStructure.States.States
 
         public GameState(ILevelDataProvider levelDataProvider,
             ICameraProvider cameraProvider, 
-            IAbilityService abilityService, 
             IWorldDataService worldDataService,
             IShootFactory shootFactory,
             ISystemFactory systemFactory,
@@ -52,7 +47,6 @@ namespace Code.InfraStructure.States.States
             _shootFactory = shootFactory;
             _levelDataProvider = levelDataProvider;
             _cameraProvider = cameraProvider;
-            _abilityService = abilityService;
         }
 
         public override void Enter()
@@ -71,7 +65,6 @@ namespace Code.InfraStructure.States.States
             
             _battleFeature.Initialize();
 
-            _abilityService.Init();
             WorldData worldData = _worldDataService.Get();
 
             GameEntity hero = _heroFactory.Create(null,_levelDataProvider.StartPoint.position,Quaternion.identity);

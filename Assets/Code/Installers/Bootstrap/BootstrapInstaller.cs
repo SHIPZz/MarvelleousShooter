@@ -6,12 +6,9 @@ using Code.ECS.Common.Time;
 using Code.ECS.Infrastructure.StateMachine;
 using Code.ECS.Systems;
 using Code.ECS.View.Factory;
-using Code.Gameplay.AbilitySystem;
-using Code.Gameplay.AbilitySystem.StatSystem.StatModifiers;
 using Code.Gameplay.Cameras;
 using Code.Gameplay.Cameras.Shake;
 using Code.Gameplay.Common;
-using Code.Gameplay.Common.Damage;
 using Code.Gameplay.Common.Services.Raycast;
 using Code.Gameplay.Common.Timer;
 using Code.Gameplay.Effects;
@@ -22,7 +19,6 @@ using Code.Gameplay.Heroes.Factory;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.Input;
 using Code.Gameplay.LevelDatas;
-using Code.Gameplay.Quest.Services;
 using Code.Gameplay.Shootables.Factory;
 using Code.Gameplay.Sounds;
 using Code.InfraStructure.AssetManagement_1;
@@ -52,20 +48,15 @@ namespace Code.Installers.Bootstrap
             BindCameraServices();
             BindStates();
             BindAssetManagementServices();
-            BindQuestServices();
             BindEffectServices();
             BindLevelDataProvider();
             BindShootServices();
             BindHeroServices();
             BindEnemyServices();
-            BindAbilityServices();
             BindGameplayServices();
             BindWindowService();
             BindEcsServices();
             BindContexts();
-
-           // BindShootStateMachineAndStates();
-            //BindHeroStateMachineAndStates();
 
             Container.BindInterfacesTo<UpdateService>().AsSingle();
             
@@ -111,18 +102,8 @@ namespace Code.Installers.Bootstrap
         {
             Container.BindInterfacesTo<TimerService>().AsTransient();
             Container.Bind<ITimeService>().To<UnityTimeService>().AsSingle();
-            Container.Bind<IDamageService>().To<DamageService>().AsSingle();
-            Container.BindInterfacesTo<StatService>().AsSingle();
-            Container.BindInterfacesTo<DamageNotifierService>().AsSingle();
             Container.Bind<IRaycastService>().To<RaycastService>().AsTransient();
             Container.Bind<IShootRaycastService>().To<ShootRaycastService>().AsSingle();
-        }
-
-        private void BindAbilityServices()
-        {
-            Container.BindInterfacesAndSelfTo<AbilityService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AbilityFactory>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AbilityStaticDataService>().AsSingle();
         }
 
         private void BindEnemyServices()
@@ -152,12 +133,6 @@ namespace Code.Installers.Bootstrap
         private void BindEffectServices()
         {
             Container.Bind<IEffectFactory>().To<EffectFactory>().AsSingle();
-        }
-
-        private void BindQuestServices()
-        {
-            Container.Bind<IQuestService>().To<QuestService>().AsSingle();
-            Container.Bind<IQuestFactory>().To<QuestFactory>().AsSingle();
         }
 
         private void BindAssetManagementServices()
@@ -194,7 +169,6 @@ namespace Code.Installers.Bootstrap
         private void BindStaticDataServices()
         {
             Container.BindInterfacesTo<UIStaticDataService>().AsSingle();
-            Container.Bind<IQuestStaticDataService>().To<QuestStaticDataService>().AsSingle();
             Container.Bind<IEffectStaticDataService>().To<EffectStaticDataService>().AsSingle();
             Container.Bind<ISoundStaticDataService>().To<SoundStaticDataService>().AsSingle();
         }

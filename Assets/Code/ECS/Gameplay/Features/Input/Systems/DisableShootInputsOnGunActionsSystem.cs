@@ -13,8 +13,8 @@ namespace Code.ECS.Gameplay.Features.Input.Systems
                 InputMatcher.Input));
             
             _gunSwitch = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.SwitchingProcessing,
-                    GameMatcher.ConnectedWithHero));
+                .AllOf(GameMatcher.ConnectedWithHero)
+                .AnyOf(GameMatcher.SwitchingProcessing));
         }
 
         public void Execute()

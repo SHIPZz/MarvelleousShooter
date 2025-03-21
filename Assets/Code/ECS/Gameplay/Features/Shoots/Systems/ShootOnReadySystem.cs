@@ -25,7 +25,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isShootAnimationFinished = false;
                 entity.isShooting = true;
             }
         }

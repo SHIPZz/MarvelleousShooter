@@ -31,8 +31,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             {
                 GameEntity gun = _game.GetEntityWithId(shootHolder.CurrentGunId);
 
-                Debug.Log($"@@@ {gun.View.gameObject.name} hide");
-                
                 ShowAnimation(entity, gun);
 
                 if (TryMarkProcessed(entity, gun))
@@ -45,7 +43,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
         private static void ShowAnimation(GameEntity entity, GameEntity gun)
         {
             if (!entity.isHidingProcessing)
+            {
                 gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Hide, 0.1f);
+                gun.isActive = false;
+            }
         }
 
         private static bool TryMarkProcessed(GameEntity entity, GameEntity gun)

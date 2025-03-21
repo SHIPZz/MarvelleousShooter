@@ -15,6 +15,7 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<MarkShootingReadySystem>());
             
             Add(systemFactory.Create<ShootOnReadySystem>());
+            Add(systemFactory.Create<MarkShootAnimStoppedOnEnd>());
             Add(systemFactory.Create<ShootWithoutAmmoOnReadySystem>());
             
             Add(systemFactory.Create<MarkShootingContinuouslySystem>());
@@ -27,8 +28,6 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<PlayAnimationOnShootSystem>());
             Add(systemFactory.Create<PlayEffectOnShootSystem>());
             
-            Add(systemFactory.Create<SetShootAnimationFinishedSystem>());
-            
             Add(systemFactory.Create<SetLastShootTimeOnShootingSystem>());
             Add(systemFactory.Create<CalculateAmmoCountOnShootSystem>());
             Add(systemFactory.Create<MarkAmmoAvailableSystem>());
@@ -36,6 +35,7 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<CleanupShootRaycastHitsSystem>());
             
             Add(systemFactory.Create<CleanupGunOnNonActiveSystem>());
+            
             Add(systemFactory.Create<CleanupShootingSystem>());
         }
     }

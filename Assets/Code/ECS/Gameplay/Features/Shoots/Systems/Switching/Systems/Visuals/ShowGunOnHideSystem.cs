@@ -40,6 +40,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             if (entity.isShowingProcessing && !gun.AnimancerAnimator.IsPlaying(AnimationTypeId.Get))
             {
                 entity.isShowingProcessed = true;
+                gun.isActive = true;
                 entity.isShowingProcessing = false;
                 return true;
             }

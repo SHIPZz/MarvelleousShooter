@@ -29,8 +29,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 
         private bool CanShoot(GameEntity entity)
         {
-            return Time.time >= entity.LastShootTime + entity.ShootInterval 
-                   && entity.isShootAnimationFinished;
+            return Time.time >= entity.LastShootTime + entity.ShootInterval
+                   && entity.isShootAnimationFinished 
+                   && entity.isNeedAnimationComplete;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             {
                 entity.isSwitchingProcessed = true;
                 entity.isSwitchingStarted = false;
+                entity.isSwitchingProcessing = false;
 
                 entity.isHidingProcessed = false;
                 entity.isShowingProcessed = false;
