@@ -49,7 +49,7 @@ namespace Code.Gameplay.Shootables.Factory
                     .AddHits(null)
                     .AddShootDistance(config.ShootDistance)
                     .AddLayerMask(config.Mask)
-                    .AddShowInputKey(config.ShowKey)
+                    .AddGunInputKey(config.InputKey)
                     .ReplaceLastShootTime(0)
                     .AddShootInterval(config.ShootInterval)
                     .With(x => x.AddAmmoCount(config.AmmoCount), when: config.AmmoCount > 0)

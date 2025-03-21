@@ -25,7 +25,7 @@ namespace Code.Gameplay.Input
     IObservable<Unit> OnRightMouseButtonUp { get; }
     IObservable<Unit> OnReloadPressed { get; }
     IObservable<bool> OnHasAxisAxisInput { get; }
-    IObservable<ShootInputTypeId> OnShootSelected { get; }
+    IObservable<GunInputTypeId> OnGunSelected { get; }
     IObservable<Unit> OnGunFocusRequested { get;  }
     bool IsRunningPressed();
     bool IsAiming();

@@ -13,7 +13,7 @@ namespace Code.ECS.Gameplay.Features.Input
                 InputMatcher.Input));
             
             _gunSwitch = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Switching,
+                .AllOf(GameMatcher.SwitchingProcessing,
                     GameMatcher.ConnectedWithHero));
         }
 

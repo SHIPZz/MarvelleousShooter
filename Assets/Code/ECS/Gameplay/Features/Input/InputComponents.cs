@@ -22,7 +22,7 @@ namespace Code.ECS.Gameplay.Features.Input
     
     [Input] public class GunChangePressed : IComponent { }
     
-    [Input] public class SelectedShoot : IComponent { public ShootInputTypeId Value; }
+    [Input] public class SelectedShoot : IComponent { public GunInputTypeId Value; }
     
     [Input] public class HasAxis : IComponent { }
     

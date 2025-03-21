@@ -53,5 +53,5 @@ namespace Code.ECS.Gameplay.Features.Shoots
     
     [Game] public class ShootTypeIdComponent : IComponent { public ShootTypeId Value; }
     
-    [Game] public class ShowInputKeyComponent : IComponent { public ShootInputTypeId Value; }
+    [Game] public class GunInputKeyComponent : IComponent { public GunInputTypeId Value; }
 }

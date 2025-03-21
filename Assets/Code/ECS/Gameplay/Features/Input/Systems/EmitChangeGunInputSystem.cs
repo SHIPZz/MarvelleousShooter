@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Input
     {
         private readonly IGroup<InputEntity> _input;
         private readonly IInputService _inputService;
-        private ShootInputTypeId _selectedShootInputId = ShootInputTypeId.None;
+        private GunInputTypeId _selectedGunInputId = GunInputTypeId.None;
 
         private readonly CompositeDisposable _compositeDisposable = new();
         
@@ -24,19 +24,19 @@ namespace Code.ECS.Gameplay.Features.Input
         {
             foreach (InputEntity input in _input)
             {
-                input.isGunChangePressed = _selectedShootInputId != ShootInputTypeId.None;
+                input.isGunChangePressed = _selectedGunInputId != GunInputTypeId.None;
                 
-                if(_selectedShootInputId == ShootInputTypeId.None)
+                if(_selectedGunInputId == GunInputTypeId.None)
                     continue;
                 
-                input.ReplaceSelectedShoot(_selectedShootInputId);
-                _selectedShootInputId = ShootInputTypeId.None;
+                input.ReplaceSelectedShoot(_selectedGunInputId);
+                _selectedGunInputId = GunInputTypeId.None;
             }
         }
 
         public void Initialize()
         {
-            _inputService.OnShootSelected.Subscribe(id => _selectedShootInputId = id).AddTo(_compositeDisposable);
+            _inputService.OnGunSelected.Subscribe(id => _selectedGunInputId = id).AddTo(_compositeDisposable);
         }
         
         public void TearDown()

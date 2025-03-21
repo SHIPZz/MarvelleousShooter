@@ -17,7 +17,7 @@ namespace Code.ECS.Gameplay.Features.Input
                     GameMatcher.ConnectedWithHero,
                     GameMatcher.Active)
                 .AnyOf(
-                    GameMatcher.Switching,
+                    GameMatcher.SwitchingProcessing,
                     GameMatcher.NotAimable));
         }
 

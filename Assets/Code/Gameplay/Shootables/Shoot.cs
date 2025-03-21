@@ -18,7 +18,7 @@ namespace Code.Gameplay.Shootables
     public class Shoot : MonoBehaviour
     {
         public ShootTypeId Id;
-        public ShootInputTypeId ShowInputKey;
+        public GunInputTypeId ShowInputKey;
 
         private readonly Subject<Shoot> _shootEvent = new Subject<Shoot>();
         private readonly Subject<RaycastHit[]> _shootHitsEvent = new Subject<RaycastHit[]>();

@@ -7,7 +7,7 @@ namespace Code.Gameplay.Heroes.Services
     {
         void Add(Shoot shoot);
         void Remove(Shoot shoot);
-        bool TryGetShoot(ShootInputTypeId shootInputTypeId, out Shoot shoot);
+        bool TryGetShoot(GunInputTypeId gunInputTypeId, out Shoot shoot);
         bool IsAlreadyActive(Shoot shoot);
     }
 }

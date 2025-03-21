@@ -16,7 +16,7 @@ namespace Code.ECS.Gameplay.Features.Input
                 .AllOf(
                     GameMatcher.ConnectedWithHero, 
                     GameMatcher.Active)
-                .AnyOf(GameMatcher.Switching,GameMatcher.Reloading));
+                .AnyOf(GameMatcher.SwitchingProcessing,GameMatcher.Reloading));
         }
 
         public void Execute()

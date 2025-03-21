@@ -30,9 +30,9 @@ namespace Code.Gameplay.Heroes.Services
             _activeShoots.Remove(shoot.Id);
         }
 
-        public bool TryGetShoot(ShootInputTypeId shootInputTypeId, out Shoot shoot)
+        public bool TryGetShoot(GunInputTypeId gunInputTypeId, out Shoot shoot)
         {
-            shoot = _activeShoots.Values.FirstOrDefault(x => x.ShowInputKey == shootInputTypeId);
+            shoot = _activeShoots.Values.FirstOrDefault(x => x.ShowInputKey == gunInputTypeId);
 
             return shoot != null;
         }

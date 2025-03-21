@@ -13,7 +13,7 @@ namespace Code.Gameplay.Input
         private Camera _mainCamera;
         private Vector3 _screenPosition;
 
-        private readonly Subject<ShootInputTypeId> _shootSelected = new Subject<ShootInputTypeId>();
+        private readonly Subject<GunInputTypeId> _gunSelected = new Subject<GunInputTypeId>();
 
         private readonly Subject<Unit> _leftMouseButtonDown = new Subject<Unit>();
         private readonly Subject<Unit> _leftMouseButtonUp = new Subject<Unit>();
@@ -32,7 +32,7 @@ namespace Code.Gameplay.Input
         
         public IObservable<Unit> OnGunFocusRequested => _gunFocusRequested;
 
-        public IObservable<ShootInputTypeId> OnShootSelected => _shootSelected;
+        public IObservable<GunInputTypeId> OnGunSelected => _gunSelected;
 
         public Camera CameraMain
         {
@@ -49,8 +49,7 @@ namespace Code.Gameplay.Input
         {
             _axisInput?.OnNext(HasAxisInput());
 
-            if (ReloadPressed)
-                _reloadPressed?.OnNext(Unit.Default);
+            EmitReload();
             
             if(GunFocusPressed)
                 _gunFocusRequested?.OnNext(default);
@@ -148,14 +147,20 @@ namespace Code.Gameplay.Input
             SendShootInputEventIfKeyDown(KeyCode.Alpha6);
         }
 
+        private void EmitReload()
+        {
+            if (ReloadPressed)
+                _reloadPressed?.OnNext(Unit.Default);
+        }
+
         private void SendShootInputEventIfKeyDown(KeyCode keyCode)
         {
             if (UnityEngine.Input.GetKeyDown(keyCode))
             {
-                ShootInputTypeId shootInputTypeId = keyCode.AsShootInput();
+                GunInputTypeId gunInputTypeId = keyCode.AsShootInput();
 
-                if (shootInputTypeId != ShootInputTypeId.None)
-                    _shootSelected?.OnNext(shootInputTypeId);
+                if (gunInputTypeId != GunInputTypeId.None)
+                    _gunSelected?.OnNext(gunInputTypeId);
             }
         }
 

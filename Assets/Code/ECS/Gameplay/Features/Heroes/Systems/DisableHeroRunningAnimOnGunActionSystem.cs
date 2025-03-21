@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                 .AnyOf(
                     GameMatcher.ShootingContinuously,
                     GameMatcher.Reloading,
-                    GameMatcher.Switching,
+                    GameMatcher.SwitchingProcessing,
                     GameMatcher.Aiming
                 ));
 

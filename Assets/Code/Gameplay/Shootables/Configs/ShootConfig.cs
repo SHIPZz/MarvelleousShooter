@@ -19,7 +19,7 @@ namespace Code.Gameplay.Shootables.Configs
         public Vector3 Rotation;
 
         public RecoilData RecoilData;
-        public ShootInputTypeId ShowKey;
+        public GunInputTypeId InputKey;
 
         public bool Reloadable = true;
         

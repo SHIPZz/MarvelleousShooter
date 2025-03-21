@@ -15,7 +15,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
         }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.TargetGunShown.Added());
+            context.CreateCollector(GameMatcher.ShowingProcessed.Added());
 
         protected override bool Filter(GameEntity entity) => entity.isSwitchable
                                                              && entity.hasTargetSwitchGunId;

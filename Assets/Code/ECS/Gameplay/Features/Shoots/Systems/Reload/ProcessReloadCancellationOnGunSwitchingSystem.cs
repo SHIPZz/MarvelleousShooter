@@ -16,7 +16,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload
                     GameMatcher.Active,
                     GameMatcher.Reloading));
 
-            _switching = game.GetGroup(GameMatcher.AllOf(GameMatcher.Active, GameMatcher.Switching));
+            _switching = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Active,
+                GameMatcher.SwitchingProcessing));
         }
 
         public void Execute()

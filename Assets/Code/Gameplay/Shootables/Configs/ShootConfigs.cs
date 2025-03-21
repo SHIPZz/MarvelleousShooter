@@ -11,18 +11,18 @@ namespace Code.Gameplay.Shootables.Configs
     {
         [OdinSerialize] private Dictionary<ShootTypeId, ShootConfig> _shootConfigs;
         
-        private Dictionary<ShootInputTypeId, ShootConfig> _shootConfigsByKey = new();
+        private Dictionary<GunInputTypeId, ShootConfig> _shootConfigsByKey = new();
 
         public ShootConfig GetById(ShootTypeId shootTypeId) => _shootConfigs[shootTypeId];
 
-        public ShootConfig GetByKey(ShootInputTypeId pressedKey) => _shootConfigsByKey.GetValueOrDefault(pressedKey);
+        public ShootConfig GetByKey(GunInputTypeId pressedKey) => _shootConfigsByKey.GetValueOrDefault(pressedKey);
 
         [Button]
         private void FillShootConfigsByKey()
         {
             foreach (ShootConfig shootConfig in _shootConfigs.Values)
             {
-                _shootConfigsByKey[shootConfig.ShowKey] = shootConfig;
+                _shootConfigsByKey[shootConfig.InputKey] = shootConfig;
             }
         }
     }

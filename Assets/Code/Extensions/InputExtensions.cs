@@ -6,20 +6,20 @@ namespace Code.Extensions
 {
     public static class InputExtensions
     {
-        private static readonly Dictionary<KeyCode, ShootInputTypeId> _weaponSelectByKey = new()
+        private static readonly Dictionary<KeyCode, GunInputTypeId> _weaponSelectByKey = new()
         {
-            { KeyCode.Alpha0, ShootInputTypeId.Nothing },
-            { KeyCode.Alpha1, ShootInputTypeId.Main },
-            { KeyCode.Alpha2, ShootInputTypeId.Second },
-            { KeyCode.Alpha3, ShootInputTypeId.Knife },
-            { KeyCode.Alpha4, ShootInputTypeId.Grenade },
-            { KeyCode.Alpha5, ShootInputTypeId.Syringe },
-            { KeyCode.Alpha6, ShootInputTypeId.Flashlight },
+            { KeyCode.Alpha0, GunInputTypeId.Nothing },
+            { KeyCode.Alpha1, GunInputTypeId.Main },
+            { KeyCode.Alpha2, GunInputTypeId.Second },
+            { KeyCode.Alpha3, GunInputTypeId.Knife },
+            { KeyCode.Alpha4, GunInputTypeId.Grenade },
+            { KeyCode.Alpha5, GunInputTypeId.Syringe },
+            { KeyCode.Alpha6, GunInputTypeId.Flashlight },
         };
 
-        public static ShootInputTypeId AsShootInput(this KeyCode keyCode)
+        public static GunInputTypeId AsShootInput(this KeyCode keyCode)
         {
-            return _weaponSelectByKey.GetValueOrDefault(keyCode, ShootInputTypeId.None);
+            return _weaponSelectByKey.GetValueOrDefault(keyCode, GunInputTypeId.None);
         }
     }
 }

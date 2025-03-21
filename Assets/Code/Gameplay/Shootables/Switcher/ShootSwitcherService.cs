@@ -26,7 +26,7 @@ namespace Code.Gameplay.Shootables.Switcher
 
         public void Initialize()
         {
-            _inputService.OnShootSelected.Subscribe(ProcessSelectedShoot).AddTo(_compositeDisposable);
+            _inputService.OnGunSelected.Subscribe(ProcessSelectedShoot).AddTo(_compositeDisposable);
         }
 
         public void Dispose()
@@ -34,9 +34,9 @@ namespace Code.Gameplay.Shootables.Switcher
             _compositeDisposable?.Dispose();
         }
 
-        private void ProcessSelectedShoot(ShootInputTypeId shootInputTypeId)
+        private void ProcessSelectedShoot(GunInputTypeId gunInputTypeId)
         {
-            if (!_heroShootHolderService.TryGetShoot(shootInputTypeId, out Shoot shoot))
+            if (!_heroShootHolderService.TryGetShoot(gunInputTypeId, out Shoot shoot))
                 return;
 
             if (!_heroShootHolderService.IsAlreadyActive(shoot))

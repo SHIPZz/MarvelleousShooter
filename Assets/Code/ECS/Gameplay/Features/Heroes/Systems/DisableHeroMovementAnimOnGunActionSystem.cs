@@ -15,7 +15,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                     GameMatcher.Reloading,
                     GameMatcher.ShootingContinuously,
                     GameMatcher.Shooting,
-                    GameMatcher.Switching,
+                    GameMatcher.SwitchingProcessing,
                     GameMatcher.Aiming
                 ));
 
