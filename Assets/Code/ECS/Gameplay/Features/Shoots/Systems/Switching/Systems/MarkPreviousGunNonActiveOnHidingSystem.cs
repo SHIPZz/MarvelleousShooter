@@ -25,6 +25,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             {
                 GameEntity targetGun = _game.GetEntityWithId(entity.PreviousSwitchedGunId);
 
+                targetGun.isShootAnimationFinished = true;
+                targetGun.isShooting = false;
+                targetGun.isShootingContinuously = false;
+                
                 targetGun.isActive = false;
             }
         }

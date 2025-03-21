@@ -67,7 +67,7 @@ namespace Code.Gameplay.Shootables.Visuals
 
         private void SetAnimFinished()
         {
-            _entityBehaviour.Entity.isShootAnimationFinished = true;
+            // _entityBehaviour.Entity.isShootAnimationFinished = true;
         }
     }
 }

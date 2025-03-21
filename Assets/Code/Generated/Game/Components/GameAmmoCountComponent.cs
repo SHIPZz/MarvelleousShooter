@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.ECS.Gameplay.Features.Shoots.AmmoCount ammoCount { get { return (Code.ECS.Gameplay.Features.Shoots.AmmoCount)GetComponent(GameComponentsLookup.AmmoCount); } }
+    public Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount ammoCount { get { return (Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount)GetComponent(GameComponentsLookup.AmmoCount); } }
     public float AmmoCount { get { return ammoCount.Value; } }
     public bool hasAmmoCount { get { return HasComponent(GameComponentsLookup.AmmoCount); } }
 
     public GameEntity AddAmmoCount(float newValue) {
         var index = GameComponentsLookup.AmmoCount;
-        var component = (Code.ECS.Gameplay.Features.Shoots.AmmoCount)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.AmmoCount));
+        var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceAmmoCount(float newValue) {
         var index = GameComponentsLookup.AmmoCount;
-        var component = (Code.ECS.Gameplay.Features.Shoots.AmmoCount)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.AmmoCount));
+        var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoCount));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

@@ -13,6 +13,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                     GameMatcher.ShootingReady,
                     GameMatcher.ShootingAvailable,
                     GameMatcher.ShootingRequested,
+                    GameMatcher.Active,
                     GameMatcher.AmmoAvailable,
                     GameMatcher.ShootDistance,
                     GameMatcher.LayerMask,
@@ -24,6 +25,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
         {
             foreach (GameEntity entity in _entities)
             {
+                entity.isShootAnimationFinished = false;
                 entity.isShooting = true;
             }
         }

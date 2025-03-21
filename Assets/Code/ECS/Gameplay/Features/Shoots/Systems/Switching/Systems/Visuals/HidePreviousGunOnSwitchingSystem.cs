@@ -17,8 +17,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Switching,
-                    GameMatcher.PreviousSwitchedGunId)
-                .NoneOf(GameMatcher.PreviousGunHidden));
+                    GameMatcher.PreviousSwitchedGunId));
         }
 
         public void Execute()
@@ -33,6 +32,15 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             }
         }
 
+        private static void StartAndMarkAnimationStarted(GameEntity entity, GameEntity gun)
+        {
+            if (!entity.isHidingStarted)
+            {
+                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Hide,0.1f);
+                entity.isHidingStarted = true;
+            }
+        }
+
         private static void MarkGunHidden(GameEntity entity, GameEntity gun)
         {
             if (entity.isHidingStarted && !gun.AnimancerAnimator.IsPlaying(AnimationTypeId.Hide))
@@ -40,15 +48,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
                 entity.isPreviousGunHidden = true;
                 entity.isHidingStarted = false; 
                 gun.isViewActive = false; 
-            }
-        }
-
-        private static void StartAndMarkAnimationStarted(GameEntity entity, GameEntity gun)
-        {
-            if (!entity.isHidingStarted)
-            {
-                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Hide);
-                entity.isHidingStarted = true;
             }
         }
     }

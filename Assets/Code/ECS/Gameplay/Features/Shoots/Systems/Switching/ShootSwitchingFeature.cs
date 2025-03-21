@@ -10,6 +10,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching
         {
             Add(systems.Create<MarkShootSwitchingRequestedOnInputSystem>());
             Add(systems.Create<MarkShootSwitchingUnavailableOnSameGunSystem>());
+           
             Add(systems.Create<SwitchShootSystem>());
             
             Add(systems.Create<HidePreviousGunOnSwitchingSystem>());

@@ -20,9 +20,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
                     GameMatcher.Switching,
                     GameMatcher.TargetSwitchGunId,
                     GameMatcher.PreviousGunHidden
-                )
-                .NoneOf(
-                    GameMatcher.TargetGunShown
                 ));
         }
 
@@ -42,8 +39,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
         {
             if (!gun.AnimancerAnimator.IsPlaying(AnimationTypeId.Get) && entity.isShowingStarted)
             {
-                entity.isTargetGunShown = true;
                 entity.isShowingStarted = false;
+                entity.isTargetGunShown = true;
             }
         }
 
@@ -52,7 +49,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
             if (!entity.isShowingStarted)
             {
                 gun.isViewActive = true;
-                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Get);
+                
+                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Get,0.1f);
                 entity.isShowingStarted = true;
             }
         }

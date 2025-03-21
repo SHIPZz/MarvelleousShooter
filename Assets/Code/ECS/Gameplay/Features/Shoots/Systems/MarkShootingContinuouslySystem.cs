@@ -19,9 +19,13 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isShootingContinuously = entity.isShootingRequested 
-                                                && entity.isShootingAvailable;
+                entity.isShootingContinuously = ShootingRequestedAndAvailable(entity);
             }
+        }
+
+        private static bool ShootingRequestedAndAvailable(GameEntity entity)
+        {
+            return entity.isShootingRequested && entity.isShootingAvailable;
         }
     }
 }

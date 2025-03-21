@@ -9,6 +9,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching
     
     [Game] public class Switching : IComponent { }
     
+    [Game] public class HeroSwitchable : IComponent { }
+    
     [Game] public class HidingStarted : IComponent { }
     
     [Game] public class ShowingStarted : IComponent { }

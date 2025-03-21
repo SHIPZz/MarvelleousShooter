@@ -13,7 +13,9 @@ namespace Code.ECS.Gameplay.Features.Input
             Add(systems.Create<EmitRunningInputSystem>());
             Add(systems.Create<EmitChangeGunInputSystem>());
             
-            Add(systems.Create<DisableInputsOnSwitchingSystem>());
+            Add(systems.Create<DisableAimInputsOnGunActionsSystem>());
+            Add(systems.Create<DisableShootInputsOnGunActionsSystem>());
+            Add(systems.Create<DisableReloadInputOnGunActionsSystem>());
         }
     }
 }

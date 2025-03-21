@@ -14,6 +14,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Shootable,
+                    GameMatcher.Active,
                     GameMatcher.HeroGun));
         }
 

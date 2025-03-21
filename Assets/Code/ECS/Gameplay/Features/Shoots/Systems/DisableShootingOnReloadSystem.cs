@@ -2,11 +2,11 @@
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems
 {
-    public class DisableShootingSystem : IExecuteSystem
+    public class DisableShootingOnReloadSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _guns;
 
-        public DisableShootingSystem(GameContext game)
+        public DisableShootingOnReloadSystem(GameContext game)
         {
             _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable));
         }
@@ -18,6 +18,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                 if (gun.isReloading)
                 {
                     gun.isShootingAvailable = false;
+                    gun.isShootAnimationFinished = true;
+                    gun.isShooting = false;
                     return;
                 }
 

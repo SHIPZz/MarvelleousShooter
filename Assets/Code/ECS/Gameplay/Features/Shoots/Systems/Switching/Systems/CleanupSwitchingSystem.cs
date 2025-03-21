@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.ECS.Gameplay.Features.Cooldown;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
@@ -12,8 +13,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         {
             _group = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Switching,
-                GameMatcher.TargetGunShown,
-                GameMatcher.PreviousGunHidden));
+                GameMatcher.TargetGunShown));
         }
 
         public void Cleanup()
@@ -22,9 +22,12 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             {
                 entity.isSwitching = false;
                 entity.isTargetGunShown = false;
+                entity.isHidingStarted = false;
+                entity.isShowingStarted = false;
                 entity.isPreviousGunHidden = false;
-                entity.RemoveTargetSwitchGunId();
-                entity.RemovePreviousSwitchedGunId();
+                entity.isShootSwitchingRequested = false;
+                
+                entity.PutOnCooldown();
             }
         }
     }

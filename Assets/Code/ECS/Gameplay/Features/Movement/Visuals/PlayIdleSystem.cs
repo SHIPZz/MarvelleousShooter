@@ -12,13 +12,12 @@ namespace Code.ECS.Gameplay.Features.Movement.Visuals
             context.CreateCollector(GameMatcher.Idle.Added(),
                 GameMatcher.IdleAvailable.Added(),
                 GameMatcher.MovementAnimAvailable.Added()
-                );
+            );
 
-        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
+        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator
                                                              && entity.isMovementAnimAvailable
                                                              && entity.isIdle
-                                                             && entity.isIdleAvailable
-                                                             ;
+                                                             && entity.isIdleAvailable;
 
         protected override void Execute(List<GameEntity> entities)
         {

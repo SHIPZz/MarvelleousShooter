@@ -12,16 +12,14 @@ namespace Code.ECS.Gameplay.Features.Input
         public EmitShootInputSystem(InputContext input, IInputService inputService)
         {
             _inputService = inputService;
-            _input = input.GetGroup(InputMatcher.AllOf(
-                InputMatcher.Input,
-                InputMatcher.ShootingAvailable));
+            _input = input.GetGroup(InputMatcher.AllOf(InputMatcher.Input));
         }
 
         public void Execute()
         {
             foreach (InputEntity input in _input)
             {
-                input.isShootingPressed = _inputService.IsShooting();
+                input.isShootingPressed = _inputService.IsShooting() && input.isShootingAvailable;
             }
         }
     }

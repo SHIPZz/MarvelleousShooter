@@ -2,6 +2,7 @@ using System;
 using Code.Data.Services;
 using Code.ECS;
 using Code.ECS.Common.Entity;
+using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
 using Code.Extensions;
@@ -61,6 +62,9 @@ namespace Code.InfraStructure.States.States
             CreateEntity.Empty()
                 .With(x => x.isShootSwitchingReady = true)
                 .With(x => x.isShootSwitchingAvailable = true)
+                .With(x => x.isConnectedWithHero = true)
+                .With(x => x.isActive = true)
+                .With(x => x.PutOnCooldown(0f))
                 .With(x => x.isSwitchable = true);
 
             _battleFeature = _systemFactory.Create<BattleFeature>();

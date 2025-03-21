@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems

@@ -1,25 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using Code.Gameplay.Animations;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 {
-    public class SetAnimationFinishedSystem : ReactiveSystem<GameEntity>
+    public class SetAnimationFinishedSystem : IExecuteSystem
     {
-        public SetAnimationFinishedSystem(IContext<GameEntity> game) : base(game) { }
+        private readonly IGroup<GameEntity> _entities;
 
-        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.Shooting.Added());
-
-        protected override bool Filter(GameEntity entity) => entity.isShootable
-                                                             && entity.isShooting
-                                                             && entity.isActive
-                                                             && entity.isNeedAnimationComplete;
-
-        protected override void Execute(List<GameEntity> entities)
+        public SetAnimationFinishedSystem(GameContext game)
         {
-            foreach (GameEntity entity in entities)
+            _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Active,
+                GameMatcher.Shootable,
+                GameMatcher.ShootingAvailable,
+                GameMatcher.NeedAnimationComplete,
+                GameMatcher.AnimancerAnimator));
+        }
+
+        public void Execute()
+        {
+            foreach (GameEntity entity in _entities)
             {
-                entity.isShootAnimationFinished = false;
+                if (!entity.isAiming && entity.isShooting && !entity.AnimancerAnimator.IsPlaying(AnimationTypeId.Shoot))
+                {
+                    entity.isShootAnimationFinished = false;
+                    continue;
+                }
+
+                if (!entity.AnimancerAnimator.IsPlaying(AnimationTypeId.AimShoot))
+                    entity.isShootAnimationFinished = true;
             }
         }
     }

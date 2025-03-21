@@ -10,15 +10,19 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
         public DisableHeroMovementAnimOnGunActionSystem(GameContext game)
         {
             _disableAnimMovementActions = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.HeroGun)
+                .AllOf(GameMatcher.ConnectedWithHero,GameMatcher.Active)
                 .AnyOf(
                     GameMatcher.Reloading,
                     GameMatcher.ShootingContinuously,
                     GameMatcher.Shooting,
+                    GameMatcher.Switching,
                     GameMatcher.Aiming
                 ));
 
-            _heroes = game.GetGroup(GameMatcher.AllOf(GameMatcher.Hero, GameMatcher.Id));
+            _heroes = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Hero, 
+                GameMatcher.Id,
+                GameMatcher.OnGround));
         }
 
         public void Execute()

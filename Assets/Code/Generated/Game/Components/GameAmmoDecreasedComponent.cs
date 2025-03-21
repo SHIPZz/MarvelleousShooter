@@ -33,7 +33,7 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.ECS.Gameplay.Features.Shoots.AmmoDecreased ammoDecreasedComponent = new Code.ECS.Gameplay.Features.Shoots.AmmoDecreased();
+    static readonly Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoDecreased ammoDecreasedComponent = new Code.ECS.Gameplay.Features.Shoots.Systems.Ammo.AmmoDecreased();
 
     public bool isAmmoDecreased {
         get { return HasComponent(GameComponentsLookup.AmmoDecreased); }

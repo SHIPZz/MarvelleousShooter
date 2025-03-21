@@ -10,7 +10,11 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 
         public CleanupShootingSystem(GameContext game)
         {
-            _group = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shooting,GameMatcher.Shootable));
+            _group = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Shooting,
+                GameMatcher.Active,
+                GameMatcher.ShootAnimationFinished,
+                GameMatcher.Shootable));
         }
 
         public void Cleanup()

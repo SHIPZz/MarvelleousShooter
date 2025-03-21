@@ -8,10 +8,14 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload
     {
         public ReloadFeature(ISystemFactory systems)
         {
+            
             Add(systems.Create<MarkReloadRequestedOnInputSystem>());
             Add(systems.Create<MarkReloadRequestedOnNoAmmoSystem>());
-            Add(systems.Create<DisableShootingSystem>());
+            Add(systems.Create<DisableShootingOnReloadSystem>());
             Add(systems.Create<PlayReloadAnimationSystem>());
+            
+            Add(systems.Create<ProcessReloadCancellationOnGunSwitchingSystem>());
+            
             Add(systems.Create<CalculateReloadingTimeSystem>());
             Add(systems.Create<SetReloadFinishedOnReloadTimeSystem>());
             Add(systems.Create<CleanupReloadAfterTimeEndedSystem>());

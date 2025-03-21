@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 {
@@ -6,6 +7,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly IGroup<GameEntity> _shootHolders;
+        private readonly List<GameEntity> _buffer = new(2);
 
         public SwitchShootSystem(GameContext game)
         {
@@ -23,7 +25,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         public void Execute()
         {
             foreach (GameEntity shootHolder in _shootHolders)
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
                 entity.ReplacePreviousSwitchedGunId(shootHolder.CurrentGunId);
                 

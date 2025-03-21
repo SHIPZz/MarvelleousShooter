@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
         public DisableHeroRunningOnGunActionSystem(GameContext game)
         {
             _disableRunningActions = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.HeroGun)
+                .AllOf(GameMatcher.ConnectedWithHero,GameMatcher.Active)
                 .AnyOf(
                     GameMatcher.ShootingContinuously,
                     GameMatcher.Shooting,

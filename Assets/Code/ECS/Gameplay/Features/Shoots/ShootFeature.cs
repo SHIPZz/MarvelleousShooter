@@ -1,9 +1,7 @@
-﻿using Code.ECS.Gameplay.Features.Heroes.Systems;
-using Code.ECS.Gameplay.Features.Shoots.Systems;
+﻿using Code.ECS.Gameplay.Features.Shoots.Systems;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Aiming;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Ammo;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Reload;
-using Code.ECS.Gameplay.Features.Shoots.Systems.Switching;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Visuals;
 using Code.ECS.Systems;
 
@@ -28,13 +26,16 @@ namespace Code.ECS.Gameplay.Features.Shoots
             
             Add(systemFactory.Create<PlayAnimationOnShootSystem>());
             Add(systemFactory.Create<PlayEffectOnShootSystem>());
-            Add(systemFactory.Create<SetAnimationFinishedSystem>());
+            
+            Add(systemFactory.Create<SetShootAnimationFinishedSystem>());
             
             Add(systemFactory.Create<SetLastShootTimeOnShootingSystem>());
             Add(systemFactory.Create<CalculateAmmoCountOnShootSystem>());
             Add(systemFactory.Create<MarkAmmoAvailableSystem>());
             
             Add(systemFactory.Create<CleanupShootRaycastHitsSystem>());
+            
+            Add(systemFactory.Create<CleanupGunOnNonActiveSystem>());
             Add(systemFactory.Create<CleanupShootingSystem>());
         }
     }

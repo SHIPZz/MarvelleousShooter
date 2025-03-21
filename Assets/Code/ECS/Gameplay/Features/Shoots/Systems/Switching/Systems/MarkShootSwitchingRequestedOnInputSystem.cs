@@ -1,5 +1,4 @@
-﻿using Code.Gameplay.Heroes.Enums;
-using Entitas;
+﻿using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 {
@@ -19,20 +18,19 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
                 GameMatcher.Id));
 
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Switchable));
+                .AllOf(GameMatcher.Switchable)
+                .NoneOf(GameMatcher.Switching));
         }
 
         public void Execute()
         {
             foreach (GameEntity switchable in _entities)
             {
-                switchable.isShootSwitchingRequested = false;
-
+                switchable.isShootSwitchingRequested = _gunChangePressed.count > 0;
+                
                 foreach (InputEntity gunChangePressed in _gunChangePressed)
                 foreach (GameEntity shoot in _shoots)
                 {
-                    switchable.isShootSwitchingRequested = true;
-
                     if (!TryGetTargetShootIdByInput(shoot, gunChangePressed, out var targetId)) 
                         continue;
 

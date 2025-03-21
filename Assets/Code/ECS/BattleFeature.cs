@@ -1,4 +1,5 @@
 ﻿using Code.ECS.Gameplay.Features.CharacterStats.Systems;
+using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Gameplay.Features.Heroes;
 using Code.ECS.Gameplay.Features.Input;
 using Code.ECS.Gameplay.Features.Lifetime;
@@ -17,6 +18,7 @@ namespace Code.ECS
         {
             Add(systems.Create<InputFeature>());
             Add(systems.Create<BindViewFeature>());
+            Add(systems.Create<CooldownFeature>());
             Add(systems.Create<ViewActiveFeature>());
             Add(systems.Create<LifetimeFeature>());
             Add(systems.Create<ShootSwitchingFeature>());

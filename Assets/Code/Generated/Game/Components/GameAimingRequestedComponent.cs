@@ -33,7 +33,7 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.ECS.Gameplay.Features.Shoots.AimingRequested aimingRequestedComponent = new Code.ECS.Gameplay.Features.Shoots.AimingRequested();
+    static readonly Code.ECS.Gameplay.Features.Shoots.Systems.Aiming.AimingRequested aimingRequestedComponent = new Code.ECS.Gameplay.Features.Shoots.Systems.Aiming.AimingRequested();
 
     public bool isAimingRequested {
         get { return HasComponent(GameComponentsLookup.AimingRequested); }
