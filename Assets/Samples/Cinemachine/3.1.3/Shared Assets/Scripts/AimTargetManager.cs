@@ -60,8 +60,8 @@ namespace Unity.Cinemachine.Samples
         /// Called by the player's shooting object to get the aim direction override, in case
         /// there is an active ThirdPersonFollow camera with noise cancellation.
         /// </summary>
-        /// <param name="firingOrigin">Where the firing will come from.</param>
-        /// <param name="firingDirection">The intended firing direction.</param>
+        /// <param CalculateRecoilSystem="firingOrigin">Where the firing will come from.</param>
+        /// <param CalculateRecoilSystem="firingDirection">The intended firing direction.</param>
         /// <returns>The direction in which to fire</returns>
         public Vector3 GetAimDirection(Vector3 firingOrigin, Vector3 firingDirection)
         {

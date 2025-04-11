@@ -10,9 +10,9 @@ namespace Code.Gameplay.Shootables.Recoils
 {
     public class Recoil : MonoBehaviour
     {
-        [SerializeField] private RecoilData _recoilData;
         [SerializeField] private Rotator _rotator;
 
+        private RecoilData _recoilData;
         private ICameraProvider _cameraProvider;
         private ITimeService _timeService;
         private ICameraShakeService _cameraShakeService;
@@ -83,7 +83,6 @@ namespace Code.Gameplay.Shootables.Recoils
             _cameraShakeService.ShakeByCameraForward();
 
             bool isAiming = _inputService.IsAiming();
-            // var isHeroOnGround = _heroService.IsOnGround;
 
             CalculateRecoil(isAiming, true);
 
