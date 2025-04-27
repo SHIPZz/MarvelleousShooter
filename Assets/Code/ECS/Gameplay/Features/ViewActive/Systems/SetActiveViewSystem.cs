@@ -15,7 +15,8 @@ namespace Code.ECS.Gameplay.Features.ViewActive.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.View.gameObject.SetActive(entity.isViewActive);
+                if (entity.View != null && entity.View.gameObject != null)
+                    entity.View.gameObject.SetActive(entity.isViewActive);
             }
         }
     }

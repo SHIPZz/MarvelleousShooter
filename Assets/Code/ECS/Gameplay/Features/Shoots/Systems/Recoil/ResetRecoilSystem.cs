@@ -24,10 +24,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         {
             foreach (GameEntity entity in _group.GetEntities(_buffer))
             {
-                entity.ReplaceRecoilPatternIndex(0);
-                entity.ReplaceHorizontalRecoil(0);
-                entity.ReplaceVerticalRecoil(0);
-                entity.ReplaceRecoilDurationLeft(entity.RecoilDuration);
+                // entity.ReplaceRecoilPatternIndex(0);
+                // entity.ReplaceHorizontalRecoil(0);
+                // entity.ReplaceVerticalRecoil(0);
+                // entity.ReplaceRecoilDurationLeft(entity.RecoilSpeed);
             }
         }
     }

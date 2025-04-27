@@ -12,7 +12,7 @@ namespace Code.Gameplay.Shootables.Configs
     {
         public ShootTypeId ShootTypeId;
         public EntityBehaviour Prefab;
-        public float ShootInterval = 0.1f;
+        public float Сooldown = 0.1f;
         public int AmmoCount = 1;
         public float DamagePerHit = 5;
         public Vector3 Position;
@@ -23,8 +23,6 @@ namespace Code.Gameplay.Shootables.Configs
 
         public bool Reloadable = true;
         
-        public bool NeedFullAnimationPlay;
-
         public bool CanAim = true;
         public bool CanRunAndShoot;
         public float ShootDistance = 100f;

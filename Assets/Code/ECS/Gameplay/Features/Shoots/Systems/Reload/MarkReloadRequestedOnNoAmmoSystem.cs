@@ -13,8 +13,11 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Reloadable,
+                    GameMatcher.Active,
                     GameMatcher.AmmoCount)
-                .NoneOf(GameMatcher.Reloading));
+                .NoneOf(GameMatcher.Reloading,
+                    GameMatcher.ShootAnimationProcessing
+                    ));
         }
 
         public void Execute()

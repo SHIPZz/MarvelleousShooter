@@ -1,12 +1,12 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuadricSurfaceView : MonoBehaviour
 {
-    public TMP_InputField A;
-    public TMP_InputField B;
-    public TMP_InputField C;
+    public InputField A;
+    public InputField B;
+    public InputField C;
 
     public DynamicQuadricSurface Surface;
 

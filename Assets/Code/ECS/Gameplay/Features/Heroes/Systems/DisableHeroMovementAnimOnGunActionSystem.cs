@@ -13,8 +13,8 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                 .AllOf(GameMatcher.ConnectedWithHero,GameMatcher.Active)
                 .AnyOf(
                     GameMatcher.Reloading,
-                    GameMatcher.ShootingContinuously,
                     GameMatcher.Shooting,
+                    GameMatcher.ShootAnimationProcessing,
                     GameMatcher.SwitchingProcessing,
                     GameMatcher.Aiming
                 ));

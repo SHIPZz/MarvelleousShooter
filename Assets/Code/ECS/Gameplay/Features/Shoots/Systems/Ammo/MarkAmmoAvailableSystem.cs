@@ -9,8 +9,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Ammo
         public MarkAmmoAvailableSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.AmmoCount,
-                    GameMatcher.AmmoCountLeft));
+                .AllOf(
+                    GameMatcher.AmmoCount,
+                    GameMatcher.AmmoCountLeft
+                    ));
         }
 
         public void Execute()

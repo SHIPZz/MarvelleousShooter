@@ -10,7 +10,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
         {
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.ShootingReady,
                     GameMatcher.ShootingAvailable,
                     GameMatcher.ShootingRequested,
                     GameMatcher.ShootDistance,
@@ -25,6 +24,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             foreach (GameEntity entity in _entities)
             {
                 entity.isShooting = true;
+                entity.isShootingStarted = true;
             }
         }
     }

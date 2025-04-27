@@ -1,25 +1,26 @@
-﻿using Entitas;
+﻿using Code.Gameplay.Shootables.Recoils;
+using Entitas;
 using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 {
     [Game] public class HasRecoil : IComponent {}
     
-    [Game] public class RecoilPatternIndex : IComponent { public int Value; }
+    [Game] public class RecoilProgress : IComponent { public float Value; }
     
-    [Game] public class RecoilRecovering : IComponent {}
+    [Game] public class RecoilPatternIndex : IComponent { public int Value; }
     
     [Game] public class Patterns : IComponent  { public Vector2[] Value; }
     
-    [Game] public class RecoilDuration : IComponent   { public float Value; }
+    [Game] public class RecoilSpeed : IComponent   { public float Value; }
     
-    [Game] public class RecoilDurationLeft : IComponent   { public float Value; }
+    [Game] public class CurrentRecoil : IComponent   { public Vector3 Value; }
     
-    [Game] public class RecoilDurationUp : IComponent   { }
+    [Game] public class TargetRecoil : IComponent   { public Vector3 Value; }
     
     [Game] public class HorizontalRecoil : IComponent  { public float Value; }
     
-    [Game] public class RecoilRotator : IComponent  { public Transform Value; }
+    [Game] public class RecoilDataComponent : IComponent  { public RecoilData Value; }
     
     [Game] public class AimMultiplier : IComponent  { public float Value; }
     
@@ -37,11 +38,5 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
     
     [Game] public class MaxHorizontalRecoilOnJump : IComponent  { public float Value; }
 
-    [Game] public class CameraRecoilSmoothing : IComponent { public float Value; }
-    
-    [Game] public class CurrentCameraRotation : IComponent { public Vector3 Value; }
-    
-    [Game] public class TargetCameraRotation : IComponent { public Vector3 Value; }
-    
     [Game] public class RecoilRecoverySpeed : IComponent { public float Value; }
 }

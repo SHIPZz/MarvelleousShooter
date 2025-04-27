@@ -10,8 +10,8 @@ namespace Code.Gameplay.Shootables.Recoils
     {
         [Header("Паттерн отдачи")] public Vector2[] Patterns;
 
-        [Range(0, 100f)] public float Duration = 1f;
-        [Range(0, 100f)] public float RecoverDuration = 5f;
+        [Range(0, 100f)] public float Speed = 1f;
+        [Range(0, 100f)] public float RecoverSpeed = 5f;
 
         [SerializeField, Range(0, 10f)] private float _aimMultiplier = 0.5f;
 

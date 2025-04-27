@@ -17,7 +17,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             _raycastService = raycastService;
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.ShootingReady,
                     GameMatcher.ShootingAvailable,
                     GameMatcher.ShootingRequested,
                     GameMatcher.Shooting,

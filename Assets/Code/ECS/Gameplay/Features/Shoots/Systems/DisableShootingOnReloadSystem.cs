@@ -18,7 +18,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                 if (gun.isReloading)
                 {
                     gun.isShootingAvailable = false;
-                    gun.isShootAnimationFinished = true;
                     gun.isShooting = false;
                     return;
                 }

@@ -21,7 +21,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                 entity.isShooting = false;
                 entity.isShootingContinuously = false;
                 entity.isShootingRequested = false;
-                entity.isShootingReady = false;
+                entity.isShootCooldownUp = true;
+                entity.ReplaceShootCooldownLeft(0);
             }
         }
     }

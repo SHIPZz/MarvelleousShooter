@@ -19,9 +19,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
             foreach (GameEntity entity in entities)
             {
                 entity.AnimancerAnimator.StartAnimation(entity.isAiming ? AnimationTypeId.AimShoot : AnimationTypeId.Shoot, 0.15f);
-
-                if (entity.isNeedAnimationComplete)
-                    entity.isShootAnimationFinished = false;
             }
         }
     }

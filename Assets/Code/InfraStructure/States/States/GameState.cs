@@ -14,6 +14,7 @@ using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
 using Code.Gameplay.Shootables;
 using Code.Gameplay.Shootables.Factory;
+using Code.Gameplay.Shootables.Recoils;
 using Code.SaveData;
 using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
@@ -73,9 +74,10 @@ namespace Code.InfraStructure.States.States
 
             Transform weaponHolder = hero.CameraHolder.GetComponent<Hero>().WeaponHolder;
             
-            GameEntity shoot =_shootFactory
+            GameEntity mainGun =_shootFactory
                 .Create(weaponHolder, worldData.PlayerData.LastWeaponId, hero.Id)
                 .With(x => x.isHeroGun = true)
+                .With(x => x.isShootCooldownUp = true)
                 .With(x => x.isActive = true)
                 ;
             
@@ -85,10 +87,10 @@ namespace Code.InfraStructure.States.States
                     .With(x => x.isViewActive = false)
                 ;
             
-            hero.AddAnimancerAnimator(shoot.AnimancerAnimator);
-            hero.AddCurrentGunId(shoot.Id);
+            hero.AddAnimancerAnimator(mainGun.AnimancerAnimator);
+            hero.AddCurrentGunId(mainGun.Id);
             
-            _heroRepository.SetCurrentGun(shoot);
+            _heroRepository.SetCurrentGun(mainGun);
             
             
             foreach (EnemySpawner enemySpawner in _levelDataProvider.EnemySpawners)
