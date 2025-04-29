@@ -2,17 +2,18 @@
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems
 {
-    public class MarkShootingAvailableOnNoRunningSystem : IExecuteSystem
+    public class DisableShootingAvailableOnRunningSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _heroes;
         private readonly IGroup<GameEntity> _guns;
 
-        public MarkShootingAvailableOnNoRunningSystem(GameContext game)
+        public DisableShootingAvailableOnRunningSystem(GameContext game)
         {
             _heroes = game.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Hero,
                     GameMatcher.Alive,
+                    GameMatcher.Running,
                     GameMatcher.Moving));
 
             _guns = game
@@ -34,10 +35,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                 if (hero.isRunning)
                 {
                     gun.isShootingAvailable = false;
-                    continue;
                 }
-                
-                gun.isShootingAvailable = true;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Code.ECS.Common.Entity;
+﻿using System.Linq;
+using Code.ECS.Common.Entity;
 using Code.ECS.Common.Services;
 using Code.ECS.View;
 using Code.ECS.View.Factory;
@@ -50,7 +51,7 @@ namespace Code.Gameplay.Shootables.Factory
                     .AddLayerMask(config.Mask)
                     .AddGunInputKey(config.InputKey)
                     .ReplaceLastShootTime(0)
-                    .AddPatterns(recoilData.Patterns)
+                    .AddPatterns(recoilData.Patterns.ToArray())
                     .AddRecoilSpeed(recoilData.Speed)
                     .AddMinHorizontalRecoilOnJump(recoilData.MinHorizontalRecoilOnJump)
                     .AddAimMultiplier(recoilData.AimMultiplier)

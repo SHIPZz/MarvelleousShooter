@@ -22,9 +22,9 @@ namespace Code.ECS
             Add(systems.Create<ViewActiveFeature>());
             Add(systems.Create<LifetimeFeature>());
             Add(systems.Create<ShootSwitchingFeature>());
-            Add(systems.Create<ShootFeature>());
             Add(systems.Create<MovementFeature>());
             Add(systems.Create<HeroFeature>());
+            Add(systems.Create<ShootFeature>());
         }
     }
 }

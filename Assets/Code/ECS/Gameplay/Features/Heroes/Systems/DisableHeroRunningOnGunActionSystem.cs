@@ -23,13 +23,12 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
         public void Execute()
         {
             foreach (GameEntity hero in _heroes)
+            foreach (GameEntity disableRunningAction in _disableRunningActions)
             {
-                bool actionsEmpty = _disableRunningActions.GetEntities().Length <= 0;
-
                 if (hero.isRunning)
-                    hero.isRunning = actionsEmpty;
+                    hero.isRunning = false;
 
-                hero.isRunningAvailable = actionsEmpty;
+                hero.isRunningAvailable = false;
             }
         }
     }

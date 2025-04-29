@@ -10,26 +10,34 @@ public class CalculateRecoilSystem : IExecuteSystem
     public CalculateRecoilSystem(GameContext game, ITimeService timeService)
     {
         _timeService = timeService;
-        _shoots = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable, GameMatcher.Active));
+        _shoots = game.GetGroup(GameMatcher.AllOf(
+            GameMatcher.Shootable,
+            GameMatcher.ShootCooldownProcessing,
+            GameMatcher.Active));
     }
 
     public void Execute()
     {
         foreach (GameEntity shoot in _shoots)
         {
-            if (shoot.isShooting)
+            switch (shoot.isShooting)
             {
-                shoot.ReplaceTargetRecoil(shoot.TargetRecoil + new Vector3(shoot.VerticalRecoil, shoot.HorizontalRecoil));
+                case true when shoot.isShootingStarted:
+                {
+                    shoot.ReplaceTargetRecoil(shoot.TargetRecoil + new Vector3(shoot.VerticalRecoil, shoot.HorizontalRecoil));
 
-                Vector3 targetRecoil = Vector3.Lerp(shoot.CurrentRecoil, shoot.TargetRecoil, _timeService.DeltaTime * shoot.RecoilSpeed);
-                shoot.ReplaceCurrentRecoil(targetRecoil);
-            }
-            else
-            {
-                Vector3 currentRecoil = Vector3.Lerp(shoot.CurrentRecoil, Vector3.zero, _timeService.DeltaTime * shoot.RecoilRecoverySpeed);
-                shoot.ReplaceCurrentRecoil(currentRecoil);
+                    Vector3 targetRecoil = Vector3.Lerp(shoot.CurrentRecoil, shoot.TargetRecoil, _timeService.DeltaTime * shoot.RecoilSpeed);
+                    shoot.ReplaceCurrentRecoil(targetRecoil);
+                    break;
+                }
+                case false:
+                {
+                    Vector3 currentRecoil = Vector3.Lerp(shoot.CurrentRecoil, Vector3.zero, _timeService.DeltaTime * shoot.RecoilRecoverySpeed);
+                    shoot.ReplaceCurrentRecoil(currentRecoil);
 
-                shoot.ReplaceTargetRecoil(currentRecoil);
+                    shoot.ReplaceTargetRecoil(currentRecoil);
+                    break;
+                }
             }
         }
     }

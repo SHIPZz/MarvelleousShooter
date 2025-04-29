@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+﻿using Code.Gameplay.Animations;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals
 {
-    public class PlayRunningSystem : ReactiveSystem<GameEntity>
+    public class PlayRunningSystem : IExecuteSystem
     {
-        public PlayRunningSystem(IContext<GameEntity> game) : base(game) { }
+        private readonly IGroup<GameEntity> _entities;
 
-        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.Running.Added(),
-                GameMatcher.RunningAvailable.Added(),
-                GameMatcher.RunningAnimAvailable.Added());
-
-        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
-                                                             && entity.isRunningAnimAvailable
-                                                             && entity.isRunning
-                                                             && entity.isRunningAvailable
-        ;
-
-        protected override void Execute(List<GameEntity> entities)
+        public PlayRunningSystem(GameContext game)
         {
-            foreach (GameEntity entity in entities)
+            _entities = game.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.RunningAvailable,
+                    GameMatcher.RunningAnimAvailable,
+                    GameMatcher.Running,
+                    GameMatcher.AnimancerAnimator,
+                    GameMatcher.MovementAnimAvailable));
+        }
+
+        public void Execute()
+        {
+            foreach (GameEntity entity in _entities)
             {
-                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Run);
+                if (entity.AnimancerAnimator.LastPlayingAnimation != AnimationTypeId.Run)
+                    entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Run);
             }
         }
     }

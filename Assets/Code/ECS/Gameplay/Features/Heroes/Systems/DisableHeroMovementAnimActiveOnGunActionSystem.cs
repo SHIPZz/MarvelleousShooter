@@ -2,25 +2,26 @@
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems
 {
-    public class DisableHeroMovementAnimOnGunActionSystem : IExecuteSystem
+    public class DisableHeroMovementAnimActiveOnGunActionSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _disableAnimMovementActions;
         private readonly IGroup<GameEntity> _heroes;
 
-        public DisableHeroMovementAnimOnGunActionSystem(GameContext game)
+        public DisableHeroMovementAnimActiveOnGunActionSystem(GameContext game)
         {
             _disableAnimMovementActions = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.ConnectedWithHero,GameMatcher.Active)
+                .AllOf(GameMatcher.ConnectedWithHero, GameMatcher.Active)
                 .AnyOf(
                     GameMatcher.Reloading,
                     GameMatcher.Shooting,
+                    GameMatcher.ShootingContinuously,
                     GameMatcher.ShootAnimationProcessing,
                     GameMatcher.SwitchingProcessing,
                     GameMatcher.Aiming
                 ));
 
             _heroes = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Hero, 
+                GameMatcher.Hero,
                 GameMatcher.Id,
                 GameMatcher.OnGround));
         }
@@ -29,7 +30,8 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
         {
             foreach (GameEntity hero in _heroes)
             {
-                hero.isMovementAnimAvailable = _disableAnimMovementActions.GetEntities().Length <= 0;
+                if (_disableAnimMovementActions.count > 0)
+                    hero.isMovementAnimAvailable = false;
             }
         }
     }

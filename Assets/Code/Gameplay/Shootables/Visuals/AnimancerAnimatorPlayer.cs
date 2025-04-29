@@ -18,8 +18,8 @@ namespace Code.Gameplay.Animations
         private readonly Dictionary<AnimationTypeId, AnimancerState> _animationStates = new();
 
         private readonly Subject<AnimationTypeId> _animationRequested = new();
-
-        public IObservable<AnimationTypeId> AnimationRequested => _animationRequested;
+        
+        public AnimationTypeId LastPlayingAnimation { get; private set; }
 
         private void Awake()
         {
@@ -51,6 +51,8 @@ namespace Code.Gameplay.Animations
             AnimancerState state = _animancer.Play(clip, fadeDuration, fadeMode);
 
             _animationStates[animationTypeId] = state;
+            
+            LastPlayingAnimation = animationTypeId;
 
             await state;
         }

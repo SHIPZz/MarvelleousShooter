@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+﻿using Code.Gameplay.Animations;
 using Entitas;
 
-namespace Code.ECS.Gameplay.Features.Shoots.Systems.Aiming.Visuals
+namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
 {
     public class PlayHeroAimAnimationSystem : IExecuteSystem
     {

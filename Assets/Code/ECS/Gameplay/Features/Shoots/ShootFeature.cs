@@ -13,15 +13,19 @@ namespace Code.ECS.Gameplay.Features.Shoots
     {
         public ShootFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<AllowShootAvailableSystem>());
+            Add(systemFactory.Create<DisableShootingOnReloadSystem>());
+            
             Add(systemFactory.Create<MarkShootingRequestedOnInputSystem>());
             
             Add(systemFactory.Create<CalculateShootCooldownSystem>());
             
             Add(systemFactory.Create<ShootOnCooldownUpSystem>());
             
-            Add(systemFactory.Create<ShootWithoutAmmoOnReadySystem>());
+            Add(systemFactory.Create<MarkShootCooldownProcessingOnShootSystem>());
             
-            Add(systemFactory.Create<MarkShootingStartedSystem>());
+            Add(systemFactory.Create<ShootWithoutAmmoOnCooldownUpSystem>());
+            
             Add(systemFactory.Create<MarkShootingAnimationProcessingSystem>());
             
             Add(systemFactory.Create<ResetShootCooldownSystem>());
@@ -44,10 +48,11 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<CalculateAmmoCountOnShootSystem>());
             Add(systemFactory.Create<MarkAmmoAvailableSystem>());
             
-            
             Add(systemFactory.Create<CleanupShootRaycastHitsSystem>());
          
             Add(systemFactory.Create<CleanupShootingSystem>());
+            
+            Add(systemFactory.Create<CleanupShootingStartedSystem>());
             
             Add(systemFactory.Create<CleanupGunOnNonActiveSystem>());
         }

@@ -17,7 +17,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
                 .AllOf(
                     GameMatcher.ShootCooldown,
                     GameMatcher.Shootable,
-                    GameMatcher.ShootingStarted,
                     GameMatcher.ShootCooldownLeft
                 ));
         }
@@ -32,7 +31,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
                 if (gun.ShootCooldownLeft <= 0)
                 {
                     gun.isShootCooldownUp = true;
-                    gun.RemoveShootCooldownLeft();
+                    gun.ReplaceShootCooldownLeft(gun.ShootCooldown);
                 }
             }
         }
