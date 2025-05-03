@@ -3,6 +3,7 @@ using Code.ECS.Common.Collisions;
 using Code.ECS.Common.Physics;
 using Code.ECS.Common.Services;
 using Code.ECS.Common.Time;
+using Code.ECS.Gameplay.Features.Cameras.Factories;
 using Code.ECS.Infrastructure.StateMachine;
 using Code.ECS.Systems;
 using Code.ECS.View.Factory;
@@ -37,7 +38,6 @@ namespace Code.Installers.Bootstrap
 
         public override void InstallBindings()
         {
-            // BindLoadingCurtain();
             BindGameStateMachine();
             BindSceneLoader();
             BindStateFactory();
@@ -153,6 +153,7 @@ namespace Code.Installers.Bootstrap
         {
             Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
             Container.Bind<ICameraShakeService>().To<CameraShakeService>().AsSingle();
+            Container.Bind<ICameraFactory>().To<CameraFactory>().AsSingle();
         }
 
         private void BindSoundServices()

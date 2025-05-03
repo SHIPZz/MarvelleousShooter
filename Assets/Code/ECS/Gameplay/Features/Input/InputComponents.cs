@@ -20,11 +20,15 @@ namespace Code.ECS.Gameplay.Features.Input
     
     [Input] public class Axis : IComponent { public Vector3 Value; }
     
+    [Input] public class MouseAxis : IComponent { public Vector2 Value; }
+    
     [Input] public class GunChangePressed : IComponent { }
     
     [Input] public class SelectedShoot : IComponent { public GunInputTypeId Value; }
     
-    [Input] public class HasAxis : IComponent { }
+    [Input] public class MovementRequested : IComponent { }
+    
+    [Input] public class HasMouseAxis : IComponent { }
     
     [Input] public class Input : IComponent {}
 }

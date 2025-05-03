@@ -8,12 +8,21 @@ namespace Code.ECS.Gameplay.Features.Movement
     {
         public MovementFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<AllowMovementSystem>());
+            
+            Add(systemFactory.Create<MarkMovingUnAvailableOnNoGroundSystem>());
+            
             Add(systemFactory.Create<MarkIdleSystem>());
             Add(systemFactory.Create<MarkMovingSystem>());
             Add(systemFactory.Create<MarkWalkingSystem>());
             
-            Add(systemFactory.Create<MarkMovingUnAvailableOnNoGroundSystem>());
             Add(systemFactory.Create<SetSpeedZeroOnNoGroundSystem>());
+            
+            Add(systemFactory.Create<SetMovementDirectionByCameraDirectionSystem>());
+            Add(systemFactory.Create<ApplyGravityToMovementDirectionSystem>());
+            
+            Add(systemFactory.Create<MoveToTargetDirectionByCharacterControllerSystem>());
+            
             
             Add(systemFactory.Create<DisableMovingOnNoGround>());
             Add(systemFactory.Create<DisableRunningOnNoGroundSystem>());

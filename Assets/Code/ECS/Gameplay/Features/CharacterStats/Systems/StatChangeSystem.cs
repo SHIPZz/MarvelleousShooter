@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Code.ECS.Common.EntityIndicies;
+using Entitas;
 
 namespace Code.ECS.Gameplay.Features.CharacterStats.Systems
 {
@@ -25,10 +26,10 @@ namespace Code.ECS.Gameplay.Features.CharacterStats.Systems
             foreach (GameEntity statOwner in _statOwners)
             foreach (Stats stat in statOwner.BaseStats.Keys)
             {
-                statOwner.StatModifiers[stat] = 0;
+                // statOwner.StatModifiers[stat] = 0;
                 
                 // foreach (GameEntity statChange in _game.TargetStatChanges(stat, statOwner.Id))
-                //         statOwner.StatModifiers[stat] += statChange.EffectValue;
+                        // statOwner.StatModifiers[stat] += statChange.EffectValue;
             }
         }
     }

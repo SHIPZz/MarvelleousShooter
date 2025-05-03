@@ -1,4 +1,5 @@
-﻿using Code.ECS.Gameplay.Features.Shoots.Systems;
+﻿using Code.ECS.Gameplay.Features.Movement.Systems;
+using Code.ECS.Gameplay.Features.Shoots.Systems;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Aiming;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Ammo;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns;
@@ -21,6 +22,8 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<CalculateShootCooldownSystem>());
             
             Add(systemFactory.Create<ShootOnCooldownUpSystem>());
+            
+            Add(systemFactory.Create<DecreaseSpeedOnShootSystem>());
             
             Add(systemFactory.Create<MarkShootCooldownProcessingOnShootSystem>());
             

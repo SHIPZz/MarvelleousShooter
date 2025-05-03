@@ -2,6 +2,7 @@ using System;
 using Code.Data.Services;
 using Code.ECS;
 using Code.ECS.Common.Entity;
+using Code.ECS.Gameplay.Features.Cameras.Factories;
 using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
@@ -16,6 +17,7 @@ using Code.Gameplay.Shootables;
 using Code.Gameplay.Shootables.Factory;
 using Code.Gameplay.Shootables.Recoils;
 using Code.SaveData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
 
@@ -30,6 +32,7 @@ namespace Code.InfraStructure.States.States
         private readonly IWorldDataService _worldDataService;
         private readonly ISystemFactory _systemFactory;
         private readonly IHeroRepository _heroRepository;
+        private readonly ICameraFactory _cameraFactory;
         
         private BattleFeature _battleFeature;
 
@@ -38,9 +41,11 @@ namespace Code.InfraStructure.States.States
             IWorldDataService worldDataService,
             IShootFactory shootFactory,
             ISystemFactory systemFactory,
+            ICameraFactory cameraFactory,
             IHeroRepository heroRepository, 
             IHeroFactory heroFactory)
         {
+            _cameraFactory = cameraFactory;
             _heroRepository = heroRepository;
             _heroFactory = heroFactory;
             _systemFactory = systemFactory;
@@ -52,7 +57,9 @@ namespace Code.InfraStructure.States.States
 
         public override void Enter()
         {
-            CreateInputEntity.Empty().isInput = true;
+            CreateInputEntity.Empty()
+                .With(x => x.AddMouseAxis(Vector2.zero))
+                .isInput = true;
 
             CreateEntity.Empty()
                 .With(x => x.isShootSwitchingReady = true)
@@ -68,7 +75,7 @@ namespace Code.InfraStructure.States.States
 
             WorldData worldData = _worldDataService.Get();
 
-            GameEntity hero = _heroFactory.Create(null,_levelDataProvider.StartPoint.position,Quaternion.identity);
+            GameEntity hero = _heroFactory.Create(_levelDataProvider.StartPoint,_levelDataProvider.StartPoint.position,Quaternion.identity);
             
             InitCamera(hero.CameraHolder);
 
@@ -98,7 +105,10 @@ namespace Code.InfraStructure.States.States
         }
 
 
-        private void InitCamera(CameraHolder cameraHolder) =>
+        private void InitCamera(CameraHolder cameraHolder)
+        {
+            _cameraFactory.CreateEntity(cameraHolder.MainCamera);
+            
             cameraHolder
                 .With(cameraHolder => _cameraProvider.WeaponCamera = cameraHolder.WeaponCamera)
                 .With(cameraHolder => _cameraProvider.Camera = cameraHolder.MainCamera)
@@ -106,8 +116,14 @@ namespace Code.InfraStructure.States.States
                 .With(cameraHolder => _cameraProvider.RecoilRotator = cameraHolder.RecoilRotator)
                 .With(cameraHolder => _cameraProvider.RecoilCamera = cameraHolder.RecoilCamera)
                 .With(cameraHolder => _cameraProvider.CinemachineImpulseSource = cameraHolder.CinemachineImpulseSource);
+        }
 
-        protected override void Exit() { }
+        protected override void Exit()
+        {
+            _battleFeature.Cleanup();
+            _battleFeature.TearDown();
+            _battleFeature.ClearReactiveSystems();
+        }
         
         public void Update()
         {
@@ -121,6 +137,7 @@ namespace Code.InfraStructure.States.States
         public void Dispose()
         {
             _battleFeature.TearDown();
+            _battleFeature.ClearReactiveSystems();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Code.ECS.Gameplay.Features.Death.Systems
     public class MarkDeadSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly List<GameEntity> _buffer = new(128);
+        private readonly List<GameEntity> _buffer = new(32);
 
         public MarkDeadSystem(GameContext game)
         {

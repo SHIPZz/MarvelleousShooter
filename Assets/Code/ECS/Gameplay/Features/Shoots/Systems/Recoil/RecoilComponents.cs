@@ -28,6 +28,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
     
     [Game] public class VerticalRecoil : IComponent  { public float Value; }
     
+    [Game] public class AimJumpMultiplier : IComponent  { public float Value; }
+    
     [Game] public class TotalVerticalRecoil : IComponent  { public float Value; }
     
     [Game] public class TotalHorizontalRecoil : IComponent  { public float Value; }

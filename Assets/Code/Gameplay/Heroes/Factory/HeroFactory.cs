@@ -9,7 +9,7 @@ using Code.Extensions;
 using Code.Gameplay.Cameras;
 using Code.Gameplay.Heroes.Configs;
 using Code.SaveData;
-using ECM.Components;
+using KinematicCharacterController.Examples;
 using UnityEngine;
 
 namespace Code.Gameplay.Heroes.Factory
@@ -18,8 +18,8 @@ namespace Code.Gameplay.Heroes.Factory
     {
         private readonly HeroConfig _heroConfig;
         private readonly IWorldDataService _worldDataService;
-        private IEntityViewFactory _entityViewFactory;
-        private IIdentifierService _identifierService;
+        private readonly IEntityViewFactory _entityViewFactory;
+        private readonly IIdentifierService _identifierService;
 
         public HeroFactory(HeroConfig heroConfig, 
             IIdentifierService identifierService,
@@ -40,18 +40,24 @@ namespace Code.Gameplay.Heroes.Factory
             EntityBehaviour prefab = _heroConfig.Prefab;
 
             Dictionary<Stats, float> stats = InitStats.EmptyStatDictionary();
+            Dictionary<Stats, float> statModifiers = InitStats.EmptyStatDictionary();
 
             stats[Stats.Hp] = worldData.PlayerData.Hp;
             stats[Stats.MaxHp] = _heroConfig.Hp;
+            stats[Stats.Speed] = _heroConfig.MovementData.Speed;
             
             GameEntity heroEntity = CreateEntity
                 .Empty()
                 .AddId(_identifierService.Next())
                 .AddRotation(rotation)
                 .AddBaseStats(stats)
+                .AddStatModifiers(statModifiers)
                 .AddWorldPosition(at)
+                .AddVerticalRotation(0)
                 .AddCurrentHp(stats[Stats.Hp])
                 .AddMaxHp(stats[Stats.MaxHp])
+                .AddSpeed(stats[Stats.Speed])
+                .AddInitialSpeed(stats[Stats.Speed])
                 .AddAvailableShoots(worldData.PlayerData.AvailableShoots)
                 .AddCurrentShootTypeId(worldData.PlayerData.LastWeaponId)
                 .With(x => x.isHero = true)
@@ -59,6 +65,9 @@ namespace Code.Gameplay.Heroes.Factory
                 .With(x => x.isMovingAvailable = true)
                 .With(x => x.isIdleAvailable = true)
                 .With(x => x.isViewActive = true)
+                .With(x => x.isActive = true)
+                .With(x => x.isAlive = true)
+                .With(x => x.isOnGround = true)
                 .With(x => x.isShootHolder = true)
                 .With(x => x.isCanRun = true)
                 .AddViewPrefab(prefab);
@@ -70,7 +79,9 @@ namespace Code.Gameplay.Heroes.Factory
 
             return heroEntity
                 .With(x => x.AddCameraHolder(createdHero.GetComponent<CameraHolder>()))
-                .With(x => x.AddCharacterMovement(createdHero.GetComponent<CharacterMovement>()))
+                .With(x => x.AddCharacterController(createdHero.GetComponent<CharacterController>()))
+                .With(x => createdHero.gameObject.SetActive(true))
+                //.With(x => x.AddCharacterMovement(createdHero.GetComponent<CharacterMovement>()))
                 ;
         }
     }

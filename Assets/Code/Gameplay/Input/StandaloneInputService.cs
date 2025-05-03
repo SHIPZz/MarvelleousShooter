@@ -82,9 +82,9 @@ namespace Code.Gameplay.Input
 
         public Vector3 GetAxis() => new(GetHorizontalAxis(),0,GetVerticalAxis());
 
-        public float GetMouseX() => UnityEngine.Input.GetAxis("Mouse X");
+        public float GetMouseX() => UnityEngine.Input.GetAxisRaw("Mouse X");
 
-        public float GetMouseY() => UnityEngine.Input.GetAxis("Mouse Y");
+        public float GetMouseY() => UnityEngine.Input.GetAxisRaw("Mouse Y");
 
         public bool HasMouseAxis() => GetMouseX() != 0 || GetMouseY() != 0;
 

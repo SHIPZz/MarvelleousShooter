@@ -12,24 +12,28 @@ public static class InputComponentsLookup {
     public const int AimingPressed = 1;
     public const int Axis = 2;
     public const int GunChangePressed = 3;
-    public const int HasAxis = 4;
+    public const int HasMouseAxis = 4;
     public const int Input = 5;
-    public const int ReloadAvailable = 6;
-    public const int ReloadingPressed = 7;
-    public const int RunningPressed = 8;
-    public const int SelectedShoot = 9;
-    public const int ShootingAvailable = 10;
-    public const int ShootingPressed = 11;
+    public const int MouseAxis = 6;
+    public const int MovementRequested = 7;
+    public const int ReloadAvailable = 8;
+    public const int ReloadingPressed = 9;
+    public const int RunningPressed = 10;
+    public const int SelectedShoot = 11;
+    public const int ShootingAvailable = 12;
+    public const int ShootingPressed = 13;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "AimingAvailable",
         "AimingPressed",
         "Axis",
         "GunChangePressed",
-        "HasAxis",
+        "HasMouseAxis",
         "Input",
+        "MouseAxis",
+        "MovementRequested",
         "ReloadAvailable",
         "ReloadingPressed",
         "RunningPressed",
@@ -43,8 +47,10 @@ public static class InputComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Input.AimingPressed),
         typeof(Code.ECS.Gameplay.Features.Input.Axis),
         typeof(Code.ECS.Gameplay.Features.Input.GunChangePressed),
-        typeof(Code.ECS.Gameplay.Features.Input.HasAxis),
+        typeof(Code.ECS.Gameplay.Features.Input.HasMouseAxis),
         typeof(Code.ECS.Gameplay.Features.Input.Input),
+        typeof(Code.ECS.Gameplay.Features.Input.MouseAxis),
+        typeof(Code.ECS.Gameplay.Features.Input.MovementRequested),
         typeof(Code.ECS.Gameplay.Features.Input.ReloadAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.ReloadingPressed),
         typeof(Code.ECS.Gameplay.Features.Input.RunningPressed),

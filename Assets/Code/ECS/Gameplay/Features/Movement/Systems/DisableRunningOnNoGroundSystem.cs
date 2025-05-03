@@ -9,17 +9,18 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         public DisableRunningOnNoGroundSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.CanRun));
+                .AllOf(GameMatcher.CanRun,GameMatcher.Speed));
         }
 
         public void Execute()
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isRunningAvailable = entity.isOnGround;
-                
-                if(entity.isRunning && !entity.isOnGround)
-                    entity.isRunning = false;   
+                if (!entity.isOnGround)
+                {
+                    entity.isRunningAvailable = false;
+                    entity.isRunning = false;
+                }
             }
         }
     }

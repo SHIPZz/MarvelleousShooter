@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
@@ -17,9 +18,17 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 
         protected override void Execute(List<GameEntity> entities)
         {
-            foreach (GameEntity entity in entities)
+            foreach (GameEntity gun in entities)
             {
-                entity.EffectPlayer.Play();
+                //todo refactor
+                gun.Transform.DOKill();
+
+                Sequence recoilSequence = DOTween.Sequence();
+                recoilSequence
+                    .Append(gun.Transform.DOLocalMoveZ(gun.InitialLocalPosition.z - 0.05f, 0.1f))
+                    .Append(gun.Transform.DOLocalMoveZ(gun.InitialLocalPosition.z, 0.1f));
+                
+                gun.EffectPlayer.Play();
             }
         }
     }

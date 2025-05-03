@@ -1,5 +1,6 @@
-﻿using ECM.Components;
-using Entitas;
+﻿using Entitas;
+using KinematicCharacterController.Examples;
+using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Heroes
 {
@@ -13,5 +14,5 @@ namespace Code.ECS.Gameplay.Features.Heroes
     
     [Game] public class CurrentGunId : IComponent { public int Value; }
     
-    [Game] public class CharacterMovementComponent : IComponent { public CharacterMovement Value; }
+    [Game] public class CharacterControllerComponent : IComponent { public CharacterController Value; }
 }

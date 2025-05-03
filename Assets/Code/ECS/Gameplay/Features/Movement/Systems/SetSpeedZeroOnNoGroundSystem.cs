@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Code.ECS.Gameplay.Features.CharacterStats;
+using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Systems
 {
@@ -9,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         public SetSpeedZeroOnNoGroundSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Speed));
+                .AllOf(GameMatcher.Speed,GameMatcher.BaseStats));
         }
 
         public void Execute()
@@ -17,7 +18,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
             foreach (GameEntity entity in _entities)
             {
                 if (!entity.isOnGround)
-                    entity.ReplaceSpeed(0);
+                    entity.BaseStats[Stats.Speed] = 0;
             }
         }
     }

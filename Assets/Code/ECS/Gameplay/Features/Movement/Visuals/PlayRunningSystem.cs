@@ -1,29 +1,29 @@
-﻿using Code.Gameplay.Animations;
+﻿using System.Collections.Generic;
+using Code.Gameplay.Animations;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals
 {
-    public class PlayRunningSystem : IExecuteSystem
+    public class PlayRunningSystem : ReactiveSystem<GameEntity>
     {
-        private readonly IGroup<GameEntity> _entities;
+        public PlayRunningSystem(IContext<GameEntity> game) : base(game) { }
 
-        public PlayRunningSystem(GameContext game)
-        {
-            _entities = game.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.RunningAvailable,
-                    GameMatcher.RunningAnimAvailable,
-                    GameMatcher.Running,
-                    GameMatcher.AnimancerAnimator,
-                    GameMatcher.MovementAnimAvailable));
-        }
+        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
+            context.CreateCollector(GameMatcher.Running.Added(),
+                GameMatcher.MovementAnimAvailable.Added(),GameMatcher.RunningAnimAvailable.Added());
 
-        public void Execute()
+        protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
+                                                             && entity.isMovementAnimAvailable
+                                                             && entity.isRunningAvailable
+                                                             && entity.isRunningAnimAvailable
+                                                             && entity.isRunning
+        ;
+
+        protected override void Execute(List<GameEntity> entities)
         {
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity entity in entities)
             {
-                if (entity.AnimancerAnimator.LastPlayingAnimation != AnimationTypeId.Run)
-                    entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Run);
+                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Run);
             }
         }
     }

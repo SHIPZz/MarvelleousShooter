@@ -1,5 +1,6 @@
 ﻿using Code.Gameplay.Input;
 using Entitas;
+using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Input.Systems
 {
@@ -18,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Input.Systems
         {
             foreach (InputEntity input in _input)
             {
-                input.isHasAxis = _inputService.HasAxisInput();
+                input.isMovementRequested = _inputService.HasAxisInput();
                 
                 input.ReplaceAxis(_inputService.GetAxis());
             }

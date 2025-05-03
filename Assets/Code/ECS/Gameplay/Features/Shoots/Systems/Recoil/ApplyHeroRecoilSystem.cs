@@ -26,13 +26,14 @@ public class ApplyHeroRecoilSystem : IExecuteSystem
         foreach (GameEntity heroGun in _heroGuns)
         {
             Transform cameraTransform = _cameraProvider.Camera.transform;
-            Vector3 targetRecoilRotation = cameraTransform.eulerAngles;
 
-            targetRecoilRotation.x += heroGun.CurrentRecoil.x;
-            targetRecoilRotation.y += heroGun.CurrentRecoil.y;
-            targetRecoilRotation.z = 0f;
+            // Quaternion currentRotation = cameraTransform.localRotation;
+            // Quaternion recoilRotation = Quaternion.Euler(heroGun.CurrentRecoil.x, heroGun.CurrentRecoil.y, 0f);
+            // cameraTransform.localRotation = currentRotation * recoilRotation;
 
-            cameraTransform.rotation = Quaternion.Euler(targetRecoilRotation);
+            // Vector3 euler = cameraTransform.eulerAngles;
+            // euler.z = 0f;
+            // cameraTransform.rotation = Quaternion.Euler(euler);
         }
     }
 }

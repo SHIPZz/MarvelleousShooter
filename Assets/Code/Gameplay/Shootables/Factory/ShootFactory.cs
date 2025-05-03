@@ -55,6 +55,7 @@ namespace Code.Gameplay.Shootables.Factory
                     .AddRecoilSpeed(recoilData.Speed)
                     .AddMinHorizontalRecoilOnJump(recoilData.MinHorizontalRecoilOnJump)
                     .AddAimMultiplier(recoilData.AimMultiplier)
+                    .AddAimJumpMultiplier(recoilData.AimJumpMultiplier)
                     .AddJumpMultiplier(recoilData.JumpMultiplier)
                     .AddCurrentRecoil(Vector3.zero)
                     .AddTargetRecoil(Vector3.zero)
@@ -91,6 +92,7 @@ namespace Code.Gameplay.Shootables.Factory
             
             createdShoot.Entity.Transform.localPosition = config.Position;
             createdShoot.Entity.Transform.localRotation = Quaternion.Euler(config.Rotation);
+            shootEntity.ReplaceInitialLocalPosition(createdShoot.Entity.Transform.localPosition);
 
             return shootEntity;
         }

@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Code.ECS.Gameplay.Features.CharacterStats;
+using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Systems
 {
@@ -10,7 +11,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.MovingAvailable,
-                GameMatcher.Speed,
+                GameMatcher.BaseStats,
                 GameMatcher.OnGround));
         }
 
@@ -18,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isMoving = entity.Speed > 0;
+                entity.isMoving = entity.BaseStats[Stats.Speed] > 0;
             }
         }
     }

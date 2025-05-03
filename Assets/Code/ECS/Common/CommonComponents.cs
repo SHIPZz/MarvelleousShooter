@@ -24,6 +24,8 @@ namespace Code.ECS.Common
    
    [Game] public class Rotation : IComponent { public Quaternion Value; }
    
+   [Game] public class InitialLocalPosition : IComponent { public Vector3 Value; }
+   
    [Game] public class Parent : IComponent { public Transform Value; }
    
    [Game] public class View : IComponent { public IEntityView Value; }

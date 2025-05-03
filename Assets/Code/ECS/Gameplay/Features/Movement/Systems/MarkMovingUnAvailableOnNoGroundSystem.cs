@@ -9,15 +9,17 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         public MarkMovingUnAvailableOnNoGroundSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Speed,
-                GameMatcher.WorldPosition));
+                    GameMatcher.Speed,
+                    GameMatcher.Active,
+                    GameMatcher.WorldPosition));
         }
 
         public void Execute()
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isMovingAvailable = entity.isOnGround;
+                if (!entity.isOnGround)
+                    entity.isMovingAvailable = false;
             }
         }
     }

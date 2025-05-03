@@ -7,6 +7,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         public RecoilFeature(ISystemFactory systems)
         {
             Add(systems.Create<GenerateRecoilSystem>());
+            Add(systems.Create<RecalculateAxisRecoilsByMultipliersSystem>());
             Add(systems.Create<CalculateRecoilSystem>());
             Add(systems.Create<ApplyHeroRecoilSystem>());
             Add(systems.Create<ResetRecoilSystem>());

@@ -51,6 +51,12 @@ namespace Code.ECS.Gameplay.Features.Movement
     
     [Game] public class EndPoint : IComponent { public Vector3 Value; }
     
+    [Game] public class VerticalRotation : IComponent { public float Value; }
+    
+    [Game] public class InitialSpeed : IComponent { public float Value; }
+    
+    [Game] public class HorizontalRotation : IComponent { public float Value; }
+    
     [Game] public class EndPointReached : IComponent {  }
 
     [Game] public class NeedRandomEndPoint : IComponent {  }

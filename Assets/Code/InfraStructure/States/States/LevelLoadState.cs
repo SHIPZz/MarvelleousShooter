@@ -1,8 +1,6 @@
 ﻿using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Infrastructure.StateMachine;
 using Code.InfraStructure.Loading;
-using Code.InfraStructure.States.StateInfrastructure;
-using Code.InfraStructure.States.StateMachine;
 
 namespace Code.InfraStructure.States.States
 {

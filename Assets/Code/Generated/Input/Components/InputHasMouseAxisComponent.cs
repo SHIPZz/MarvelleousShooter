@@ -8,17 +8,17 @@
 //------------------------------------------------------------------------------
 public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<InputEntity> _matcherHasAxis;
+    static Entitas.IMatcher<InputEntity> _matcherHasMouseAxis;
 
-    public static Entitas.IMatcher<InputEntity> HasAxis {
+    public static Entitas.IMatcher<InputEntity> HasMouseAxis {
         get {
-            if (_matcherHasAxis == null) {
-                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.HasAxis);
+            if (_matcherHasMouseAxis == null) {
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.HasMouseAxis);
                 matcher.componentNames = InputComponentsLookup.componentNames;
-                _matcherHasAxis = matcher;
+                _matcherHasMouseAxis = matcher;
             }
 
-            return _matcherHasAxis;
+            return _matcherHasMouseAxis;
         }
     }
 }
@@ -33,18 +33,18 @@ public sealed partial class InputMatcher {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly Code.ECS.Gameplay.Features.Input.HasAxis hasAxisComponent = new Code.ECS.Gameplay.Features.Input.HasAxis();
+    static readonly Code.ECS.Gameplay.Features.Input.HasMouseAxis hasMouseAxisComponent = new Code.ECS.Gameplay.Features.Input.HasMouseAxis();
 
-    public bool isHasAxis {
-        get { return HasComponent(InputComponentsLookup.HasAxis); }
+    public bool isHasMouseAxis {
+        get { return HasComponent(InputComponentsLookup.HasMouseAxis); }
         set {
-            if (value != isHasAxis) {
-                var index = InputComponentsLookup.HasAxis;
+            if (value != isHasMouseAxis) {
+                var index = InputComponentsLookup.HasMouseAxis;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : hasAxisComponent;
+                            : hasMouseAxisComponent;
 
                     AddComponent(index, component);
                 } else {

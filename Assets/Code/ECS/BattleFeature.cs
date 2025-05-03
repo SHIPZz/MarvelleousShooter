@@ -1,4 +1,5 @@
-﻿using Code.ECS.Gameplay.Features.CharacterStats.Systems;
+﻿using Code.ECS.Gameplay.Features.Cameras;
+using Code.ECS.Gameplay.Features.CharacterStats.Systems;
 using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Gameplay.Features.Heroes;
 using Code.ECS.Gameplay.Features.Input;
@@ -17,13 +18,19 @@ namespace Code.ECS
         public BattleFeature(ISystemFactory systems)
         {
             Add(systems.Create<InputFeature>());
+            Add(systems.Create<CameraFeature>());
+            Add(systems.Create<StatsFeature>());
+            
             Add(systems.Create<BindViewFeature>());
             Add(systems.Create<CooldownFeature>());
             Add(systems.Create<ViewActiveFeature>());
+            
             Add(systems.Create<LifetimeFeature>());
             Add(systems.Create<ShootSwitchingFeature>());
-            Add(systems.Create<MovementFeature>());
+            
             Add(systems.Create<HeroFeature>());
+            Add(systems.Create<MovementFeature>());
+            
             Add(systems.Create<ShootFeature>());
         }
     }

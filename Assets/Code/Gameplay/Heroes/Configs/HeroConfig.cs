@@ -1,4 +1,5 @@
-﻿using Code.ECS.View;
+﻿using Code.ECS.Gameplay.Features.Movement.Configs;
+using Code.ECS.View;
 using Code.Gameplay.Shootables;
 using UnityEngine;
 
@@ -10,5 +11,7 @@ namespace Code.Gameplay.Heroes.Configs
         public EntityBehaviour Prefab;
         public ShootTypeId InitialWeapon;
         public float Hp = 100f;
+        
+        public MovementData MovementData = new();
     }
 }

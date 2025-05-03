@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems
 {
@@ -8,14 +9,20 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
 
         public MarkHeroOnGroundSystem(GameContext game)
         {
-            _heroes = game.GetGroup(GameMatcher.AllOf(GameMatcher.Hero,GameMatcher.CharacterMovement));
+            _heroes = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Hero,
+                GameMatcher.CharacterController));
         }
 
         public void Execute()
         {
             foreach (GameEntity hero in _heroes)
             {
-                hero.isOnGround = hero.CharacterMovement.isOnGround;
+                Debug.Log($"{hero.CharacterController.isGrounded}");
+                // if(!hero.isMoving)
+                //     return;
+                //
+                // hero.isOnGround = hero.CharacterController.isGrounded;
             }
         }
     }
