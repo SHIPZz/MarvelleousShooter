@@ -15,7 +15,6 @@ namespace Code.ECS.Gameplay.Features.Heroes
             Add(systems.Create<DisableHeroRunningOnGunActionSystem>());
             
             Add(systems.Create<MarkHeroRunningSystem>());
-            Add(systems.Create<MarkHeroOnGroundSystem>());
 
             Add(systems.Create<PlayHeroAimAnimationSystem>());
             Add(systems.Create<PlayHeroAimShootAnimationSystem>());

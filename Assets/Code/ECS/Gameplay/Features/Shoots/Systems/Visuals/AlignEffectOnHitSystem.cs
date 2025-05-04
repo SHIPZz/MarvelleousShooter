@@ -27,7 +27,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
         {
             foreach (GameEntity entity in entities)
             {
-                RaycastHit[] hits = entity.Hits;
+                var hits = entity.Hits;
                 
                 _effectFactory.Create(entity.HitEffectTypeId, null,
                     hits[0].point,

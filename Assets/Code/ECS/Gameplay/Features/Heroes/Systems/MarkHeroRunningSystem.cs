@@ -15,6 +15,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                 GameMatcher.Hero,
                 GameMatcher.CanRun,
                 GameMatcher.Speed,
+                GameMatcher.MovingAvailable,
                 GameMatcher.RunningAvailable));
         }
 

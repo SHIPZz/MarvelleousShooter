@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Constant;
 using Code.Data.Services;
 using Code.ECS.Common.Entity;
 using Code.ECS.Common.Services;
@@ -45,6 +46,7 @@ namespace Code.Gameplay.Heroes.Factory
             stats[Stats.Hp] = worldData.PlayerData.Hp;
             stats[Stats.MaxHp] = _heroConfig.Hp;
             stats[Stats.Speed] = _heroConfig.MovementData.Speed;
+            stats[Stats.JumpForce] = _heroConfig.MovementData.JumpForce;
             
             GameEntity heroEntity = CreateEntity
                 .Empty()
@@ -54,21 +56,33 @@ namespace Code.Gameplay.Heroes.Factory
                 .AddStatModifiers(statModifiers)
                 .AddWorldPosition(at)
                 .AddVerticalRotation(0)
+                .AddVerticalVelocity(0)
+                .AddGroundRadius(_heroConfig.GroundRadius)
+                .AddGravity(_heroConfig.MovementData.Gravity)
+                .AddIdleJumpMultiplier(_heroConfig.MovementData.IdleJumpMultiplier)
+                .AddWalkJumpMultiplier(_heroConfig.MovementData.WalkJumpMultiplier)
+                .AddRunJumpMultiplier(_heroConfig.MovementData.RunJumpMultiplier)
+                .AddAirSpeed(_heroConfig.MovementData.AirSpeed)
+                .AddGroundDepth(_heroConfig.GroundDepth)
+                .AddGroundDetectionMask(_heroConfig.GroundDetectionMask)
                 .AddCurrentHp(stats[Stats.Hp])
                 .AddMaxHp(stats[Stats.MaxHp])
                 .AddSpeed(stats[Stats.Speed])
                 .AddInitialSpeed(stats[Stats.Speed])
+                .AddJumpForce(stats[Stats.JumpForce])
                 .AddAvailableShoots(worldData.PlayerData.AvailableShoots)
                 .AddCurrentShootTypeId(worldData.PlayerData.LastWeaponId)
                 .With(x => x.isHero = true)
                 .With(x => x.isRunningAvailable = true)
                 .With(x => x.isMovingAvailable = true)
+                .With(x => x.isNeedGroundDetection = true)
                 .With(x => x.isIdleAvailable = true)
                 .With(x => x.isViewActive = true)
                 .With(x => x.isActive = true)
                 .With(x => x.isAlive = true)
                 .With(x => x.isOnGround = true)
                 .With(x => x.isShootHolder = true)
+                .With(x => x.isMovable = true)
                 .With(x => x.isCanRun = true)
                 .AddViewPrefab(prefab);
             

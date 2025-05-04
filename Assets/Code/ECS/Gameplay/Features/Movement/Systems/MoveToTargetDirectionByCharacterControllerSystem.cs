@@ -1,31 +1,37 @@
 ﻿using Code.ECS.Common.Time;
+using Code.ECS.Extensions;
 using Entitas;
+using UnityEngine;
 
-namespace Code.ECS.Gameplay.Features.Movement.Systems
+public class MoveToTargetDirectionByCharacterControllerSystem : IExecuteSystem
 {
-    public class MoveToTargetDirectionByCharacterControllerSystem : IExecuteSystem
+    private readonly IGroup<GameEntity> _entities;
+    private readonly ITimeService _timeService;
+
+    public MoveToTargetDirectionByCharacterControllerSystem(GameContext game, ITimeService timeService)
     {
-        private readonly IGroup<GameEntity> _entities;
-        private readonly ITimeService _timeService;
+        _timeService = timeService;
 
-        public MoveToTargetDirectionByCharacterControllerSystem(GameContext game, ITimeService timeService)
-        {
-            _timeService = timeService;
-            
-            _entities = game.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.Active,
-                    GameMatcher.Speed,
-                    GameMatcher.Direction,
-                    GameMatcher.CharacterController));
-        }
+        _entities = game.GetGroup(GameMatcher
+            .AllOf(
+                GameMatcher.Active,
+                GameMatcher.Speed,
+                GameMatcher.Direction,
+                GameMatcher.CharacterController,
+                GameMatcher.VerticalVelocity)); 
+    }
 
-        public void Execute()
+    public void Execute()
+    {
+        foreach (GameEntity entity in _entities)
         {
-            foreach (GameEntity entity in _entities)
-            {
-                entity.CharacterController.Move(entity.Direction * entity.Speed * _timeService.DeltaTime);
-            }
+            float deltaTime = _timeService.DeltaTime;
+
+            Vector3 horizontal = entity.Direction * entity.Speed;
+
+            Vector3 finalVelocity = horizontal.SetY(entity.VerticalVelocity) * deltaTime;
+
+            entity.CharacterController.Move(finalVelocity);
         }
     }
 }

@@ -11,7 +11,8 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
             _entities = game
                 .GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Speed 
+                    GameMatcher.Speed,
+                    GameMatcher.Movable
                     ));
         }
 

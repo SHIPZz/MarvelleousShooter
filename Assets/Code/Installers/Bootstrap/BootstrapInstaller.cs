@@ -102,8 +102,7 @@ namespace Code.Installers.Bootstrap
         {
             Container.BindInterfacesTo<TimerService>().AsTransient();
             Container.Bind<ITimeService>().To<UnityTimeService>().AsSingle();
-            Container.Bind<IRaycastService>().To<RaycastService>().AsTransient();
-            Container.Bind<IShootRaycastService>().To<ShootRaycastService>().AsSingle();
+            Container.Bind<IRaycastService>().To<RaycastHitService>().AsSingle();
         }
 
         private void BindEnemyServices()

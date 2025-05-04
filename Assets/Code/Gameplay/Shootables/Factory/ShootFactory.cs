@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Code.ECS.Common.Entity;
 using Code.ECS.Common.Services;
 using Code.ECS.View;
@@ -45,7 +46,7 @@ namespace Code.Gameplay.Shootables.Factory
                     .AddId(_identifierService.Next())
                     .AddViewPrefab(prefab)
                     .AddDamage(config.DamagePerHit)
-                    .AddHits(null)
+                    .AddHits(new List<RaycastHit>(16))
                     .AddRecoilData(recoilData)
                     .AddShootDistance(config.ShootDistance)
                     .AddLayerMask(config.Mask)

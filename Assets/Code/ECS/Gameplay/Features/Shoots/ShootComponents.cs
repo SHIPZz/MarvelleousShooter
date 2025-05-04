@@ -33,7 +33,7 @@ namespace Code.ECS.Gameplay.Features.Shoots
 
     [Game] public class AvailableShoots : IComponent { public List<ShootTypeId> Value; }
 
-    [Game] public class Hits : IComponent { public RaycastHit[] Value; }
+    [Game] public class Hits : IComponent { public List<RaycastHit> Value; }
 
     [Game] public class OwnerId : IComponent { public int Value; }
     

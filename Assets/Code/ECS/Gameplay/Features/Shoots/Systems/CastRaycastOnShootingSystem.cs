@@ -8,10 +8,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
     public class CastRaycastOnShootingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly IShootRaycastService _raycastService;
+        private readonly IRaycastService _raycastService;
         private readonly ICameraProvider _cameraProvider;
 
-        public CastRaycastOnShootingSystem(GameContext game, IShootRaycastService raycastService, ICameraProvider cameraProvider)
+        public CastRaycastOnShootingSystem(GameContext game, IRaycastService raycastService, ICameraProvider cameraProvider)
         {
             _cameraProvider = cameraProvider;
             _raycastService = raycastService;
@@ -35,14 +35,14 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             {
                 Vector3 direction = _cameraProvider.Camera.transform.forward;
                 Vector3 origin = _cameraProvider.Camera.transform.position;
-
+                
                 _raycastService.GetTargetHitsNonAlloc(out RaycastHit[] raycastHits,
                     origin,
                     direction, 
                     entity.ShootDistance,
                     entity.LayerMask);
                 
-                entity.ReplaceHits(raycastHits);
+                entity.Hits.AddRange(raycastHits);
             }
         }
     }

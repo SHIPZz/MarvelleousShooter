@@ -5,24 +5,26 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 {
     public class CleanupShootRaycastHitsSystem : ICleanupSystem
     {
-        private readonly IGroup<GameEntity> _group;
-        private readonly IShootRaycastService _raycastService;
+        private readonly IGroup<GameEntity> _guns;
+        private readonly IRaycastService _raycastService;
 
-        public CleanupShootRaycastHitsSystem(IShootRaycastService raycastService, GameContext game)
+        public CleanupShootRaycastHitsSystem(IRaycastService raycastService, GameContext game)
         {
             _raycastService = raycastService;
-            
-            _group = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Hits, 
+
+            _guns = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Hits,
                 GameMatcher.Shootable));
         }
 
         public void Cleanup()
         {
-            foreach (GameEntity entity in _group)
+            foreach (GameEntity entity in _guns)
             {
-                 _raycastService.ClearRaycastHits();
-                 entity.ReplaceHits(null);
+                _raycastService.ClearRaycastHits();
+                
+                if (entity.Hits.Count > 0)
+                    entity.Hits.Clear();
             }
         }
     }

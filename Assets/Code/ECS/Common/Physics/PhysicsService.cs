@@ -6,8 +6,9 @@ namespace Code.ECS.Common.Physics
 {
   public class PhysicsService : IPhysicsService
   {
-    private static readonly RaycastHit2D[] Hits = new RaycastHit2D[128];
-    private static readonly Collider2D[] OverlapHits = new Collider2D[128];
+    private static readonly RaycastHit[] Hits = new RaycastHit[128];
+    
+    private static readonly Collider[] ColliderHits = new Collider[128];
     
     private readonly ICollisionRegistry _collisionRegistry;
 
@@ -16,13 +17,14 @@ namespace Code.ECS.Common.Physics
       _collisionRegistry = collisionRegistry;
     }
 
-    public IEnumerable<GameEntity> RaycastAll(Vector2 worldPosition, Vector2 direction, int layerMask)
+    public IEnumerable<GameEntity> RaycastAll(Vector3 worldPosition, Vector3 direction, int layerMask)
     {
-      int hitCount = Physics2D.RaycastNonAlloc(worldPosition, direction, Hits, layerMask);
+      int hitCount = UnityEngine.Physics.RaycastNonAlloc(worldPosition, direction, Hits, layerMask);
 
       for (int i = 0; i < hitCount; i++)
       {
-        RaycastHit2D hit = Hits[i];
+        RaycastHit hit = Hits[i];
+        
         if (hit.collider == null)
           continue;
 
@@ -34,13 +36,14 @@ namespace Code.ECS.Common.Physics
       }
     }
 
-    public GameEntity Raycast(Vector2 worldPosition, Vector2 direction, int layerMask)
+    public GameEntity Raycast(Vector3 worldPosition, Vector3 direction, int layerMask)
     {
-      int hitCount = Physics2D.RaycastNonAlloc(worldPosition, direction, Hits, layerMask);
+      int hitCount = UnityEngine.Physics.RaycastNonAlloc(worldPosition, direction, Hits, layerMask);
 
       for (int i = 0; i < hitCount; i++)
       {
-        RaycastHit2D hit = Hits[i];
+        RaycastHit hit = Hits[i];
+        
         if (hit.collider == null)
           continue;
 
@@ -54,13 +57,14 @@ namespace Code.ECS.Common.Physics
       return null;
     }
 
-    public GameEntity LineCast(Vector2 start, Vector2 end, int layerMask)
+    public GameEntity LineCast(Vector3 start, Vector3 end, int layerMask)
     {
-      int hitCount = Physics2D.RaycastNonAlloc(start, end, Hits, layerMask);
+      int hitCount = UnityEngine.Physics.RaycastNonAlloc(start, end, Hits, layerMask);
 
       for (int i = 0; i < hitCount; i++)
       {
-        RaycastHit2D hit = Hits[i];
+        RaycastHit hit = Hits[i];
+        
         if (hit.collider == null)
           continue;
 
@@ -76,13 +80,13 @@ namespace Code.ECS.Common.Physics
     
     public IEnumerable<GameEntity> CircleCast(Vector3 position, float radius, int layerMask) 
     {
-      int hitCount = OverlapCircle(position, radius, OverlapHits, layerMask);
+      int hitCount = OverlapCircle(position, radius, ColliderHits, layerMask);
 
       DrawDebug(position, radius, 1f, Color.red);
       
       for (int i = 0; i < hitCount; i++)
       {
-        GameEntity entity = _collisionRegistry.Get<GameEntity>(OverlapHits[i].GetInstanceID());
+        GameEntity entity = _collisionRegistry.Get<GameEntity>(ColliderHits[i].GetInstanceID());
         if (entity == null)
           continue;
 
@@ -92,13 +96,13 @@ namespace Code.ECS.Common.Physics
 
     public int CircleCastNonAlloc(Vector3 position, float radius, int layerMask, GameEntity[] hitBuffer) 
     {
-      int hitCount = OverlapCircle(position, radius, OverlapHits, layerMask);
+      int hitCount = OverlapCircle(position, radius, ColliderHits, layerMask);
 
       DrawDebug(position, radius, 1f, Color.green);
       
       for (int i = 0; i < hitCount; i++)
       {
-        GameEntity entity = _collisionRegistry.Get<GameEntity>(OverlapHits[i].GetInstanceID());
+        GameEntity entity = _collisionRegistry.Get<GameEntity>(ColliderHits[i].GetInstanceID());
         if (entity == null)
           continue;
 
@@ -109,13 +113,14 @@ namespace Code.ECS.Common.Physics
       return hitCount;
     }
 
-    public TEntity OverlapPoint<TEntity>(Vector2 worldPosition, int layerMask) where TEntity : class
+    public TEntity OverlapSphere<TEntity>(Vector3 worldPosition, float radius, int layerMask) where TEntity : class
     {
-      int hitCount = Physics2D.OverlapPointNonAlloc(worldPosition, OverlapHits, layerMask);
+      int hitCount = UnityEngine.Physics.OverlapSphereNonAlloc(worldPosition, radius, ColliderHits, layerMask);
 
       for (int i = 0; i < hitCount; i++)
       {
-        Collider2D hit = OverlapHits[i];
+        Collider hit = ColliderHits[i];
+        
         if (hit == null)
           continue;
 
@@ -129,8 +134,8 @@ namespace Code.ECS.Common.Physics
       return null;
     }
 
-    public int OverlapCircle(Vector3 worldPos, float radius, Collider2D[] hits, int layerMask) =>
-      Physics2D.OverlapCircleNonAlloc(worldPos, radius, hits, layerMask);
+    public int OverlapCircle(Vector3 worldPos, float radius, Collider[] hits, int layerMask) =>
+      UnityEngine.Physics.OverlapSphereNonAlloc(worldPos, radius, hits, layerMask);
     
     private static void DrawDebug(Vector2 worldPos, float radius, float seconds, Color color)
     {

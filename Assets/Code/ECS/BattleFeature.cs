@@ -1,5 +1,6 @@
 ﻿using Code.ECS.Gameplay.Features.Cameras;
 using Code.ECS.Gameplay.Features.CharacterStats.Systems;
+using Code.ECS.Gameplay.Features.Collisions;
 using Code.ECS.Gameplay.Features.Cooldown;
 using Code.ECS.Gameplay.Features.Heroes;
 using Code.ECS.Gameplay.Features.Input;
@@ -18,6 +19,7 @@ namespace Code.ECS
         public BattleFeature(ISystemFactory systems)
         {
             Add(systems.Create<InputFeature>());
+            Add(systems.Create<CollisionFeature>());
             Add(systems.Create<CameraFeature>());
             Add(systems.Create<StatsFeature>());
             

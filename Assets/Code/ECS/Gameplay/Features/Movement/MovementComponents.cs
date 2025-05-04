@@ -33,6 +33,8 @@ namespace Code.ECS.Gameplay.Features.Movement
     
     [Game] public class MovingAvailable : IComponent {  }
     
+    [Game] public class MovingRequested : IComponent {  }
+    
     [Game] public class RunningAvailable : IComponent {  }
     
     [Game] public class Running : IComponent {  }
@@ -51,9 +53,25 @@ namespace Code.ECS.Gameplay.Features.Movement
     
     [Game] public class EndPoint : IComponent { public Vector3 Value; }
     
+    [Game] public class VerticalVelocity : IComponent { public float Value; }
+    
     [Game] public class VerticalRotation : IComponent { public float Value; }
     
+    [Game] public class JumpForce : IComponent { public float Value; }
+    
+    [Game] public class AirSpeed : IComponent { public float Value; }
+    
     [Game] public class InitialSpeed : IComponent { public float Value; }
+    
+    [Game] public class GravityComponent : IComponent { public float Value; }
+    
+    [Game] public class MovementSpeed : IComponent { public float Value; }
+    
+    [Game] public class RunJumpMultiplier : IComponent { public float Value; }
+    
+    [Game] public class WalkJumpMultiplier : IComponent { public float Value; }
+    
+    [Game] public class IdleJumpMultiplier : IComponent { public float Value = 1; }
     
     [Game] public class HorizontalRotation : IComponent { public float Value; }
     

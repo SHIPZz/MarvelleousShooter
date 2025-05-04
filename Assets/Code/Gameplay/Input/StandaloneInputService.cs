@@ -90,6 +90,8 @@ namespace Code.Gameplay.Input
 
         public bool IsRunningPressed() => UnityEngine.Input.GetKey(KeyCode.LeftShift);
 
+        public bool IsJumpButtonPressed() => UnityEngine.Input.GetKeyDown(KeyCode.Space);
+
         public bool IsShooting() =>
             UnityEngine.Input.GetMouseButton(0) 
             && !EventSystem.current.IsPointerOverGameObject();

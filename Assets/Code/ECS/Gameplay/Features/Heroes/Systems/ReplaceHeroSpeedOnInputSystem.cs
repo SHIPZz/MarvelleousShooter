@@ -20,8 +20,8 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             _heroes = game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.Hero,
                     GameMatcher.MovingAvailable,
-                    GameMatcher.Active,
-                    GameMatcher.OnGround));
+                    GameMatcher.OnGround,
+                    GameMatcher.Active));
         }
 
         public void Execute()
@@ -29,6 +29,12 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             foreach (InputEntity input in _inputs)
             foreach (GameEntity hero in _heroes)
             {
+                if (input.isJumpingRequested)
+                {
+                    hero.BaseStats[Stats.Speed] = hero.AirSpeed;
+                    return;
+                }
+                
                 if (!input.isMovementRequested)
                 {
                     hero.BaseStats[Stats.Speed] = 0;
@@ -37,10 +43,10 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
 
                 MovementData movementData = _heroConfig.MovementData;
 
-                Debug.Log($"{input.isRunningPressed}");
-
-                hero.BaseStats[Stats.Speed] = input.isRunningPressed ? movementData.RunningSpeed : movementData.Speed;
+                hero.BaseStats[Stats.Speed] = input.isRunningPressed && hero.isRunningAvailable ? movementData.RunningSpeed : movementData.Speed;
             }
         }
+        
+
     }
 }

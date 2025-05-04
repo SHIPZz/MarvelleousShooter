@@ -10,7 +10,11 @@ namespace Code.ECS.Gameplay.Features.Input
     
     [Input] public class AimingAvailable : IComponent {}
     
+    [Input] public class JumpingAvailable : IComponent {}
+    
     [Input] public class ShootingAvailable : IComponent {}
+    
+    [Input] public class MovementAvailable : IComponent {}
     
     [Input] public class ReloadAvailable : IComponent {}
     
@@ -27,6 +31,8 @@ namespace Code.ECS.Gameplay.Features.Input
     [Input] public class SelectedShoot : IComponent { public GunInputTypeId Value; }
     
     [Input] public class MovementRequested : IComponent { }
+    
+    [Input] public class JumpingRequested : IComponent { }
     
     [Input] public class HasMouseAxis : IComponent { }
     

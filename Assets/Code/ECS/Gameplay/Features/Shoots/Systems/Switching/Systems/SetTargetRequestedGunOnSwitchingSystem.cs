@@ -27,6 +27,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             foreach (GameEntity entity in _entities)
             {
                 GameEntity targetGun = GetTargetGun(entity);
+                
+                if(targetGun == null)
+                    continue;
 
                 entity.ReplaceTargetSwitchGunId(targetGun.Id);
             }

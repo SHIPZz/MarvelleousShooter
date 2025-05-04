@@ -10,16 +10,17 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         public MarkMovingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.MovingAvailable,
-                GameMatcher.BaseStats,
-                GameMatcher.OnGround));
+                GameMatcher.Movable,
+                GameMatcher.BaseStats));
         }
 
         public void Execute()
         {
             foreach (GameEntity entity in _entities)
             {
-                entity.isMoving = entity.BaseStats[Stats.Speed] > 0;
+                entity.isMoving = entity.BaseStats[Stats.Speed] > 0
+                                  && entity.isOnGround
+                                  && entity.isMovingRequested;
             }
         }
     }

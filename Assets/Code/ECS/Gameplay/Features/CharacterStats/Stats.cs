@@ -8,5 +8,7 @@
         Damage = 3,
         Scale = 4,
         Hp = 5,
+        JumpForce = 6,
+        AirSpeed = 7,
     }
 }

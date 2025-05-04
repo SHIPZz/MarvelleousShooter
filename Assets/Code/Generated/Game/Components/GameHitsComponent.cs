@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.Hits hits { get { return (Code.ECS.Gameplay.Features.Shoots.Hits)GetComponent(GameComponentsLookup.Hits); } }
-    public UnityEngine.RaycastHit[] Hits { get { return hits.Value; } }
+    public System.Collections.Generic.List<UnityEngine.RaycastHit> Hits { get { return hits.Value; } }
     public bool hasHits { get { return HasComponent(GameComponentsLookup.Hits); } }
 
-    public GameEntity AddHits(UnityEngine.RaycastHit[] newValue) {
+    public GameEntity AddHits(System.Collections.Generic.List<UnityEngine.RaycastHit> newValue) {
         var index = GameComponentsLookup.Hits;
         var component = (Code.ECS.Gameplay.Features.Shoots.Hits)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Hits));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceHits(UnityEngine.RaycastHit[] newValue) {
+    public GameEntity ReplaceHits(System.Collections.Generic.List<UnityEngine.RaycastHit> newValue) {
         var index = GameComponentsLookup.Hits;
         var component = (Code.ECS.Gameplay.Features.Shoots.Hits)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Hits));
         component.Value = newValue;

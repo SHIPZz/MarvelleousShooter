@@ -13,5 +13,8 @@ namespace Code.Gameplay.Heroes.Configs
         public float Hp = 100f;
         
         public MovementData MovementData = new();
+        public LayerMask GroundDetectionMask;
+        public float GroundDepth = 5f;
+        public float GroundRadius = 1f;
     }
 }
