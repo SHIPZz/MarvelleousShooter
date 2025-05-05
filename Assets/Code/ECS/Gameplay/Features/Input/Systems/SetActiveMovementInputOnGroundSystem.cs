@@ -20,7 +20,7 @@ namespace Code.ECS.Gameplay.Features.Input.Systems
             foreach (GameEntity hero in _heroes)
             foreach (InputEntity input in _input)
             {
-                input.isMovementAvailable = hero.isOnGround;
+                // input.isMovementAvailable = hero.isOnGround;
                 input.isJumpingAvailable = hero.isOnGround;
             }
         }

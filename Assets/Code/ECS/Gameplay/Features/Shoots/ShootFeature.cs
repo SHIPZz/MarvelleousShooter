@@ -34,7 +34,7 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<ResetShootCooldownSystem>());
             
             Add(systemFactory.Create<MarkShootingContinuouslySystem>());
-            Add(systemFactory.Create<CastRaycastOnShootingSystem>());
+            Add(systemFactory.Create<CastRaycastByCameraOnShootingSystem>());
             Add(systemFactory.Create<AlignEffectOnHitSystem>());
 
             Add(systemFactory.Create<PlayAnimationOnShootSystem>());

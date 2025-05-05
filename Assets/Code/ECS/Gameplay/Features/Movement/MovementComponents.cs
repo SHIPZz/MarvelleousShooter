@@ -73,6 +73,8 @@ namespace Code.ECS.Gameplay.Features.Movement
     
     [Game] public class IdleJumpMultiplier : IComponent { public float Value = 1; }
     
+    [Game] public class FinalVelocity : IComponent { public Vector3 Value; }
+    
     [Game] public class HorizontalRotation : IComponent { public float Value; }
     
     [Game] public class EndPointReached : IComponent {  }

@@ -14,5 +14,7 @@ namespace Code.ECS.Gameplay.Features.Cameras
     
     [Game] public class MaxCameraRotation : IComponent { public float Value; }
     
+    [Game] public class CurrentCameraRotation : IComponent { public Quaternion Value; }
+    
     [Game] public class CameraRotationSpeed : IComponent { public float Value; }
 }

@@ -11,14 +11,14 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.Transform,
                     GameMatcher.WorldPosition
-                ).NoneOf(GameMatcher.CharacterController));
+                ));
         }
 
         public void Execute()
         {
             foreach (GameEntity entity in _entities)
             {
-                //entity.Transform.position = entity.WorldPosition;
+                entity.Transform.position = entity.WorldPosition;
             }
         }
     }

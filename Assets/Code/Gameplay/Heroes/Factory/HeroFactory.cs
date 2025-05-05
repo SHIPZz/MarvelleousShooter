@@ -55,6 +55,7 @@ namespace Code.Gameplay.Heroes.Factory
                 .AddBaseStats(stats)
                 .AddStatModifiers(statModifiers)
                 .AddWorldPosition(at)
+                .AddDirection(Vector3.zero)
                 .AddVerticalRotation(0)
                 .AddVerticalVelocity(0)
                 .AddGroundRadius(_heroConfig.GroundRadius)
@@ -70,6 +71,7 @@ namespace Code.Gameplay.Heroes.Factory
                 .AddSpeed(stats[Stats.Speed])
                 .AddInitialSpeed(stats[Stats.Speed])
                 .AddJumpForce(stats[Stats.JumpForce])
+                .AddViewPrefab(prefab)
                 .AddAvailableShoots(worldData.PlayerData.AvailableShoots)
                 .AddCurrentShootTypeId(worldData.PlayerData.LastWeaponId)
                 .With(x => x.isHero = true)
@@ -84,19 +86,9 @@ namespace Code.Gameplay.Heroes.Factory
                 .With(x => x.isShootHolder = true)
                 .With(x => x.isMovable = true)
                 .With(x => x.isCanRun = true)
-                .AddViewPrefab(prefab);
-            
-           var createdHero = _entityViewFactory.CreateViewForEntityFromPrefab(heroEntity);
-
-           createdHero.transform.position = at;
-            
-
-            return heroEntity
-                .With(x => x.AddCameraHolder(createdHero.GetComponent<CameraHolder>()))
-                .With(x => x.AddCharacterController(createdHero.GetComponent<CharacterController>()))
-                .With(x => createdHero.gameObject.SetActive(true))
-                //.With(x => x.AddCharacterMovement(createdHero.GetComponent<CharacterMovement>()))
                 ;
+            
+            return heroEntity;
         }
     }
 }

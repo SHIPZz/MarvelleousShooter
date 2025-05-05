@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems
 {
-    public class CastRaycastOnShootingSystem : IExecuteSystem
+    public class CastRaycastByCameraOnShootingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly IRaycastService _raycastService;
         private readonly ICameraProvider _cameraProvider;
 
-        public CastRaycastOnShootingSystem(GameContext game, IRaycastService raycastService, ICameraProvider cameraProvider)
+        public CastRaycastByCameraOnShootingSystem(GameContext game, IRaycastService raycastService, ICameraProvider cameraProvider)
         {
             _cameraProvider = cameraProvider;
             _raycastService = raycastService;

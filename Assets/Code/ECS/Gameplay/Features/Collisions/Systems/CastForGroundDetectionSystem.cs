@@ -26,19 +26,22 @@ namespace Code.ECS.Gameplay.Features.Collisions.Systems
         {
             foreach (GameEntity entity in _entities)
             {
-                int hitCount = _raycastService.GetSphereCastTargetHitsNonAlloc(out RaycastHit[] hits,
-                    entity.GroundDetectionTransform.position,
-                    Vector3.down * entity.GroundDepth, entity.GroundRadius, entity.GroundDepth,
-                    entity.GroundDetectionMask);
-
-                float normalAngle = Vector3.Angle(hits[0].normal, Vector3.up);
-                
-                entity.ReplaceGroundTouchedAngle(normalAngle);
-
-                entity.isOnGround = hits[0].collider != null && normalAngle < entity.CharacterController.slopeLimit;
+                // int hitCount = _raycastService.GetSphereCastTargetHitsNonAlloc(out RaycastHit[] hits,
+                //     entity.GroundDetectionTransform.position,
+                //     Vector3.down * entity.GroundDepth, entity.GroundRadius, entity.GroundDepth,
+                //     entity.GroundDetectionMask);
+                //
+                // entity.isOnGround = hits[0].collider != null && IsSurfaceWalkable(hits[0].normal,entity.CharacterController.slopeLimit);
             }
 
             _raycastService.ClearRaycastHits();
+        }
+
+        private bool IsSurfaceWalkable(Vector3 normal, float maxAngle)
+        {
+            float dotProduct = Vector3.Dot(normal, Vector3.up);
+    
+            return dotProduct > 0 && dotProduct >= Mathf.Cos(maxAngle * Mathf.Deg2Rad);
         }
     }
 }

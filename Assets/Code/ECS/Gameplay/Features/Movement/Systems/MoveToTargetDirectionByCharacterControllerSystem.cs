@@ -17,7 +17,6 @@ public class MoveToTargetDirectionByCharacterControllerSystem : IExecuteSystem
                 GameMatcher.Active,
                 GameMatcher.Speed,
                 GameMatcher.Direction,
-                GameMatcher.CharacterController,
                 GameMatcher.VerticalVelocity)); 
     }
 
@@ -31,7 +30,8 @@ public class MoveToTargetDirectionByCharacterControllerSystem : IExecuteSystem
 
             Vector3 finalVelocity = horizontal.SetY(entity.VerticalVelocity) * deltaTime;
 
-            entity.CharacterController.Move(finalVelocity);
+            entity.ReplaceFinalVelocity(finalVelocity);
+            // entity.CharacterController.Move(finalVelocity);
         }
     }
 }

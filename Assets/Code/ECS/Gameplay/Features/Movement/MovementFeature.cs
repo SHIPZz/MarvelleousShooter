@@ -9,8 +9,6 @@ namespace Code.ECS.Gameplay.Features.Movement
     {
         public MovementFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<UpdateWorldPositionFromCharacterControllerSystem>());
-
             Add(systemFactory.Create<UpdateTransformPositionSystem>());
 
             Add(systemFactory.Create<AllowMovementSystem>());

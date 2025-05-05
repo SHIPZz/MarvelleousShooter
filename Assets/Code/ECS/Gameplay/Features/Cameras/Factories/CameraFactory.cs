@@ -26,6 +26,7 @@ namespace Code.ECS.Gameplay.Features.Cameras.Factories
                 .AddMinCameraRotation(_cameraConfig.MinCameraRotation)
                 .AddMaxCameraRotation(_cameraConfig.MaxCameraRotation)
                 .AddHorizontalRotation(0)
+                .AddCurrentCameraRotation(camera.transform.rotation)
                 .AddVerticalRotation(0)
                 .AddTransform(camera.transform)
                 ;

@@ -44,7 +44,9 @@ namespace Code.ECS.Gameplay.Features.Cameras.Systems
                 camera.ReplaceHorizontalRotation(newYaw);
 
                 Quaternion targetRotation = Quaternion.Euler(newPitch, newYaw, 0f);
-                camera.Transform.localRotation = Quaternion.Slerp(camera.Transform.localRotation, targetRotation, 1f - Mathf.Exp(-camera.CameraRotationSharpness * Time.deltaTime)); 
+                camera.ReplaceCurrentCameraRotation(targetRotation);
+                
+                // camera.Transform.localRotation = Quaternion.Slerp(camera.Transform.localRotation, targetRotation, 1f - Mathf.Exp(-camera.CameraRotationSharpness * Time.deltaTime)); 
             }
         }
     }

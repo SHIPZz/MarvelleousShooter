@@ -21,7 +21,6 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
                 .GetGroup(GameMatcher.AllOf(
                     GameMatcher.Speed,
                     GameMatcher.Active,
-                    GameMatcher.OnGround,
                     GameMatcher.Hero));
         }
 

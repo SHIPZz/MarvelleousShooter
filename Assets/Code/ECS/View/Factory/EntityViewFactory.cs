@@ -40,7 +40,7 @@ namespace Code.ECS.View.Factory
         
         public EntityBehaviour CreateViewForEntityFromPrefab(GameEntity entity)
         {
-            EntityBehaviour view = _instantiator.InstantiatePrefabForComponent<EntityBehaviour>(entity.ViewPrefab, _farAway,
+            EntityBehaviour view = _instantiator.InstantiatePrefabForComponent<EntityBehaviour>(entity.ViewPrefab, entity.WorldPosition,
                 Quaternion.identity, null);
             
             view.SetEntity(entity);
