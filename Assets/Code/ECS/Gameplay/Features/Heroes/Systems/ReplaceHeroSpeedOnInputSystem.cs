@@ -29,18 +29,6 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
             foreach (InputEntity input in _inputs)
             foreach (GameEntity hero in _heroes)
             {
-                if (input.isJumpingRequested)
-                {
-                    hero.BaseStats[Stats.Speed] = hero.AirSpeed;
-                    return;
-                }
-                
-                if (!input.isMovementRequested)
-                {
-                    hero.BaseStats[Stats.Speed] = 0;
-                    return;
-                }
-
                 MovementData movementData = _heroConfig.MovementData;
 
                 hero.BaseStats[Stats.Speed] = input.isRunningPressed && hero.isRunningAvailable ? movementData.RunningSpeed : movementData.Speed;

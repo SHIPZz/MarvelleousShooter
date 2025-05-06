@@ -16,7 +16,7 @@ namespace Code.ECS.Gameplay.Features.Movement
             Add(systemFactory.Create<MarkMovingRequestedOnInputSystem>());
 
             Add(systemFactory.Create<MarkMovingUnAvailableOnNoGroundSystem>());
-
+            
             Add(systemFactory.Create<MarkIdleSystem>());
             Add(systemFactory.Create<MarkMovingSystem>());
             Add(systemFactory.Create<MarkWalkingSystem>());
@@ -24,9 +24,9 @@ namespace Code.ECS.Gameplay.Features.Movement
 
             Add(systemFactory.Create<SetMovementDirectionByCameraDirectionSystem>());
 
-            Add(systemFactory.Create<ApplyJumpOnInputSystem>());
+            Add(systemFactory.Create<CalculateJumpVelocitySystem>());
 
-            Add(systemFactory.Create<MoveToTargetDirectionByCharacterControllerSystem>());
+            Add(systemFactory.Create<CalculateFinalVelocitySystem>());
 
 
             Add(systemFactory.Create<DisableMovingOnNoGround>());

@@ -56,8 +56,12 @@ namespace Code.Gameplay.Heroes.Factory
                 .AddStatModifiers(statModifiers)
                 .AddWorldPosition(at)
                 .AddDirection(Vector3.zero)
+                .AddFinalVelocity(Vector3.zero)
+                .AddJumpVelocity(Vector3.zero)
+                .AddDamping(_heroConfig.MovementData.Damping)
                 .AddVerticalRotation(0)
                 .AddVerticalVelocity(0)
+                .AddAnimationFadeDuration(_heroConfig.AnimationFadeDuration)
                 .AddGroundRadius(_heroConfig.GroundRadius)
                 .AddGravity(_heroConfig.MovementData.Gravity)
                 .AddIdleJumpMultiplier(_heroConfig.MovementData.IdleJumpMultiplier)
@@ -82,9 +86,9 @@ namespace Code.Gameplay.Heroes.Factory
                 .With(x => x.isViewActive = true)
                 .With(x => x.isActive = true)
                 .With(x => x.isAlive = true)
-                .With(x => x.isOnGround = true)
                 .With(x => x.isShootHolder = true)
                 .With(x => x.isMovable = true)
+                .With(x => x.isOnGround = true)
                 .With(x => x.isCanRun = true)
                 ;
             

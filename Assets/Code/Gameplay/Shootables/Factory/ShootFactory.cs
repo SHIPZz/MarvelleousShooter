@@ -41,7 +41,6 @@ namespace Code.Gameplay.Shootables.Factory
 
             GameEntity shootEntity = CreateEntity
                     .Empty()
-                    .AddWorldPosition(Vector3.zero)
                     .AddOwnerId(ownerId)
                     .AddId(_identifierService.Next())
                     .AddViewPrefab(prefab)

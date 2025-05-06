@@ -19,6 +19,11 @@ namespace Code.ECS.Extensions
       v = tmp;
       return v;
     }
+    
+    public static Vector3 WithY(this Vector3 v, float y)
+    {
+      return new Vector3(v.x, y, v.z);
+    }
 
     public static Vector3 SetZ(this Vector3 v, float z)
     {

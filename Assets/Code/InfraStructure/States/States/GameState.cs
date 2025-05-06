@@ -8,17 +8,13 @@ using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
 using Code.Extensions;
 using Code.Gameplay.Cameras;
-using Code.Gameplay.Enemies.Services;
 using Code.Gameplay.Heroes;
 using Code.Gameplay.Heroes.Factory;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
 using Code.Gameplay.Shootables;
 using Code.Gameplay.Shootables.Factory;
-using Code.Gameplay.Shootables.Recoils;
 using Code.SaveData;
-using Cysharp.Threading.Tasks;
-using KinematicCharacterController;
 using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
 
@@ -104,8 +100,6 @@ namespace Code.InfraStructure.States.States
 
         private void InitEnemies()
         {
-            foreach (EnemySpawner enemySpawner in _levelDataProvider.EnemySpawners)
-                enemySpawner.Spawn();
         }
 
         private void CreateKnife(Transform weaponHolder, GameEntity hero)

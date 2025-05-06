@@ -23,4 +23,23 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
             }
         }
     }
+    
+        // private readonly IGroup<GameEntity> _entities;
+        //
+        // public MarkMovingAnimationUnAvailableOnNoGroundSystem(GameContext game)
+        // {
+        //     _entities = game.GetGroup(GameMatcher.AllOf(
+        //         GameMatcher.Speed,
+        //         GameMatcher.Active,
+        //         GameMatcher.SwitchAnimationTime,
+        //         GameMatcher.WorldPosition));
+        // }
+        //
+        // public void Execute()
+        // {
+        //     foreach (GameEntity entity in _entities)
+        //     {
+        //
+        //     }
+        // }
 }

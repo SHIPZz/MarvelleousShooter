@@ -5,7 +5,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
 {
     public class SetMovementDirectionByCameraDirectionSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _heroes;
         private readonly IGroup<InputEntity> _input;
         private readonly IGroup<GameEntity> _cameras;
 
@@ -17,7 +17,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
                 .GetGroup(GameMatcher.AllOf(
                     GameMatcher.MainCamera));
             
-            _entities = game
+            _heroes = game
                 .GetGroup(GameMatcher.AllOf(
                     GameMatcher.Speed,
                     GameMatcher.Active,
@@ -28,7 +28,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
         {
             foreach (InputEntity input in _input)
             foreach (GameEntity camera in _cameras)
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity hero in _heroes)
             {
                 Vector3 inputAxis = input.Axis;
                 
@@ -42,7 +42,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
                 right.Normalize();
 
                 Vector3 direction = right * inputAxis.x + forward * inputAxis.z;
-                entity.ReplaceDirection(direction.normalized);
+                hero.ReplaceDirection(direction.normalized);
 
             }
         }

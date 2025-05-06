@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.ECS.Gameplay.Features.Movement.AnimationDuration animationDuration { get { return (Code.ECS.Gameplay.Features.Movement.AnimationDuration)GetComponent(GameComponentsLookup.AnimationDuration); } }
+    public Code.ECS.Gameplay.Features.Animations.AnimationDuration animationDuration { get { return (Code.ECS.Gameplay.Features.Animations.AnimationDuration)GetComponent(GameComponentsLookup.AnimationDuration); } }
     public float AnimationDuration { get { return animationDuration.Value; } }
     public bool hasAnimationDuration { get { return HasComponent(GameComponentsLookup.AnimationDuration); } }
 
     public GameEntity AddAnimationDuration(float newValue) {
         var index = GameComponentsLookup.AnimationDuration;
-        var component = (Code.ECS.Gameplay.Features.Movement.AnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Movement.AnimationDuration));
+        var component = (Code.ECS.Gameplay.Features.Animations.AnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Animations.AnimationDuration));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceAnimationDuration(float newValue) {
         var index = GameComponentsLookup.AnimationDuration;
-        var component = (Code.ECS.Gameplay.Features.Movement.AnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Movement.AnimationDuration));
+        var component = (Code.ECS.Gameplay.Features.Animations.AnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Animations.AnimationDuration));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

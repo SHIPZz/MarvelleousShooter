@@ -27,242 +27,247 @@ public static class GameComponentsLookup {
     public const int ViewPath = 16;
     public const int ViewPrefab = 17;
     public const int WorldPosition = 18;
-    public const int CameraHolder = 19;
-    public const int CameraRotationSharpness = 20;
-    public const int CameraRotationSpeed = 21;
-    public const int CurrentCameraRotation = 22;
-    public const int MainCamera = 23;
-    public const int MaxCameraRotation = 24;
-    public const int MinCameraRotation = 25;
-    public const int BaseStats = 26;
-    public const int StatChange = 27;
-    public const int StatModifiers = 28;
-    public const int GroundDepth = 29;
-    public const int GroundDetectionMask = 30;
-    public const int GroundDetectionTransform = 31;
-    public const int GroundHitCollider = 32;
-    public const int GroundRadius = 33;
-    public const int GroundTouchedAngle = 34;
-    public const int NeedGroundDetection = 35;
-    public const int Cooldown = 36;
-    public const int CooldownLeft = 37;
-    public const int CooldownUp = 38;
-    public const int Dead = 39;
-    public const int DeathAnimationDuration = 40;
-    public const int DeathProcessing = 41;
-    public const int ApplyEffectOnEndPointReached = 42;
-    public const int ApplyStatusOnEndPointReached = 43;
-    public const int DamageEffect = 44;
-    public const int Effect = 45;
-    public const int EffectSetups = 46;
-    public const int EffectTypeId = 47;
-    public const int EffectValue = 48;
-    public const int HealEffect = 49;
-    public const int Processed = 50;
-    public const int ProducerId = 51;
-    public const int PullEffect = 52;
-    public const int TargetId = 53;
-    public const int EnchantHolder = 54;
-    public const int EnchantTypeId = 55;
-    public const int ExplosiveEnchant = 56;
-    public const int HexEnchant = 57;
-    public const int PoisonEnchant = 58;
-    public const int Enemy = 59;
-    public const int FollowDistanceLeft = 60;
-    public const int FollowingUp = 61;
-    public const int FollowMaxDistance = 62;
-    public const int FollowNewCloseTarget = 63;
-    public const int FollowTargetId = 64;
-    public const int LastFollowTargets = 65;
-    public const int ConnectedWithHero = 66;
-    public const int CurrentGunId = 67;
-    public const int Hero = 68;
-    public const int HeroAction = 69;
-    public const int HeroGun = 70;
-    public const int Alive = 71;
-    public const int CurrentHp = 72;
-    public const int HpRestored = 73;
-    public const int MaxHp = 74;
-    public const int RestoreHp = 75;
-    public const int Collected = 76;
-    public const int Experience = 77;
-    public const int LootTypeId = 78;
-    public const int PickupRadius = 79;
-    public const int Pullable = 80;
-    public const int Pulling = 81;
-    public const int AirSpeed = 82;
-    public const int AnimationCurve = 83;
-    public const int AnimationDuration = 84;
-    public const int CanRun = 85;
-    public const int DestructOnMovingFinished = 86;
-    public const int ElapsedTime = 87;
-    public const int EndPoint = 88;
-    public const int EndPointReached = 89;
-    public const int FinalVelocity = 90;
-    public const int Gravity = 91;
-    public const int HeightUpdated = 92;
-    public const int HorizontalRotation = 93;
-    public const int Idle = 94;
-    public const int IdleAvailable = 95;
-    public const int IdleJumpMultiplier = 96;
-    public const int InitialSpeed = 97;
-    public const int JumpForce = 98;
-    public const int Jumping = 99;
-    public const int JumpingRequested = 100;
-    public const int Movable = 101;
-    public const int MovementAnimAvailable = 102;
-    public const int MovementSpeed = 103;
-    public const int Moving = 104;
-    public const int MovingAvailable = 105;
-    public const int MovingRequested = 106;
-    public const int NeedRandomEndPoint = 107;
-    public const int NoGround = 108;
-    public const int OnGround = 109;
-    public const int OrbitCenterFollowTarget = 110;
-    public const int OrbitCenterPosition = 111;
-    public const int OrbitPhase = 112;
-    public const int OrbitRadius = 113;
-    public const int RotateAlongDirection = 114;
-    public const int RunJumpMultiplier = 115;
-    public const int Running = 116;
-    public const int RunningAnimAvailable = 117;
-    public const int RunningAvailable = 118;
-    public const int Speed = 119;
-    public const int StartHeight = 120;
-    public const int TurnAlongDirection = 121;
-    public const int UpdateHeightBySinCurve = 122;
-    public const int VerticalRotation = 123;
-    public const int VerticalVelocity = 124;
-    public const int Walking = 125;
-    public const int WalkJumpMultiplier = 126;
-    public const int DestructOnMaxPullTargetReached = 127;
-    public const int MaxPullTargetHold = 128;
-    public const int MinCountToPullTargets = 129;
-    public const int PullAnchorTargetId = 130;
-    public const int PullingDetector = 131;
-    public const int PullInRadius = 132;
-    public const int PullProducerId = 133;
-    public const int PullTargetConsistently = 134;
-    public const int PullTargetHolder = 135;
-    public const int PullTargetHolderStatuses = 136;
-    public const int PullTargetLayerMask = 137;
-    public const int PullTargetList = 138;
-    public const int AvailableShoots = 139;
-    public const int CanRaycast = 140;
-    public const int CanRunAndShoot = 141;
-    public const int CurrentShootTypeId = 142;
-    public const int GunHasFocus = 143;
-    public const int GunInputKey = 144;
-    public const int HitEffectTypeId = 145;
-    public const int Hits = 146;
-    public const int LastShootTime = 147;
-    public const int OwnerId = 148;
-    public const int Shootable = 149;
-    public const int ShootAnimationProcessing = 150;
-    public const int ShootCooldown = 151;
-    public const int ShootCooldownLeft = 152;
-    public const int ShootCooldownProcessing = 153;
-    public const int ShootCooldownUp = 154;
-    public const int ShootDistance = 155;
-    public const int ShootHolder = 156;
-    public const int Shooting = 157;
-    public const int ShootingAvailable = 158;
-    public const int ShootingContinuously = 159;
-    public const int ShootingRequested = 160;
-    public const int ShootingStarted = 161;
-    public const int ShootTypeId = 162;
-    public const int ShootWithoutAmmo = 163;
-    public const int Aimable = 164;
-    public const int Aiming = 165;
-    public const int AimingAvailable = 166;
-    public const int AimingRequested = 167;
-    public const int NotAimable = 168;
-    public const int AmmoAvailable = 169;
-    public const int AmmoCount = 170;
-    public const int AmmoCountLeft = 171;
-    public const int AmmoDecreased = 172;
-    public const int AimJumpMultiplier = 173;
-    public const int AimMultiplier = 174;
-    public const int CurrentRecoil = 175;
-    public const int HasRecoil = 176;
-    public const int HorizontalRecoil = 177;
-    public const int JumpMultiplier = 178;
-    public const int MaxHorizontalRecoilOnJump = 179;
-    public const int MinHorizontalRecoilOnJump = 180;
-    public const int MinVerticalRecoilOnJump = 181;
-    public const int Patterns = 182;
-    public const int RecoilData = 183;
-    public const int RecoilPatternIndex = 184;
-    public const int RecoilProgress = 185;
-    public const int RecoilRecoverySpeed = 186;
-    public const int RecoilSpeed = 187;
-    public const int TargetRecoil = 188;
-    public const int TotalHorizontalRecoil = 189;
-    public const int TotalVerticalRecoil = 190;
-    public const int VerticalRecoil = 191;
-    public const int Reloadable = 192;
-    public const int Reloading = 193;
-    public const int ReloadingFinished = 194;
-    public const int ReloadRequested = 195;
-    public const int ReloadTime = 196;
-    public const int ReloadTimeEnded = 197;
-    public const int ReloadTimeLeft = 198;
-    public const int HeroSwitchable = 199;
-    public const int HidingProcessed = 200;
-    public const int HidingProcessing = 201;
-    public const int SameGunSelected = 202;
-    public const int ShootSwitchingAvailable = 203;
-    public const int ShootSwitchingReady = 204;
-    public const int ShootSwitchingRequested = 205;
-    public const int ShowingProcessed = 206;
-    public const int ShowingProcessing = 207;
-    public const int Switchable = 208;
-    public const int SwitchingProcessed = 209;
-    public const int SwitchingProcessing = 210;
-    public const int SwitchingStarted = 211;
-    public const int TargetInputGun = 212;
-    public const int TargetSwitchGunId = 213;
-    public const int Affected = 214;
-    public const int Applied = 215;
-    public const int ApplierStatusLink = 216;
-    public const int CurrentHpStatus = 217;
-    public const int Duration = 218;
-    public const int Freeze = 219;
-    public const int Invulnerable = 220;
-    public const int InvulnerableStatus = 221;
-    public const int MaxHpIncrease = 222;
-    public const int Period = 223;
-    public const int PeriodicDamageStatus = 224;
-    public const int Poison = 225;
-    public const int ScaleIncrease = 226;
-    public const int SpeedUp = 227;
-    public const int Status = 228;
-    public const int StatusCreator = 229;
-    public const int StatusSetups = 230;
-    public const int StatusTypeId = 231;
-    public const int TimeLeft = 232;
-    public const int TimeSinceLastTick = 233;
-    public const int Unapplied = 234;
-    public const int Vampirism = 235;
-    public const int CollectingAvailable = 236;
-    public const int CollectingTargetsContinuously = 237;
-    public const int CollectTargetsInterval = 238;
-    public const int CollectTargetsLayerMask = 239;
-    public const int CollectTargetsTimer = 240;
-    public const int IgnoreBuffer = 241;
-    public const int Ignored = 242;
-    public const int LastCollectedId = 243;
-    public const int OverflowProcessedTargetsBuffer = 244;
-    public const int ProcessedTargetsBuffer = 245;
-    public const int Radius = 246;
-    public const int Reached = 247;
-    public const int ReadyToCollectOnMovingFinished = 248;
-    public const int ReadyToCollectTargets = 249;
-    public const int TargetLimit = 250;
-    public const int TargetsBuffer = 251;
-    public const int ViewActive = 252;
+    public const int AnimationDuration = 19;
+    public const int AnimationFadeDuration = 20;
+    public const int CameraHolder = 21;
+    public const int CameraRotationSharpness = 22;
+    public const int CameraRotationSpeed = 23;
+    public const int CurrentCameraRotation = 24;
+    public const int MainCamera = 25;
+    public const int MaxCameraRotation = 26;
+    public const int MinCameraRotation = 27;
+    public const int BaseStats = 28;
+    public const int StatChange = 29;
+    public const int StatModifiers = 30;
+    public const int GroundDepth = 31;
+    public const int GroundDetectionMask = 32;
+    public const int GroundDetectionTransform = 33;
+    public const int GroundHitCollider = 34;
+    public const int GroundRadius = 35;
+    public const int GroundTouchedAngle = 36;
+    public const int NeedGroundDetection = 37;
+    public const int Cooldown = 38;
+    public const int CooldownLeft = 39;
+    public const int CooldownUp = 40;
+    public const int Dead = 41;
+    public const int DeathAnimationDuration = 42;
+    public const int DeathProcessing = 43;
+    public const int ApplyEffectOnEndPointReached = 44;
+    public const int ApplyStatusOnEndPointReached = 45;
+    public const int DamageEffect = 46;
+    public const int Effect = 47;
+    public const int EffectSetups = 48;
+    public const int EffectTypeId = 49;
+    public const int EffectValue = 50;
+    public const int HealEffect = 51;
+    public const int Processed = 52;
+    public const int ProducerId = 53;
+    public const int PullEffect = 54;
+    public const int TargetId = 55;
+    public const int EnchantHolder = 56;
+    public const int EnchantTypeId = 57;
+    public const int ExplosiveEnchant = 58;
+    public const int HexEnchant = 59;
+    public const int PoisonEnchant = 60;
+    public const int Enemy = 61;
+    public const int FollowDistanceLeft = 62;
+    public const int FollowingUp = 63;
+    public const int FollowMaxDistance = 64;
+    public const int FollowNewCloseTarget = 65;
+    public const int FollowTargetId = 66;
+    public const int LastFollowTargets = 67;
+    public const int ConnectedWithHero = 68;
+    public const int CurrentGunId = 69;
+    public const int Hero = 70;
+    public const int HeroAction = 71;
+    public const int HeroGun = 72;
+    public const int Alive = 73;
+    public const int CurrentHp = 74;
+    public const int HpRestored = 75;
+    public const int MaxHp = 76;
+    public const int RestoreHp = 77;
+    public const int Collected = 78;
+    public const int Experience = 79;
+    public const int LootTypeId = 80;
+    public const int PickupRadius = 81;
+    public const int Pullable = 82;
+    public const int Pulling = 83;
+    public const int AirSpeed = 84;
+    public const int AnimationCurve = 85;
+    public const int CanRun = 86;
+    public const int Damping = 87;
+    public const int DestructOnMovingFinished = 88;
+    public const int ElapsedTime = 89;
+    public const int EndPoint = 90;
+    public const int EndPointReached = 91;
+    public const int FinalVelocity = 92;
+    public const int Gravity = 93;
+    public const int HeightUpdated = 94;
+    public const int HorizontalRotation = 95;
+    public const int Idle = 96;
+    public const int IdleAvailable = 97;
+    public const int IdleJumpMultiplier = 98;
+    public const int InitialSpeed = 99;
+    public const int JumpForce = 100;
+    public const int Jumping = 101;
+    public const int JumpingRequested = 102;
+    public const int NoGroundTime = 103;
+    public const int JumpVelocity = 104;
+    public const int Movable = 105;
+    public const int MovementAnimAvailable = 106;
+    public const int MovementSpeed = 107;
+    public const int Moving = 108;
+    public const int MovingAvailable = 109;
+    public const int MovingRequested = 110;
+    public const int NeedRandomEndPoint = 111;
+    public const int NoGround = 112;
+    public const int OnGround = 113;
+    public const int OrbitCenterFollowTarget = 114;
+    public const int OrbitCenterPosition = 115;
+    public const int OrbitPhase = 116;
+    public const int OrbitRadius = 117;
+    public const int RotateAlongDirection = 118;
+    public const int RunJumpMultiplier = 119;
+    public const int Running = 120;
+    public const int RunningAnimAvailable = 121;
+    public const int RunningAvailable = 122;
+    public const int RunSpeed = 123;
+    public const int Speed = 124;
+    public const int StartHeight = 125;
+    public const int TurnAlongDirection = 126;
+    public const int UpdateHeightBySinCurve = 127;
+    public const int VerticalRotation = 128;
+    public const int VerticalVelocity = 129;
+    public const int Walking = 130;
+    public const int WalkJumpMultiplier = 131;
+    public const int DestructOnMaxPullTargetReached = 132;
+    public const int MaxPullTargetHold = 133;
+    public const int MinCountToPullTargets = 134;
+    public const int PullAnchorTargetId = 135;
+    public const int PullingDetector = 136;
+    public const int PullInRadius = 137;
+    public const int PullProducerId = 138;
+    public const int PullTargetConsistently = 139;
+    public const int PullTargetHolder = 140;
+    public const int PullTargetHolderStatuses = 141;
+    public const int PullTargetLayerMask = 142;
+    public const int PullTargetList = 143;
+    public const int AvailableShoots = 144;
+    public const int CanRaycast = 145;
+    public const int CanRunAndShoot = 146;
+    public const int CurrentShootTypeId = 147;
+    public const int GunHasFocus = 148;
+    public const int GunInputKey = 149;
+    public const int HitEffectTypeId = 150;
+    public const int Hits = 151;
+    public const int LastShootTime = 152;
+    public const int OwnerId = 153;
+    public const int Shootable = 154;
+    public const int ShootAnimationProcessing = 155;
+    public const int ShootCooldown = 156;
+    public const int ShootCooldownLeft = 157;
+    public const int ShootCooldownProcessing = 158;
+    public const int ShootCooldownUp = 159;
+    public const int ShootDistance = 160;
+    public const int ShootHolder = 161;
+    public const int Shooting = 162;
+    public const int ShootingAvailable = 163;
+    public const int ShootingContinuously = 164;
+    public const int ShootingRequested = 165;
+    public const int ShootingStarted = 166;
+    public const int ShootTypeId = 167;
+    public const int ShootWithoutAmmo = 168;
+    public const int Aimable = 169;
+    public const int Aiming = 170;
+    public const int AimingAvailable = 171;
+    public const int AimingRequested = 172;
+    public const int NotAimable = 173;
+    public const int AmmoAvailable = 174;
+    public const int AmmoCount = 175;
+    public const int AmmoCountLeft = 176;
+    public const int AmmoDecreased = 177;
+    public const int AimJumpMultiplier = 178;
+    public const int AimMultiplier = 179;
+    public const int CurrentRecoil = 180;
+    public const int HasRecoil = 181;
+    public const int HorizontalRecoil = 182;
+    public const int JumpMultiplier = 183;
+    public const int MaxHorizontalRecoilOnJump = 184;
+    public const int MinHorizontalRecoilOnJump = 185;
+    public const int MinVerticalRecoilOnJump = 186;
+    public const int Patterns = 187;
+    public const int RecoilData = 188;
+    public const int RecoilPatternIndex = 189;
+    public const int RecoilProgress = 190;
+    public const int RecoilRecoverySpeed = 191;
+    public const int RecoilSpeed = 192;
+    public const int TargetRecoil = 193;
+    public const int TotalHorizontalRecoil = 194;
+    public const int TotalVerticalRecoil = 195;
+    public const int VerticalRecoil = 196;
+    public const int Reloadable = 197;
+    public const int Reloading = 198;
+    public const int ReloadingFinished = 199;
+    public const int ReloadRequested = 200;
+    public const int ReloadTime = 201;
+    public const int ReloadTimeEnded = 202;
+    public const int ReloadTimeLeft = 203;
+    public const int HeroSwitchable = 204;
+    public const int HidingProcessed = 205;
+    public const int HidingProcessing = 206;
+    public const int SameGunSelected = 207;
+    public const int ShootSwitchingAvailable = 208;
+    public const int ShootSwitchingReady = 209;
+    public const int ShootSwitchingRequested = 210;
+    public const int ShowingProcessed = 211;
+    public const int ShowingProcessing = 212;
+    public const int Switchable = 213;
+    public const int SwitchingProcessed = 214;
+    public const int SwitchingProcessing = 215;
+    public const int SwitchingStarted = 216;
+    public const int TargetInputGun = 217;
+    public const int TargetSwitchGunId = 218;
+    public const int Affected = 219;
+    public const int Applied = 220;
+    public const int ApplierStatusLink = 221;
+    public const int CurrentHpStatus = 222;
+    public const int Duration = 223;
+    public const int Freeze = 224;
+    public const int Invulnerable = 225;
+    public const int InvulnerableStatus = 226;
+    public const int MaxHpIncrease = 227;
+    public const int Period = 228;
+    public const int PeriodicDamageStatus = 229;
+    public const int Poison = 230;
+    public const int ScaleIncrease = 231;
+    public const int SpeedUp = 232;
+    public const int Status = 233;
+    public const int StatusCreator = 234;
+    public const int StatusSetups = 235;
+    public const int StatusTypeId = 236;
+    public const int TimeLeft = 237;
+    public const int TimeSinceLastTick = 238;
+    public const int Unapplied = 239;
+    public const int Vampirism = 240;
+    public const int CollectingAvailable = 241;
+    public const int CollectingTargetsContinuously = 242;
+    public const int CollectTargetsInterval = 243;
+    public const int CollectTargetsLayerMask = 244;
+    public const int CollectTargetsTimer = 245;
+    public const int IgnoreBuffer = 246;
+    public const int Ignored = 247;
+    public const int LastCollectedId = 248;
+    public const int OverflowProcessedTargetsBuffer = 249;
+    public const int ProcessedTargetsBuffer = 250;
+    public const int Radius = 251;
+    public const int Reached = 252;
+    public const int ReadyToCollectOnMovingFinished = 253;
+    public const int ReadyToCollectTargets = 254;
+    public const int TargetLimit = 255;
+    public const int TargetsBuffer = 256;
+    public const int ViewActive = 257;
 
-    public const int TotalComponents = 253;
+    public const int TotalComponents = 258;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -284,6 +289,8 @@ public static class GameComponentsLookup {
         "ViewPath",
         "ViewPrefab",
         "WorldPosition",
+        "AnimationDuration",
+        "AnimationFadeDuration",
         "CameraHolder",
         "CameraRotationSharpness",
         "CameraRotationSpeed",
@@ -349,8 +356,8 @@ public static class GameComponentsLookup {
         "Pulling",
         "AirSpeed",
         "AnimationCurve",
-        "AnimationDuration",
         "CanRun",
+        "Damping",
         "DestructOnMovingFinished",
         "ElapsedTime",
         "EndPoint",
@@ -366,6 +373,8 @@ public static class GameComponentsLookup {
         "JumpForce",
         "Jumping",
         "JumpingRequested",
+        "NoGroundTime",
+        "JumpVelocity",
         "Movable",
         "MovementAnimAvailable",
         "MovementSpeed",
@@ -384,6 +393,7 @@ public static class GameComponentsLookup {
         "Running",
         "RunningAnimAvailable",
         "RunningAvailable",
+        "RunSpeed",
         "Speed",
         "StartHeight",
         "TurnAlongDirection",
@@ -540,6 +550,8 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Common.ViewPath),
         typeof(Code.ECS.Common.ViewPrefab),
         typeof(Code.ECS.Common.WorldPosition),
+        typeof(Code.ECS.Gameplay.Features.Animations.AnimationDuration),
+        typeof(Code.ECS.Gameplay.Features.Animations.AnimationFadeDuration),
         typeof(Code.ECS.Gameplay.Features.Cameras.CameraHolderComponent),
         typeof(Code.ECS.Gameplay.Features.Cameras.CameraRotationSharpnessComponent),
         typeof(Code.ECS.Gameplay.Features.Cameras.CameraRotationSpeed),
@@ -605,8 +617,8 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Loot.Pulling),
         typeof(Code.ECS.Gameplay.Features.Movement.AirSpeed),
         typeof(Code.ECS.Gameplay.Features.Movement.AnimationCurveComponent),
-        typeof(Code.ECS.Gameplay.Features.Movement.AnimationDuration),
         typeof(Code.ECS.Gameplay.Features.Movement.CanRun),
+        typeof(Code.ECS.Gameplay.Features.Movement.Damping),
         typeof(Code.ECS.Gameplay.Features.Movement.DestructOnMovingFinished),
         typeof(Code.ECS.Gameplay.Features.Movement.ElapsedTime),
         typeof(Code.ECS.Gameplay.Features.Movement.EndPoint),
@@ -622,6 +634,8 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Movement.JumpForce),
         typeof(Code.ECS.Gameplay.Features.Movement.Jumping.Jumping),
         typeof(Code.ECS.Gameplay.Features.Movement.Jumping.JumpingRequested),
+        typeof(Code.ECS.Gameplay.Features.Movement.Jumping.NoGroundTime),
+        typeof(Code.ECS.Gameplay.Features.Movement.JumpVelocity),
         typeof(Code.ECS.Gameplay.Features.Movement.Movable),
         typeof(Code.ECS.Gameplay.Features.Movement.MovementAnimAvailable),
         typeof(Code.ECS.Gameplay.Features.Movement.MovementSpeed),
@@ -640,6 +654,7 @@ public static class GameComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Movement.Running),
         typeof(Code.ECS.Gameplay.Features.Movement.RunningAnimAvailable),
         typeof(Code.ECS.Gameplay.Features.Movement.RunningAvailable),
+        typeof(Code.ECS.Gameplay.Features.Movement.RunSpeed),
         typeof(Code.ECS.Gameplay.Features.Movement.Speed),
         typeof(Code.ECS.Gameplay.Features.Movement.StartHeight),
         typeof(Code.ECS.Gameplay.Features.Movement.TurnAlongDirection),

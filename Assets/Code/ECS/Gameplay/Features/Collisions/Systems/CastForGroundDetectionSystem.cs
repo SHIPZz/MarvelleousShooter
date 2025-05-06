@@ -27,11 +27,11 @@ namespace Code.ECS.Gameplay.Features.Collisions.Systems
             foreach (GameEntity entity in _entities)
             {
                 // int hitCount = _raycastService.GetSphereCastTargetHitsNonAlloc(out RaycastHit[] hits,
-                //     entity.GroundDetectionTransform.position,
+                //     entity.Transform.position,
                 //     Vector3.down * entity.GroundDepth, entity.GroundRadius, entity.GroundDepth,
                 //     entity.GroundDetectionMask);
                 //
-                // entity.isOnGround = hits[0].collider != null && IsSurfaceWalkable(hits[0].normal,entity.CharacterController.slopeLimit);
+                // entity.isOnGround = hits[0].collider != null;
             }
 
             _raycastService.ClearRaycastHits();

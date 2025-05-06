@@ -1,4 +1,5 @@
-﻿using Code.ECS.Gameplay.Features.Cameras;
+﻿using Code.ECS.Gameplay.Features.Animations;
+using Code.ECS.Gameplay.Features.Cameras;
 using Code.ECS.Gameplay.Features.CharacterStats.Systems;
 using Code.ECS.Gameplay.Features.Collisions;
 using Code.ECS.Gameplay.Features.Cooldown;

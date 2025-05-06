@@ -23,7 +23,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Visuals
         {
             foreach (GameEntity entity in entities)
             {
-                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Idle);
+                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Idle, 0.3f);
             }
         }
     }

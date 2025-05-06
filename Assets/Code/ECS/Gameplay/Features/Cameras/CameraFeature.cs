@@ -7,7 +7,7 @@ namespace Code.ECS.Gameplay.Features.Cameras
     {
         public CameraFeature(ISystemFactory systems)
         {
-            Add(systems.Create<ApplyCameraRotationOnInputSystem>());
+            Add(systems.Create<ApplyHeroRotationByCameraRotationOnInputSystem>());
         }
     }
 }

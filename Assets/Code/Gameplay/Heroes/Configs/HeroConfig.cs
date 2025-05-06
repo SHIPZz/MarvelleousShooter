@@ -1,12 +1,16 @@
-﻿using Code.ECS.Gameplay.Features.Movement.Configs;
+﻿using System.Collections.Generic;
+using Code.ECS.Gameplay.Features.Movement.Configs;
 using Code.ECS.View;
+using Code.Gameplay.Animations;
 using Code.Gameplay.Shootables;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace Code.Gameplay.Heroes.Configs
 {
     [CreateAssetMenu(fileName = "HeroConfig", menuName = "Gameplay/HeroConfig", order = 1)]
-    public class HeroConfig : ScriptableObject
+    public class HeroConfig : SerializedScriptableObject
     {
         public EntityBehaviour Prefab;
         public ShootTypeId InitialWeapon;
@@ -16,5 +20,7 @@ namespace Code.Gameplay.Heroes.Configs
         public LayerMask GroundDetectionMask;
         public float GroundDepth = 5f;
         public float GroundRadius = 1f;
+        
+         public float AnimationFadeDuration = 0.1f;
     }
 }

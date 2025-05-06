@@ -13,9 +13,6 @@ using Code.Gameplay.Common;
 using Code.Gameplay.Common.Services.Raycast;
 using Code.Gameplay.Common.Timer;
 using Code.Gameplay.Effects;
-using Code.Gameplay.Enemies;
-using Code.Gameplay.Enemies.Factory;
-using Code.Gameplay.Enemies.Services;
 using Code.Gameplay.Heroes.Factory;
 using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.Input;
@@ -107,9 +104,6 @@ namespace Code.Installers.Bootstrap
 
         private void BindEnemyServices()
         {
-            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
-            Container.Bind<IEnemyService>().To<EnemyService>().AsSingle();
-            Container.Bind<IEnemyStaticDataService>().To<EnemyStaticDataService>().AsSingle();
         }
 
         private void BindShootServices()
