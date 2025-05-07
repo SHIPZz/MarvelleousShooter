@@ -11,7 +11,7 @@ namespace Code.ECS.Gameplay.Features.Movement.Systems
             _entities = game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.Transform,
                     GameMatcher.WorldPosition
-                ));
+                ).NoneOf(GameMatcher.PositionFixed));
         }
 
         public void Execute()

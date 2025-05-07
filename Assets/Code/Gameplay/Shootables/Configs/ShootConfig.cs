@@ -31,5 +31,10 @@ namespace Code.Gameplay.Shootables.Configs
         public EffectTypeId HitEffectTypeId = EffectTypeId.GoldSmallFireImpact;
         public bool CanRaycast = true;
         public LayerMask GroundDetectionMask;
+        
+        [Space]
+        [Header("Move on shoot")]
+        public float MoveGunDuration;
+        public float MoveGunZ;
     }
 }

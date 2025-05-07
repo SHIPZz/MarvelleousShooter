@@ -7,7 +7,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
     public class ResetRecoilSystem : ICleanupSystem
     {
         private readonly IGroup<GameEntity> _group;
-        private readonly List<GameEntity> _buffer = new(128);
+        private readonly List<GameEntity> _buffer = new(32);
 
         public ResetRecoilSystem(GameContext game)
         {
@@ -16,7 +16,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
                 GameMatcher.VerticalRecoil,
                 GameMatcher.RecoilPatternIndex,
                 GameMatcher.Shootable)
-                .NoneOf(GameMatcher.HasRecoil,GameMatcher.ShootingContinuously)
+                .NoneOf(GameMatcher.ShootingContinuously)
             );
         }
 
@@ -24,10 +24,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         {
             foreach (GameEntity entity in _group.GetEntities(_buffer))
             {
-                // entity.ReplaceRecoilPatternIndex(0);
-                // entity.ReplaceHorizontalRecoil(0);
-                // entity.ReplaceVerticalRecoil(0);
-                // entity.ReplaceRecoilDurationLeft(entity.RecoilSpeed);
+                entity.ReplaceRecoilPatternIndex(0);
+                entity.ReplaceHorizontalRecoil(0);
+                entity.ReplaceVerticalRecoil(0);
             }
         }
     }

@@ -31,10 +31,6 @@ public class CalculateFinalVelocitySystem : IExecuteSystem
             float damping = 1f - Mathf.Exp(entity.Damping * deltaTime); 
             Vector3 newVelocity = Vector3.Lerp(currentVelocity, targetVelocity, damping);
 
-            Debug.Log($"@@@ Direction: {direction}, Jump: {jumpVelocity}, Speed: {entity.Speed}");
-            Debug.Log($"@@@ TargetVelocity: {targetVelocity}");
-            Debug.Log($"@@@ FinalVelocity Before: {currentVelocity}, After: {newVelocity}");
-
             entity.ReplaceFinalVelocity(newVelocity);
             
         }

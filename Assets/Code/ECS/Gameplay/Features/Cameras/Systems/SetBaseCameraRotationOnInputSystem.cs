@@ -3,14 +3,12 @@ using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Cameras.Systems
 {
-    public class ApplyHeroRotationByCameraRotationOnInputSystem : IExecuteSystem, IInitializeSystem
+    public class SetBaseCameraRotationOnInputSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _cameras;
         private readonly IGroup<InputEntity> _inputs;
-        private readonly IGroup<GameEntity> _heroes;
 
-        public ApplyHeroRotationByCameraRotationOnInputSystem(GameContext game, InputContext input)
-                
+        public SetBaseCameraRotationOnInputSystem(GameContext game, InputContext input)
         {
             _inputs = input.GetGroup(InputMatcher.AllOf(InputMatcher.Input,InputMatcher.HasMouseAxis));
             
@@ -19,19 +17,11 @@ namespace Code.ECS.Gameplay.Features.Cameras.Systems
                 GameMatcher.MinCameraRotation,
                 GameMatcher.MaxCameraRotation,
                 GameMatcher.CameraRotationSharpness));
-            
-            _heroes = game.GetGroup(GameMatcher.AllOf(GameMatcher.Hero));
-        }
-
-        public void Initialize()
-        {
-                Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void Execute()
         {
             foreach (var inputEntity in _inputs)
-            foreach (GameEntity hero in _heroes)
             foreach (GameEntity camera in _cameras)
             {
                 Vector2 inputMouse = inputEntity.MouseAxis;
@@ -48,8 +38,9 @@ namespace Code.ECS.Gameplay.Features.Cameras.Systems
                 camera.ReplaceHorizontalRotation(newYaw);
 
                 Quaternion targetRotation = Quaternion.Euler(newPitch, newYaw, 0f);
-                
-                camera.Transform.rotation = Quaternion.Slerp(hero.Transform.rotation, targetRotation, sensitivity);
+
+                camera.ReplaceBaseCameraRotation(targetRotation);
+
             }
         }
     }

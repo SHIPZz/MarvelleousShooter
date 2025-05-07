@@ -10,6 +10,7 @@ using Code.Gameplay.Effects;
 using Code.Gameplay.Shootables.Configs;
 using Code.Gameplay.Shootables.Extensions;
 using Code.Gameplay.Shootables.Recoils;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Code.Gameplay.Shootables.Factory
@@ -39,11 +40,12 @@ namespace Code.Gameplay.Shootables.Factory
 
             RecoilData recoilData = config.RecoilData;
 
-            GameEntity shootEntity = CreateEntity
+            GameEntity gun = CreateEntity
                     .Empty()
                     .AddOwnerId(ownerId)
                     .AddId(_identifierService.Next())
                     .AddViewPrefab(prefab)
+                    .AddWorldPosition(Vector3.zero)
                     .AddDamage(config.DamagePerHit)
                     .AddHits(new List<RaycastHit>(16))
                     .AddRecoilData(recoilData)
@@ -68,6 +70,8 @@ namespace Code.Gameplay.Shootables.Factory
                     .AddShootCooldown(config.Сooldown)
                     .AddShootCooldownLeft(0)
                     .AddRecoilPatternIndex(0)
+                    .AddMoveGunDuration(config.MoveGunDuration)
+                    .AddMoveGunZ(config.MoveGunZ)
                     .With(x => x.AddAmmoCount(config.AmmoCount), when: config.AmmoCount > 0)
                     .PutOnAmmo()
                     .With(x => x.AddHitEffectTypeId(config.HitEffectTypeId), when: config.HitEffectTypeId != EffectTypeId.Unknown)
@@ -84,17 +88,35 @@ namespace Code.Gameplay.Shootables.Factory
                     .With(x => x.isAimingAvailable = config.CanAim)
                     .With(x => x.isAimable = config.CanAim)
                     .With(x => x.isViewActive = true)
+                    .With(x => x.isPositionFixed = true)
                     .With(x => x.isCanRunAndShoot = config.CanRunAndShoot)
                 ;
 
             
-            EntityBehaviour createdShoot = _entityViewFactory.CreateViewForEntityFromPrefab(shootEntity, parent);
+
+            EntityBehaviour createdShoot = _entityViewFactory.CreateViewForEntityFromPrefab(gun, parent);
             
             createdShoot.Entity.Transform.localPosition = config.Position;
             createdShoot.Entity.Transform.localRotation = Quaternion.Euler(config.Rotation);
-            shootEntity.ReplaceInitialLocalPosition(createdShoot.Entity.Transform.localPosition);
+            gun.ReplaceInitialLocalPosition(createdShoot.Entity.Transform.localPosition);
 
-            return shootEntity;
+            AddMoveRecoilTween(gun);
+            
+            return gun;
+        }
+
+        private static void AddMoveRecoilTween(GameEntity gun)
+        {
+            Sequence recoilSequence = DOTween.Sequence();
+
+            recoilSequence
+                .Append(gun.Transform.DOLocalMoveZ(gun.InitialLocalPosition.z - gun.MoveGunZ, gun.MoveGunDuration))
+                .Append(gun.Transform.DOLocalMoveZ(gun.InitialLocalPosition.z, gun.MoveGunDuration))
+                .SetAutoKill(false)
+                .Pause();
+
+
+            gun.AddMoveRecoilTween(recoilSequence);
         }
     }
 }

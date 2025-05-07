@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
@@ -85,6 +84,8 @@ namespace Code.ECS.Gameplay.Features.Movement
     [Game] public class EndPointReached : IComponent {  }
 
     [Game] public class NeedRandomEndPoint : IComponent {  }
+    
+    [Game] public class PositionFixed : IComponent {  }
     
     [Game] public class OrbitRadius : IComponent { public float Value; }
     

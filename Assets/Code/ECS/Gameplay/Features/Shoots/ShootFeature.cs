@@ -38,6 +38,9 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<AlignEffectOnHitSystem>());
 
             Add(systemFactory.Create<PlayAnimationOnShootSystem>());
+            
+            Add(systemFactory.Create<PlayMoveGunAnimOnShootSystem>());
+            
             Add(systemFactory.Create<PlayEffectOnShootSystem>());
 
             Add(systemFactory.Create<PlayCameraShakeOnShootSystem>());

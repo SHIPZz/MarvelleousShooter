@@ -2,6 +2,7 @@
 using Code.Gameplay.Effects;
 using Code.Gameplay.Heroes.Enums;
 using Code.Gameplay.Shootables;
+using DG.Tweening;
 using Entitas;
 using UnityEngine;
 
@@ -44,6 +45,12 @@ namespace Code.ECS.Gameplay.Features.Shoots
     [Game] public class ShootDistance : IComponent { public float Value; }
 
     [Game] public class LastShootTime : IComponent { public float Value; }
+    
+    [Game] public class MoveGunZ : IComponent { public float Value; }
+    
+    [Game] public class MoveGunDuration : IComponent { public float Value; }
+    
+    [Game] public class MoveRecoilTween : IComponent { public Tween Value; }
 
     [Game] public class ShootCooldown : IComponent { public float Value; }
 

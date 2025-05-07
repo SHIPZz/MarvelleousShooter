@@ -15,9 +15,9 @@ namespace Code.ECS.Gameplay.Features.Cameras.Factories
             _identifierService = identifierService;
         }
 
-        public void CreateEntity(Camera camera)
+        public GameEntity CreateEntity(Camera camera)
         {
-            Common.Entity.CreateEntity
+           return Common.Entity.CreateEntity
                 .Empty()
                 .AddId(_identifierService.Next())
                 .AddMainCamera(camera)
@@ -25,6 +25,9 @@ namespace Code.ECS.Gameplay.Features.Cameras.Factories
                 .AddCameraRotationSharpness(_cameraConfig.RotationSharpness)
                 .AddMinCameraRotation(_cameraConfig.MinCameraRotation)
                 .AddMaxCameraRotation(_cameraConfig.MaxCameraRotation)
+                .AddRecoilRotation(new Quaternion())
+                .AddFinalCameraRotation(new Quaternion())
+                .AddFinalRecoilRotation(camera.transform.localRotation)
                 .AddHorizontalRotation(0)
                 .AddCurrentCameraRotation(camera.transform.rotation)
                 .AddVerticalRotation(0)

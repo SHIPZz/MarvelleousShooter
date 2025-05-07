@@ -56,28 +56,27 @@ namespace Code.InfraStructure.States.States
         {
             if(_battleFeature ==null)
                 return;
-            
-            _battleFeature.Execute();
-            _battleFeature.Cleanup();
+
+            ExecuteBattleFeature();
         }
 
-        public override async void Enter()
+        public override void Enter()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            
             CreateInput();
 
             CreateShootSwitching();
 
-            _battleFeature = _systemFactory.Create<BattleFeature>();
-            
-            _battleFeature.Initialize();
+            CreateBattleFeature();
 
             WorldData worldData = _worldDataService.Get();
 
             GameEntity hero = CreateHero();
             
-            Update();
+            ExecuteBattleFeature();
 
-            InitCamera(hero.View.gameObject.GetComponent<CameraHolder>());
+            InitHeroCamera(hero.View.gameObject.GetComponent<CameraHolder>());
 
             Transform weaponHolder = hero.View.gameObject.GetComponent<Hero>().WeaponHolder;
             
@@ -91,6 +90,13 @@ namespace Code.InfraStructure.States.States
             _heroRepository.SetCurrentGun(mainGun);
             
             InitEnemies();
+        }
+
+        private void CreateBattleFeature()
+        {
+            _battleFeature = _systemFactory.Create<BattleFeature>();
+
+            _battleFeature.Initialize();
         }
 
         private GameEntity CreateHero()
@@ -109,6 +115,12 @@ namespace Code.InfraStructure.States.States
                     .With(x => x.isHeroGun = true)
                     .With(x => x.isViewActive = false)
                 ;
+        }
+
+        private void ExecuteBattleFeature()
+        {
+            _battleFeature.Execute();
+            _battleFeature.Cleanup();
         }
 
         private GameEntity CreateMainGun(Transform weaponHolder, WorldData worldData, GameEntity hero)
@@ -141,9 +153,10 @@ namespace Code.InfraStructure.States.States
         }
 
 
-        private void InitCamera(CameraHolder cameraHolder)
+        private void InitHeroCamera(CameraHolder cameraHolder)
         {
-            _cameraFactory.CreateEntity(cameraHolder.MainCamera);
+            _cameraFactory.CreateEntity(cameraHolder.MainCamera)
+                .With(x => x.isConnectedWithHero = true);
             
             cameraHolder
                 .With(cameraHolder => _cameraProvider.WeaponCamera = cameraHolder.WeaponCamera)

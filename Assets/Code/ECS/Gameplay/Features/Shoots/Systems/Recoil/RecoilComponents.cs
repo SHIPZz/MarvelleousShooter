@@ -16,6 +16,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
     
     [Game] public class CurrentRecoil : IComponent   { public Vector3 Value; }
     
+    [Game] public class RecoilRotation : IComponent   { public Quaternion Value; }
+    
     [Game] public class TargetRecoil : IComponent   { public Vector3 Value; }
     
     [Game] public class HorizontalRecoil : IComponent  { public float Value; }

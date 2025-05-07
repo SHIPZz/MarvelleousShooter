@@ -47,8 +47,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
                     targetVerticalRecoil *= shoot.JumpMultiplier;
                 }
 
-
-
+                
                 shoot.ReplaceHorizontalRecoil(targetHorizontalRecoil);
                 shoot.ReplaceVerticalRecoil(targetVerticalRecoil);
             }

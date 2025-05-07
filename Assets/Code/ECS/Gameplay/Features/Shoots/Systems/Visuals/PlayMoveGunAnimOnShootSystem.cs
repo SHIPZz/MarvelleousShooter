@@ -4,9 +4,9 @@ using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 {
-    public class PlayEffectOnShootSystem : ReactiveSystem<GameEntity>
+    public class PlayMoveGunAnimOnShootSystem : ReactiveSystem<GameEntity>
     {
-        public PlayEffectOnShootSystem(IContext<GameEntity> game) : base(game) { }
+        public PlayMoveGunAnimOnShootSystem(IContext<GameEntity> game) : base(game) { }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Shooting.Added());
@@ -14,13 +14,14 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
         protected override bool Filter(GameEntity entity) => entity.isShootable
                                                              && entity.isShooting
                                                              && entity.isActive
+                                                             && entity.hasMoveRecoilTween
                                                              && entity.hasEffectPlayer;
 
         protected override void Execute(List<GameEntity> entities)
         {
             foreach (GameEntity gun in entities)
             {
-                gun.EffectPlayer.Play();
+                gun.MoveRecoilTween.Restart();
             }
         }
     }
