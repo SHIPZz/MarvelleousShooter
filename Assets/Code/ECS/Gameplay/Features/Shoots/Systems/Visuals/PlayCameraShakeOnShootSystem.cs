@@ -16,7 +16,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Shooting.Added());
 
-        protected override bool Filter(GameEntity entity) => entity.isShootable;
+        protected override bool Filter(GameEntity entity) => entity.isGun;
 
         protected override void Execute(List<GameEntity> entities)
         {

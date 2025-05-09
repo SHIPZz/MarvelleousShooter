@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         {
             _timeService = timeService;
             _heroGuns = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Shootable,
+                GameMatcher.Gun,
                 GameMatcher.HorizontalRecoil,
                 GameMatcher.Active,
                 GameMatcher.CurrentRecoil,
@@ -34,30 +34,28 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
             foreach (GameEntity heroGun in _heroGuns)
             foreach (GameEntity camera in _cameras)
             {
-                Quaternion newRecoilRotation = Quaternion.Euler(
-                    heroGun.CurrentRecoil.y,
+                Quaternion targetRecoilRotation = Quaternion.Euler(
+                    heroGun.CurrentRecoil.y, 
                     heroGun.CurrentRecoil.x, 
                     0f);
 
-                camera.ReplaceRecoilRotation(newRecoilRotation);
+                camera.ReplaceRecoilRotation(Quaternion.Slerp(
+                    camera.RecoilRotation,
+                    targetRecoilRotation,
+                    heroGun.RecoilSpeed * deltaTime
+                ));
 
-                if (heroGun.CurrentRecoil != Vector3.zero)
-                {
-                    camera.finalRecoilRotation.Value *= newRecoilRotation;
-                }
-                else 
-                {
-                    float recoveryFactor = 1 - Mathf.Exp(-heroGun.RecoilRecoverySpeed * deltaTime);
-                    camera.finalRecoilRotation.Value = Quaternion.Slerp(
-                        camera.finalRecoilRotation.Value,
-                        Quaternion.identity,
-                        recoveryFactor);
-                    
-                    if (Quaternion.Angle(camera.FinalRecoilRotation, Quaternion.identity) < 0.1f)
-                    {
-                        camera.ReplaceFinalRecoilRotation(Quaternion.identity);
-                    }
-                }
+                float returnFactor = heroGun.isShootingContinuously ? 0.1f : 1f;
+                
+                Quaternion returnRotation = Quaternion.Slerp(
+                    camera.RecoilRotation,
+                    Quaternion.identity,
+                    heroGun.RecoilRecoverySpeed * returnFactor * deltaTime
+                );
+
+                camera.ReplaceRecoilRotation(returnRotation);
+
+                camera.ReplaceFinalRecoilRotation(camera.RecoilRotation);
             }
         }
     }

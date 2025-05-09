@@ -4,7 +4,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 {
     public class ApplyWeaponRecoilModifiersSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _shoots;
+        private readonly IGroup<GameEntity> _guns;
         private readonly IGroup<GameEntity> _heroes;
 
         public ApplyWeaponRecoilModifiersSystem(GameContext game)
@@ -13,8 +13,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
                 GameMatcher.Hero,
                 GameMatcher.Active));
 
-            _shoots = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Shootable,
+            _guns = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Gun,
                 GameMatcher.Shooting,
                 GameMatcher.ConnectedWithHero,
                 GameMatcher.AimMultiplier,
@@ -28,7 +28,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         public void Execute()
         {
             foreach (GameEntity hero in _heroes)
-            foreach (GameEntity shoot in _shoots)
+            foreach (GameEntity shoot in _guns)
             {
                 var targetHorizontalRecoil = shoot.HorizontalRecoil;
                 var targetVerticalRecoil = shoot.VerticalRecoil;

@@ -16,7 +16,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
             _guns = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.ShootCooldown,
-                    GameMatcher.Shootable,
+                    GameMatcher.Gun,
                     GameMatcher.ShootCooldownLeft
                 ).NoneOf(GameMatcher.ShootCooldownUp));
         }
@@ -30,6 +30,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
                     gun.ReplaceShootCooldownLeft(gun.ShootCooldownLeft - _timeService.DeltaTime);
                     gun.isShootCooldownUp = gun.ShootCooldownLeft <= 0;
                 }
+                
+                if(gun.isShootCooldownUp) 
+                    gun.ReplaceShootCooldownLeft(0);
             }
         }
     }

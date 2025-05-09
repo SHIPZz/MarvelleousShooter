@@ -13,7 +13,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Aiming
             
             _guns = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Shootable,
+                    GameMatcher.Gun,
                     GameMatcher.Aimable));
         }
 

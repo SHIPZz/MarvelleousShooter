@@ -15,7 +15,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
                     GameMatcher.SwitchingStarted,
                     GameMatcher.Switchable,
                     GameMatcher.ShowingProcessing,
-                    GameMatcher.ShootSwitchingRequested
+                    GameMatcher.GunSwitchingRequested
                     )
                 .NoneOf(GameMatcher.SameGunSelected))
                 ;

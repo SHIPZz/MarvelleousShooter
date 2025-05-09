@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 
         public DecreaseSpeedOnShootSystem(GameContext game)
         {
-            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable, 
+            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Gun, 
                 GameMatcher.Id));
             
             _gunHolders = game.GetGroup(GameMatcher

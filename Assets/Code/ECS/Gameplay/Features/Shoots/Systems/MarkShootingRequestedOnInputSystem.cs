@@ -12,7 +12,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
            _inputs = input.GetGroup(InputMatcher.Input);
             
             _entities = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Shootable,
+                .AllOf(GameMatcher.Gun,
                     GameMatcher.Active));
         }
 

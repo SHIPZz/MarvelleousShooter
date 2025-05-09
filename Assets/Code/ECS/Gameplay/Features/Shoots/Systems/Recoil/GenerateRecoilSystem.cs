@@ -5,12 +5,12 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 {
     public class GenerateRecoilSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _shoots;
+        private readonly IGroup<GameEntity> _guns;
 
         public GenerateRecoilSystem(GameContext game)
         {
-            _shoots = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Shootable,
+            _guns = game.GetGroup(GameMatcher
+                .AllOf(GameMatcher.Gun,
                     GameMatcher.Shooting,
                     GameMatcher.Patterns,
                     GameMatcher.RecoilPatternIndex));
@@ -18,7 +18,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 
         public void Execute()
         {
-            foreach (GameEntity shoot in _shoots)
+            foreach (GameEntity shoot in _guns)
             {
                 Vector2 horizontalRecoil = shoot.Patterns[shoot.RecoilPatternIndex];
                 shoot.ReplaceHorizontalRecoil(horizontalRecoil.x);

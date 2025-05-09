@@ -19,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
             context.CreateCollector(GameMatcher.HitDetected.Added());
 
         protected override bool Filter(GameEntity entity) => !entity.Hits.IsNullOrEmpty() 
-                                                             && entity.isShootable
+                                                             && entity.isGun
                                                              && entity.isActive
                                                              && entity.hasHitEffectTypeId;
 

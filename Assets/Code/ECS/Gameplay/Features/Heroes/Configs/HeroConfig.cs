@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Configs
     public class HeroConfig : SerializedScriptableObject
     {
         public EntityBehaviour Prefab;
-        public ShootTypeId InitialWeapon;
+        public GunTypeId InitialWeapon;
         public float Hp = 100f;
         
         public MovementData MovementData = new();

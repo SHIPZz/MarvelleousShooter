@@ -13,7 +13,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload
         {
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Shootable,
+                    GameMatcher.Gun,
                     GameMatcher.Reloading,
                     GameMatcher.ReloadTimeLeft
                     ));

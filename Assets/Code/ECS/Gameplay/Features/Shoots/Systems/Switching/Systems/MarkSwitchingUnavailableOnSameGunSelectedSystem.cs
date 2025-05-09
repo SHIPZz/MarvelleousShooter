@@ -6,7 +6,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
     {
         private readonly IGroup<GameEntity> _switchings;
         private readonly GameContext _game;
-        private readonly IGroup<GameEntity> _shootHolders;
+        private readonly IGroup<GameEntity> _gunHolders;
 
         public MarkSwitchingUnavailableOnSameGunSelectedSystem(GameContext game)
         {
@@ -14,29 +14,29 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
             _switchings = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Switchable,
-                    GameMatcher.ShootSwitchingRequested,
-                    GameMatcher.TargetInputGun));
+                    GameMatcher.GunSwitchingRequested,
+                    GameMatcher.RequestedSwitchingGun));
 
-            _shootHolders = game.GetGroup(GameMatcher.AllOf(GameMatcher.ShootHolder,
+            _gunHolders = game.GetGroup(GameMatcher.AllOf(GameMatcher.GunHolder,
                 GameMatcher.CurrentGunId));
         }
 
         public void Execute()
         {
             foreach (GameEntity switching in _switchings)
-            foreach (GameEntity shootHolder in _shootHolders)
+            foreach (GameEntity gunHolder in _gunHolders)
             {
-                GameEntity currentShoot = _game.GetEntityWithId(shootHolder.CurrentGunId);
+                GameEntity currentShoot = _game.GetEntityWithId(gunHolder.CurrentGunId);
 
-                if (currentShoot.GunInputKey == switching.TargetInputGun)
+                if (currentShoot.GunInputKey == switching.RequestedSwitchingGun)
                 {
                     switching.isSameGunSelected = true;
-                    switching.isShootSwitchingAvailable = false;
+                    switching.isGunSwitchingAvailable = false;
                 }
                 else
                 {
                     switching.isSameGunSelected = false;
-                    switching.isShootSwitchingAvailable = true;
+                    switching.isGunSwitchingAvailable = true;
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Configs
     [CreateAssetMenu(fileName = "ShootConfig", menuName = "Gameplay/ShootConfig")]
     public class ShootConfig : SerializedScriptableObject
     {
-        public ShootTypeId ShootTypeId;
+        public GunTypeId gunTypeId;
         public EntityBehaviour Prefab;
         public float Сooldown = 0.1f;
         public int AmmoCount = 1;

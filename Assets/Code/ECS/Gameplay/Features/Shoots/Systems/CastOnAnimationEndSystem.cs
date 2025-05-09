@@ -18,7 +18,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
             _guns = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.ShootingAvailable,
-                    GameMatcher.Shootable,
+                    GameMatcher.Gun,
                     GameMatcher.ShootDistance,
                     GameMatcher.CanRaycast,
                     GameMatcher.Hits,

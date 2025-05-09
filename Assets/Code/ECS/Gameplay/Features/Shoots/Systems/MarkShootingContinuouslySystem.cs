@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
         {
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Shootable, 
+                    GameMatcher.Gun, 
                     GameMatcher.HeroGun 
                     ));
         }

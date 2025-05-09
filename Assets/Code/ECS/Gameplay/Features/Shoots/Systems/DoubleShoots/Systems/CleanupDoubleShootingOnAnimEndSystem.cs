@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.DoubleShoots.Systems
             _group = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.DoubleShooting,
                 GameMatcher.AnimancerAnimator,
-                GameMatcher.Shootable));
+                GameMatcher.Gun));
         }
 
         public void Cleanup()

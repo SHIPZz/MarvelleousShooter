@@ -10,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cleanups
 
         public CleanupGunOnNonActiveSystem(GameContext game)
         {
-            _group = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable)
+            _group = game.GetGroup(GameMatcher.AllOf(GameMatcher.Gun)
                 .NoneOf(GameMatcher.Active));
         }
 

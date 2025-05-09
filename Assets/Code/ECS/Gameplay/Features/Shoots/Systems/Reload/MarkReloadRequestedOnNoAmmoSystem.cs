@@ -15,9 +15,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload
                     GameMatcher.Reloadable,
                     GameMatcher.Active,
                     GameMatcher.AmmoCount)
-                .NoneOf(GameMatcher.Reloading,
-                    GameMatcher.ShootAnimationProcessing
-                    ));
+                .NoneOf(GameMatcher.Reloading));
         }
 
         public void Execute()

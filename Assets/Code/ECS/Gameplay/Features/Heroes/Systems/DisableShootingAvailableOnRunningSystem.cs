@@ -18,7 +18,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
 
             _guns = game
                 .GetGroup(GameMatcher.AllOf(
-                        GameMatcher.Shootable, 
+                        GameMatcher.Gun, 
                         GameMatcher.Active,
                         GameMatcher.HeroGun)
                     .NoneOf(

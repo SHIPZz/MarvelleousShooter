@@ -19,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                     GameMatcher.AmmoAvailable,
                     GameMatcher.ShootDistance,
                     GameMatcher.LayerMask,
-                    GameMatcher.Shootable
+                    GameMatcher.Gun
                 ).NoneOf(GameMatcher.Shooting));
         }
 

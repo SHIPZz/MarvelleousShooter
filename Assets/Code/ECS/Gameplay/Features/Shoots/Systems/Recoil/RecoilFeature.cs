@@ -8,7 +8,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         {
             Add(systems.Create<GenerateRecoilSystem>());
             Add(systems.Create<ApplyWeaponRecoilModifiersSystem>());
-            Add(systems.Create<CalculateRecoilSystem>());
+            Add(systems.Create<CalculateCurrentRecoilSystem>());
             Add(systems.Create<ApplyGunRecoilToCameraRotationSystem>());
             Add(systems.Create<ResetRecoilSystem>());
         }

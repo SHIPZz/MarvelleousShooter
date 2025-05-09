@@ -1,5 +1,4 @@
-﻿using Code.Extensions;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Cameras.Systems

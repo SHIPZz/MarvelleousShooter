@@ -33,7 +33,7 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.ECS.Gameplay.Features.Death.Dead deadComponent = new Code.ECS.Gameplay.Features.Death.Dead();
+    static readonly Code.ECS.Gameplay.Features.Lifetime.Dead deadComponent = new Code.ECS.Gameplay.Features.Lifetime.Dead();
 
     public bool isDead {
         get { return HasComponent(GameComponentsLookup.Dead); }

@@ -11,12 +11,12 @@ namespace Code.ECS.Gameplay.Features.Shoots.Configs
     [CreateAssetMenu(fileName = "ShootConfigs", menuName = "Gameplay/ShootConfigs")]
     public class ShootConfigs : SerializedScriptableObject
     {
-        [OdinSerialize] private Dictionary<ShootTypeId, ShootConfig> _shootConfigs;
+        [OdinSerialize] private Dictionary<GunTypeId, ShootConfig> _shootConfigs;
         
 
-        public ShootConfig GetById(ShootTypeId shootTypeId)
+        public ShootConfig GetById(GunTypeId gunTypeId)
         {
-            return _shootConfigs.TryGetValue(shootTypeId, out var result) ? result : throw new ArgumentException($"No such config for {shootTypeId}");
+            return _shootConfigs.TryGetValue(gunTypeId, out var result) ? result : throw new ArgumentException($"No such config for {gunTypeId}");
         }
         
         
@@ -25,7 +25,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Configs
         {
             if (_shootConfigs == null)
             {
-                _shootConfigs = new Dictionary<ShootTypeId, ShootConfig>();
+                _shootConfigs = new Dictionary<GunTypeId, ShootConfig>();
             }
 
             string currentPath = AssetDatabase.GetAssetPath(this);
@@ -40,9 +40,9 @@ namespace Code.ECS.Gameplay.Features.Shoots.Configs
         
                 if (config != null) 
                 {
-                    if (_shootConfigs.TryAdd(config.ShootTypeId, config))
+                    if (_shootConfigs.TryAdd(config.gunTypeId, config))
                     {
-                        Debug.Log($"Added new config: {config.ShootTypeId} from {path}");
+                        Debug.Log($"Added new config: {config.gunTypeId} from {path}");
                     }
                 }
             }

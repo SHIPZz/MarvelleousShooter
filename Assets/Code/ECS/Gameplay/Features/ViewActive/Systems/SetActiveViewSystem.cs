@@ -8,7 +8,7 @@ namespace Code.ECS.Gameplay.Features.ViewActive.Systems
 
         public SetActiveViewSystem(GameContext game)
         {
-            _entities = game.GetGroup(GameMatcher.AllOf(GameMatcher.View).NoneOf(GameMatcher.Destructed));
+            _entities = game.GetGroup(GameMatcher.View);
         }
 
         public void Execute()

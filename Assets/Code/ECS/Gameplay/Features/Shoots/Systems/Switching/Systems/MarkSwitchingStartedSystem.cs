@@ -9,8 +9,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         public MarkSwitchingStartedSystem(GameContext game)
         {
             _switchings = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.ShootSwitchingAvailable,
-                    GameMatcher.ShootSwitchingRequested));
+                .AllOf(GameMatcher.GunSwitchingAvailable,
+                    GameMatcher.GunSwitchingRequested));
         }
 
         public void Execute()

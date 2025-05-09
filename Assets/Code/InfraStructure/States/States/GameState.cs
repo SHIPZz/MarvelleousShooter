@@ -64,7 +64,7 @@ namespace Code.InfraStructure.States.States
 
             CreateInput();
 
-            CreateShootSwitching();
+            CreateGunSwitching();
             
             WorldData worldData = _worldDataService.Get();
 
@@ -76,10 +76,10 @@ namespace Code.InfraStructure.States.States
 
             GameEntity mainGun = CreateMainGun(weaponHolder, worldData, hero);
 
-            CreateGun(weaponHolder, hero, ShootTypeId.Knife);
-            CreateGun(weaponHolder, hero, ShootTypeId.WithoutGun);
-            CreateGun(weaponHolder, hero, ShootTypeId.BigAxe);
-            CreateGun(weaponHolder, hero, ShootTypeId.DefaultPistol);
+            CreateGun(weaponHolder, hero, GunTypeId.Knife);
+            CreateGun(weaponHolder, hero, GunTypeId.WithoutGun);
+            CreateGun(weaponHolder, hero, GunTypeId.BigAxe);
+            CreateGun(weaponHolder, hero, GunTypeId.DefaultPistol);
 
             hero.AddAnimancerAnimator(mainGun.AnimancerAnimator);
             hero.AddCurrentGunId(mainGun.Id);
@@ -97,15 +97,15 @@ namespace Code.InfraStructure.States.States
 
         private void InitEnemies() { }
 
-        private GameEntity CreateGun(Transform weaponHolder, GameEntity hero, ShootTypeId shootTypeId) =>
+        private GameEntity CreateGun(Transform weaponHolder, GameEntity hero, GunTypeId gunTypeId) =>
             _shootFactory
-                .Create(weaponHolder, shootTypeId, hero.Id)
+                .Create(weaponHolder, gunTypeId, hero.Id)
                 .With(x => x.isHeroGun = true);
 
         private GameEntity CreateMainGun(Transform weaponHolder, WorldData worldData, GameEntity hero)
         {
             GameEntity mainGun = _shootFactory
-                    .Create(weaponHolder, worldData.PlayerData.LastWeaponId, hero.Id)
+                    .Create(weaponHolder, worldData.PlayerData.LastGunId, hero.Id)
                     .With(x => x.isHeroGun = true)
                     .With(x => x.isShootCooldownUp = true)
                     .With(x => x.isActive = true)
@@ -114,12 +114,12 @@ namespace Code.InfraStructure.States.States
             return mainGun;
         }
 
-        private void CreateShootSwitching()
+        private void CreateGunSwitching()
         {
             CreateEntity.Empty()
                 .AddId(_identifierService.Next())
-                .With(x => x.isShootSwitchingReady = true)
-                .With(x => x.isShootSwitchingAvailable = true)
+                .With(x => x.isGunSwitchingReady = true)
+                .With(x => x.isGunSwitchingAvailable = true)
                 .With(x => x.isConnectedWithHero = true)
                 .With(x => x.isActive = true)
                 .With(x => x.PutOnCooldown(0f))

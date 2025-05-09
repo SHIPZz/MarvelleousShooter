@@ -11,7 +11,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.DoubleShoots.Systems.Visuals
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.DoubleShooting.Added());
 
-        protected override bool Filter(GameEntity entity) => entity.isShootable 
+        protected override bool Filter(GameEntity entity) => entity.isGun 
                                                              && entity.isDoubleShootingAvailable
                                                              && entity.isActive
                                                              && entity.hasAnimancerAnimator

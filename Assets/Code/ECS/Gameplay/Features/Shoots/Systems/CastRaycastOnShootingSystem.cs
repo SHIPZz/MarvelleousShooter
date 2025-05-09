@@ -23,7 +23,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
                     GameMatcher.CanRaycast,
                     GameMatcher.Hits,
                     GameMatcher.LayerMask,
-                    GameMatcher.Shootable
+                    GameMatcher.Gun
                 ).NoneOf(GameMatcher.OnAnimationEndCast));
         }
 

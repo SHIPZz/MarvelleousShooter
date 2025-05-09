@@ -21,10 +21,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         {
             foreach (GameEntity switching in _switchings)
             {
-                switching.isShootSwitchingRequested = _gunChangePressed.count > 0;
+                switching.isGunSwitchingRequested = _gunChangePressed.count > 0;
 
                 foreach (InputEntity input in _gunChangePressed)
-                    switching.ReplaceTargetInputGun(input.SelectedShoot);
+                    switching.ReplaceRequestedSwitchingGun(input.SelectedShoot);
             }
         }
     }

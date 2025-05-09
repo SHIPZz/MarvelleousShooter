@@ -7,8 +7,8 @@ namespace Code.SaveData
     [Serializable]
     public class PlayerData
     {
-        public ShootTypeId LastWeaponId = ShootTypeId.BasicRifle;
-        public List<ShootTypeId> AvailableShoots = new List<ShootTypeId>() { ShootTypeId.Knife , ShootTypeId.WithoutGun, ShootTypeId.BasicRifle};
+        public GunTypeId LastGunId = GunTypeId.BasicRifle;
+        public List<GunTypeId> AvailableGuns = new List<GunTypeId>() { GunTypeId.Knife , GunTypeId.WithoutGun, GunTypeId.BasicRifle};
         public float Hp = 100f;
     }
 }

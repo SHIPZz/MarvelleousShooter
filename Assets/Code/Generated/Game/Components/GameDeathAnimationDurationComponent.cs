@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.ECS.Gameplay.Features.Death.DeathAnimationDuration deathAnimationDuration { get { return (Code.ECS.Gameplay.Features.Death.DeathAnimationDuration)GetComponent(GameComponentsLookup.DeathAnimationDuration); } }
+    public Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration deathAnimationDuration { get { return (Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration)GetComponent(GameComponentsLookup.DeathAnimationDuration); } }
     public float DeathAnimationDuration { get { return deathAnimationDuration.Value; } }
     public bool hasDeathAnimationDuration { get { return HasComponent(GameComponentsLookup.DeathAnimationDuration); } }
 
     public GameEntity AddDeathAnimationDuration(float newValue) {
         var index = GameComponentsLookup.DeathAnimationDuration;
-        var component = (Code.ECS.Gameplay.Features.Death.DeathAnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Death.DeathAnimationDuration));
+        var component = (Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceDeathAnimationDuration(float newValue) {
         var index = GameComponentsLookup.DeathAnimationDuration;
-        var component = (Code.ECS.Gameplay.Features.Death.DeathAnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Death.DeathAnimationDuration));
+        var component = (Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Lifetime.DeathAnimationDuration));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

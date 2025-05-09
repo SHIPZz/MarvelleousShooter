@@ -18,13 +18,14 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems
                     GameMatcher.DoubleShootRequested,
                     GameMatcher.IdleFocusRequested,
                     GameMatcher.ShootingContinuously,
-                    GameMatcher.ShootAnimationProcessing,
                     GameMatcher.SwitchingProcessing,
                     GameMatcher.Aiming
                 ));
 
             _heroes = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Hero,
+                GameMatcher.Active,
+                GameMatcher.Alive,
                 GameMatcher.Id));
         }
 

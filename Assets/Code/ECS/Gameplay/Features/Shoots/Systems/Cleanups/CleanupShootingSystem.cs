@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cleanups
                 GameMatcher.ShootCooldownUp,
                 GameMatcher.ShootCooldown,
                 GameMatcher.Shooting,
-                GameMatcher.Shootable));
+                GameMatcher.Gun));
         }
 
         public void Cleanup()

@@ -7,7 +7,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
     public class SetTargetRequestedGunOnSwitchingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly IGroup<GameEntity> _shootHolders;
+        private readonly IGroup<GameEntity> _gunHolders;
         private readonly IGroup<GameEntity> _guns;
         private readonly List<GameEntity> _buffer = new(3);
 
@@ -15,12 +15,12 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         {
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.ShootSwitchingRequested,
-                    GameMatcher.ShootSwitchingAvailable,
+                    GameMatcher.GunSwitchingRequested,
+                    GameMatcher.GunSwitchingAvailable,
                     GameMatcher.Switchable,
-                    GameMatcher.TargetInputGun));
+                    GameMatcher.RequestedSwitchingGun));
 
-            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable,
+            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Gun,
                 GameMatcher.GunInputKey,
                 GameMatcher.Id));
         }
@@ -33,7 +33,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 
                 if (targetGun == null)
                 {
-                    entity.isShootSwitchingAvailable = false;
+                    entity.isGunSwitchingAvailable = false;
                     continue;
                 }
 
@@ -44,7 +44,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         private GameEntity GetTargetGun(GameEntity switching)
         {
             return
-                GetGunByInput(switching.TargetInputGun);
+                GetGunByInput(switching.RequestedSwitchingGun);
         }
 
         private GameEntity GetGunByInput(GunInputTypeId gunInputType)

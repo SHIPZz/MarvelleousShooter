@@ -5,6 +5,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Factory
 {
     public interface IShootFactory
     {
-        GameEntity Create(Transform parent, ShootTypeId shootTypeId, int ownerId);
+        GameEntity Create(Transform parent, GunTypeId gunTypeId, int ownerId);
     }
 }

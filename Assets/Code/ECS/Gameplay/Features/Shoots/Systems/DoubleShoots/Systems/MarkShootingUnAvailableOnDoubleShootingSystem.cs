@@ -13,7 +13,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.DoubleShoots.Systems
                     GameMatcher.DoubleShootingAvailable,
                     GameMatcher.DoubleShooting,
                     GameMatcher.DoubleShootRequested,
-                    GameMatcher.Shootable));
+                    GameMatcher.Gun));
         }
 
         public void Execute()

@@ -15,7 +15,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
                 GameMatcher.HorizontalRecoil,
                 GameMatcher.VerticalRecoil,
                 GameMatcher.RecoilPatternIndex,
-                GameMatcher.Shootable)
+                GameMatcher.Gun)
                 .NoneOf(GameMatcher.ShootingContinuously)
             );
         }

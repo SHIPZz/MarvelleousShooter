@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cleanups
 
             _guns = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Hits,
-                GameMatcher.Shootable));
+                GameMatcher.Gun));
         }
 
         public void Cleanup()

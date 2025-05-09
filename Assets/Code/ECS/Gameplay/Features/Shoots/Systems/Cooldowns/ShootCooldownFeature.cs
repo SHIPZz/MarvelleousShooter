@@ -8,7 +8,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
         {
             Add(systems.Create<ReplaceShootCooldownLeftOnShootSystem>());
             Add(systems.Create<CalculateShootCooldownSystem>());
-            Add(systems.Create<MarkShootCooldownProcessingOnShootSystem>());
         }
     }
 }

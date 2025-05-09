@@ -29,51 +29,51 @@ namespace Code.ECS.Gameplay.Features.Shoots.Factory
             _shootConfigs = shootConfigs;
         }
 
-        public GameEntity Create(Transform parent, ShootTypeId shootTypeId, int ownerId)
+        public GameEntity Create(Transform parent, GunTypeId gunTypeId, int ownerId)
         {
-            ShootConfig config = _shootConfigs.GetById(shootTypeId);
+            ShootConfig config = _shootConfigs.GetById(gunTypeId);
             EntityBehaviour prefab = config.Prefab;
 
             RecoilData recoilData = config.RecoilData;
 
-            switch (shootTypeId)
+            switch (gunTypeId)
             {
-                case ShootTypeId.BasicRifle:
+                case GunTypeId.BasicRifle:
                     return CreateBasicRifle(parent, ownerId, prefab, config, recoilData);
 
-                case ShootTypeId.Knife:
+                case GunTypeId.Knife:
                     return CreateKnife(parent, ownerId, prefab, config, recoilData);
 
-                case ShootTypeId.Grenade:
+                case GunTypeId.Grenade:
                     break;
 
-                case ShootTypeId.SmallAxe:
+                case GunTypeId.SmallAxe:
                     break;
 
-                case ShootTypeId.BigAxe:
+                case GunTypeId.BigAxe:
                     return CreateBigAxe(parent, ownerId, prefab, config, recoilData);
 
-                case ShootTypeId.SniperRifle:
+                case GunTypeId.SniperRifle:
                     break;
 
-                case ShootTypeId.GrenadeGun:
+                case GunTypeId.GrenadeGun:
                     break;
 
-                case ShootTypeId.ShotGun:
+                case GunTypeId.ShotGun:
                     break;
 
-                case ShootTypeId.WithoutGun:
+                case GunTypeId.WithoutGun:
                     return CreateWithoutGun(parent, ownerId, prefab, config, recoilData);
                 
-                case ShootTypeId.DefaultPistol:
+                case GunTypeId.DefaultPistol:
                     return CreateDefaultPistol(parent, ownerId, prefab, config, recoilData);
                     
 
                 default:
-                    throw new ArgumentNullException(nameof(shootTypeId));
+                    throw new ArgumentNullException(nameof(gunTypeId));
             }
 
-            throw new ArgumentNullException(nameof(shootTypeId));
+            throw new ArgumentNullException(nameof(gunTypeId));
         }
 
         private GameEntity CreateDefaultPistol(Transform parent, int ownerId, EntityBehaviour prefab, ShootConfig config, RecoilData recoilData)
@@ -161,7 +161,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Factory
                     .With(x => x.AddMinVerticalRecoilOnJump(recoilData.MinHorizontalRecoilOnJump),
                         when: recoilData.MinVerticalRecoilOnJump > 0)
                     .With(x => x.isShootingAvailable = true)
-                    .With(x => x.isShootable = true)
+                    .With(x => x.isGun = true)
                     .With(x => x.isHasRecoil = !recoilData.Patterns.IsNullOrEmpty())
                     .With(x => x.isShootCooldownUp = true)
                     .With(x => x.isCanRaycast = config.CanRaycast)

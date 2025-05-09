@@ -9,21 +9,16 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching
         public GunSwitchingFeature(ISystemFactory systems)
         {
             Add(systems.Create<MarkSwitchingRequestedOnInputSystem>());
-            
             Add(systems.Create<MarkSwitchingUnavailableOnSameGunSelectedSystem>());
             
             Add(systems.Create<SetTargetRequestedGunOnSwitchingSystem>());
-            
             Add(systems.Create<ClearVisualProcessingOnQuickSwitchingSystem>());
             
             Add(systems.Create<MarkSwitchingStartedSystem>());
-            
             Add(systems.Create<HideGunOnSwitchingStartedSystem>());
             
             Add(systems.Create<ShowGunOnHideSystem>());
-            
-            Add(systems.Create<SetNewGunToShootHolderSystem>());
-            
+            Add(systems.Create<SetNewGunToGunHolderSystem>());
             Add(systems.Create<MarkSwitchingFinishedOnShowingProcessedSystem>());
         }
     }

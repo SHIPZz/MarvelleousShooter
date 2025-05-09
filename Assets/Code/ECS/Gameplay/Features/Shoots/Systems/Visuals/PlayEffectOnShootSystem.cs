@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 using Entitas;
-using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 {
@@ -12,7 +10,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Shooting.Added());
 
-        protected override bool Filter(GameEntity entity) => entity.isShootable
+        protected override bool Filter(GameEntity entity) => entity.isGun
                                                              && entity.isShooting
                                                              && entity.isActive
                                                              && entity.hasEffectPlayer;

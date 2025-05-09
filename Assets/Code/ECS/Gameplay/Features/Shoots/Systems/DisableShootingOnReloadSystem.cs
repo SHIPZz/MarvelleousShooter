@@ -8,7 +8,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems
 
         public DisableShootingOnReloadSystem(GameContext game)
         {
-            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable, GameMatcher.Reloading, GameMatcher.Active));
+            _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Gun, GameMatcher.Reloading, GameMatcher.Active));
         }
 
         public void Execute()
