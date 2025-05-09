@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Shootables.Extensions;
+using Code.ECS.Gameplay.Features.Shoots.Extensions;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload

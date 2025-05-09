@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Common.EffectPlayerComponent effectPlayer { get { return (Code.ECS.Common.EffectPlayerComponent)GetComponent(GameComponentsLookup.EffectPlayer); } }
-    public Code.Gameplay.Shootables.Visuals.EffectPlayer EffectPlayer { get { return effectPlayer.Value; } }
+    public Code.ECS.Effects.EffectPlayer EffectPlayer { get { return effectPlayer.Value; } }
     public bool hasEffectPlayer { get { return HasComponent(GameComponentsLookup.EffectPlayer); } }
 
-    public GameEntity AddEffectPlayer(Code.Gameplay.Shootables.Visuals.EffectPlayer newValue) {
+    public GameEntity AddEffectPlayer(Code.ECS.Effects.EffectPlayer newValue) {
         var index = GameComponentsLookup.EffectPlayer;
         var component = (Code.ECS.Common.EffectPlayerComponent)CreateComponent(index, typeof(Code.ECS.Common.EffectPlayerComponent));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceEffectPlayer(Code.Gameplay.Shootables.Visuals.EffectPlayer newValue) {
+    public GameEntity ReplaceEffectPlayer(Code.ECS.Effects.EffectPlayer newValue) {
         var index = GameComponentsLookup.EffectPlayer;
         var component = (Code.ECS.Common.EffectPlayerComponent)CreateComponent(index, typeof(Code.ECS.Common.EffectPlayerComponent));
         component.Value = newValue;

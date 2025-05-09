@@ -2,18 +2,19 @@ using System;
 using Code.Data.Services;
 using Code.ECS;
 using Code.ECS.Common.Entity;
+using Code.ECS.Common.Services;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Code.ECS.Gameplay.Features.Cameras.Factories;
 using Code.ECS.Gameplay.Features.Cooldown;
+using Code.ECS.Gameplay.Features.Heroes;
+using Code.ECS.Gameplay.Features.Heroes.Factory;
+using Code.ECS.Gameplay.Features.Shoots.Enums;
+using Code.ECS.Gameplay.Features.Shoots.Factory;
 using Code.ECS.Infrastructure.StateInfrastructure;
 using Code.ECS.Systems;
 using Code.Extensions;
 using Code.Gameplay.Cameras;
-using Code.Gameplay.Heroes;
-using Code.Gameplay.Heroes.Factory;
-using Code.Gameplay.Heroes.Services;
 using Code.Gameplay.LevelDatas;
-using Code.Gameplay.Shootables;
-using Code.Gameplay.Shootables.Factory;
 using Code.SaveData;
 using UnityEngine;
 using IUpdateable = Code.InfraStructure.States.StateInfrastructure.IUpdateable;
@@ -28,23 +29,26 @@ namespace Code.InfraStructure.States.States
         private readonly IShootFactory _shootFactory;
         private readonly IWorldDataService _worldDataService;
         private readonly ISystemFactory _systemFactory;
-        private readonly IHeroRepository _heroRepository;
         private readonly ICameraFactory _cameraFactory;
-        
+        private readonly GameContext _game;
+        private readonly IIdentifierService _identifierService;
+
         private BattleFeature _battleFeature;
 
         public GameState(ILevelDataProvider levelDataProvider,
-            ICameraProvider cameraProvider, 
+            ICameraProvider cameraProvider,
             IWorldDataService worldDataService,
             IShootFactory shootFactory,
             ISystemFactory systemFactory,
             ICameraFactory cameraFactory,
-            IHeroRepository heroRepository, 
-            IHeroFactory heroFactory)
+            IHeroFactory heroFactory, 
+            GameContext game, 
+            IIdentifierService identifierService)
         {
             _cameraFactory = cameraFactory;
-            _heroRepository = heroRepository;
             _heroFactory = heroFactory;
+            _game = game;
+            _identifierService = identifierService;
             _systemFactory = systemFactory;
             _worldDataService = worldDataService;
             _shootFactory = shootFactory;
@@ -52,91 +56,68 @@ namespace Code.InfraStructure.States.States
             _cameraProvider = cameraProvider;
         }
 
-        public void Update()
-        {
-            if(_battleFeature ==null)
-                return;
-
-            ExecuteBattleFeature();
-        }
-
         public override void Enter()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            CreateBattleFeature();
             
+            Cursor.lockState = CursorLockMode.Locked;
+
             CreateInput();
 
             CreateShootSwitching();
-
-            CreateBattleFeature();
-
+            
             WorldData worldData = _worldDataService.Get();
 
             GameEntity hero = CreateHero();
-            
-            ExecuteBattleFeature();
 
             InitHeroCamera(hero.View.gameObject.GetComponent<CameraHolder>());
 
             Transform weaponHolder = hero.View.gameObject.GetComponent<Hero>().WeaponHolder;
-            
+
             GameEntity mainGun = CreateMainGun(weaponHolder, worldData, hero);
-            
-            CreateKnife(weaponHolder, hero);
-            
+
+            CreateGun(weaponHolder, hero, ShootTypeId.Knife);
+            CreateGun(weaponHolder, hero, ShootTypeId.WithoutGun);
+            CreateGun(weaponHolder, hero, ShootTypeId.BigAxe);
+            CreateGun(weaponHolder, hero, ShootTypeId.DefaultPistol);
+
             hero.AddAnimancerAnimator(mainGun.AnimancerAnimator);
             hero.AddCurrentGunId(mainGun.Id);
-            
-            _heroRepository.SetCurrentGun(mainGun);
-            
+
             InitEnemies();
+
+            hero.AnimancerAnimator.StartAnimation(AnimationTypeId.Idle);
         }
 
-        private void CreateBattleFeature()
-        {
-            _battleFeature = _systemFactory.Create<BattleFeature>();
+        public void Update() => ExecuteBattleFeature();
 
-            _battleFeature.Initialize();
-        }
+        private GameEntity CreateHero() =>
+            _heroFactory.Create(_levelDataProvider.StartPoint, _levelDataProvider.StartPoint.position,
+                Quaternion.identity);
 
-        private GameEntity CreateHero()
-        {
-            return _heroFactory.Create(_levelDataProvider.StartPoint,_levelDataProvider.StartPoint.position,Quaternion.identity);
-        }
+        private void InitEnemies() { }
 
-        private void InitEnemies()
-        {
-        }
-
-        private void CreateKnife(Transform weaponHolder, GameEntity hero)
-        {
-            GameEntity knife =_shootFactory
-                    .Create(weaponHolder, ShootTypeId.Knife, hero.Id)
-                    .With(x => x.isHeroGun = true)
-                    .With(x => x.isViewActive = false)
-                ;
-        }
-
-        private void ExecuteBattleFeature()
-        {
-            _battleFeature.Execute();
-            _battleFeature.Cleanup();
-        }
+        private GameEntity CreateGun(Transform weaponHolder, GameEntity hero, ShootTypeId shootTypeId) =>
+            _shootFactory
+                .Create(weaponHolder, shootTypeId, hero.Id)
+                .With(x => x.isHeroGun = true);
 
         private GameEntity CreateMainGun(Transform weaponHolder, WorldData worldData, GameEntity hero)
         {
-            GameEntity mainGun =_shootFactory
+            GameEntity mainGun = _shootFactory
                     .Create(weaponHolder, worldData.PlayerData.LastWeaponId, hero.Id)
                     .With(x => x.isHeroGun = true)
                     .With(x => x.isShootCooldownUp = true)
                     .With(x => x.isActive = true)
+                    .With(x => x.isViewActive = true)
                 ;
             return mainGun;
         }
 
-        private static void CreateShootSwitching()
+        private void CreateShootSwitching()
         {
             CreateEntity.Empty()
+                .AddId(_identifierService.Next())
                 .With(x => x.isShootSwitchingReady = true)
                 .With(x => x.isShootSwitchingAvailable = true)
                 .With(x => x.isConnectedWithHero = true)
@@ -157,7 +138,7 @@ namespace Code.InfraStructure.States.States
         {
             _cameraFactory.CreateEntity(cameraHolder.MainCamera)
                 .With(x => x.isConnectedWithHero = true);
-            
+
             cameraHolder
                 .With(cameraHolder => _cameraProvider.WeaponCamera = cameraHolder.WeaponCamera)
                 .With(cameraHolder => _cameraProvider.Camera = cameraHolder.MainCamera)
@@ -167,17 +148,47 @@ namespace Code.InfraStructure.States.States
                 .With(cameraHolder => _cameraProvider.CinemachineImpulseSource = cameraHolder.CinemachineImpulseSource);
         }
 
+        private void ExecuteBattleFeature()
+        {
+            _battleFeature.Execute();
+            _battleFeature.Cleanup();
+        }
+
         protected override void Exit()
         {
-            _battleFeature.Cleanup();
-            _battleFeature.TearDown();
-            _battleFeature.ClearReactiveSystems();
+            CleanupBattleFeature();
         }
 
         public void Dispose()
         {
-            _battleFeature.TearDown();
+            CleanupBattleFeature();
+        }
+
+        private void DestructEntities()
+        {
+            foreach (GameEntity entity in _game.GetEntities())
+            {
+                entity.isDestructed = true;
+            }
+        }
+
+        private void CleanupBattleFeature()
+        {
+            _battleFeature.DeactivateReactiveSystems();
             _battleFeature.ClearReactiveSystems();
+
+            DestructEntities();
+
+            _battleFeature.Cleanup();
+            _battleFeature.TearDown();
+            _battleFeature = null;
+        }
+
+        private void CreateBattleFeature()
+        {
+            _battleFeature = _systemFactory.Create<BattleFeature>();
+
+            _battleFeature.Initialize();
         }
     }
 }

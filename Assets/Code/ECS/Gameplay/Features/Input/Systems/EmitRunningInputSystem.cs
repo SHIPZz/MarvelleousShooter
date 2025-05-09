@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Input;
+﻿using Code.ECS.Common.Services;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Input.Systems

@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun targetInputGun { get { return (Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun)GetComponent(GameComponentsLookup.TargetInputGun); } }
-    public Code.Gameplay.Heroes.Enums.GunInputTypeId TargetInputGun { get { return targetInputGun.Value; } }
+    public Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId TargetInputGun { get { return targetInputGun.Value; } }
     public bool hasTargetInputGun { get { return HasComponent(GameComponentsLookup.TargetInputGun); } }
 
-    public GameEntity AddTargetInputGun(Code.Gameplay.Heroes.Enums.GunInputTypeId newValue) {
+    public GameEntity AddTargetInputGun(Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId newValue) {
         var index = GameComponentsLookup.TargetInputGun;
         var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceTargetInputGun(Code.Gameplay.Heroes.Enums.GunInputTypeId newValue) {
+    public GameEntity ReplaceTargetInputGun(Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId newValue) {
         var index = GameComponentsLookup.TargetInputGun;
         var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Switching.TargetInputGun));
         component.Value = newValue;

@@ -10,7 +10,10 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
         public GenerateRecoilSystem(GameContext game)
         {
             _shoots = game.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Shootable,GameMatcher.Shooting));
+                .AllOf(GameMatcher.Shootable,
+                    GameMatcher.Shooting,
+                    GameMatcher.Patterns,
+                    GameMatcher.RecoilPatternIndex));
         }
 
         public void Execute()
@@ -19,7 +22,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
             {
                 Vector2 horizontalRecoil = shoot.Patterns[shoot.RecoilPatternIndex];
                 shoot.ReplaceHorizontalRecoil(horizontalRecoil.x);
-                shoot.ReplaceVerticalRecoil(horizontalRecoil.y);
+                shoot.ReplaceVerticalRecoil(-horizontalRecoil.y);
                 
                 shoot.ReplaceRecoilPatternIndex(shoot.RecoilPatternIndex + 1);
                 

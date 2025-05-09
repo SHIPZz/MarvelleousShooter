@@ -12,8 +12,13 @@ namespace Code.ECS.Gameplay.Features.Movement
             Add(systemFactory.Create<UpdateTransformPositionSystem>());
 
             Add(systemFactory.Create<AllowMovementSystem>());
+            Add(systemFactory.Create<AllowIdleFocusPlayingSystem>());
 
             Add(systemFactory.Create<MarkMovingRequestedOnInputSystem>());
+            
+            Add(systemFactory.Create<MarkIdleFocusUnAvailableOnAnimPlayingSystem>());
+            
+            Add(systemFactory.Create<MarkIdleFocusPlayingRequestedOnInput>());
 
             Add(systemFactory.Create<MarkMovingUnAvailableOnNoGroundSystem>());
             

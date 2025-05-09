@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
-using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
 {

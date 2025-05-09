@@ -1,4 +1,5 @@
-﻿using Code.Gameplay.Animations;
+﻿using Code.ECS.Gameplay.Features.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
@@ -20,8 +21,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
                 AnimancerAnimatorPlayer animator = entity.AnimancerAnimator;
                 
                 entity.isShootAnimationProcessing =
-                    animator.IsPlaying(AnimationTypeId.Shoot) || 
-                    animator.IsPlaying(AnimationTypeId.AimShoot);
+                    animator.IsPlaying(AnimationTypeId.Single_Shot) || 
+                    animator.IsPlaying(AnimationTypeId.Aiming_Shot);
             }
         }
     }

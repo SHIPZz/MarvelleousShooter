@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent shootTypeId { get { return (Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent)GetComponent(GameComponentsLookup.ShootTypeId); } }
-    public Code.Gameplay.Shootables.ShootTypeId ShootTypeId { get { return shootTypeId.Value; } }
+    public Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId ShootTypeId { get { return shootTypeId.Value; } }
     public bool hasShootTypeId { get { return HasComponent(GameComponentsLookup.ShootTypeId); } }
 
-    public GameEntity AddShootTypeId(Code.Gameplay.Shootables.ShootTypeId newValue) {
+    public GameEntity AddShootTypeId(Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId newValue) {
         var index = GameComponentsLookup.ShootTypeId;
         var component = (Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceShootTypeId(Code.Gameplay.Shootables.ShootTypeId newValue) {
+    public GameEntity ReplaceShootTypeId(Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId newValue) {
         var index = GameComponentsLookup.ShootTypeId;
         var component = (Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.ShootTypeIdComponent));
         component.Value = newValue;

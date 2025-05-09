@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Heroes.Enums;
+﻿using Code.ECS.Gameplay.Features.Shoots.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals

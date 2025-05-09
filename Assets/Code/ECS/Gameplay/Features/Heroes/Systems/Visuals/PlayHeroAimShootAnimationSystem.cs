@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
@@ -24,7 +24,7 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
             foreach (GameEntity hero in _heroes)
             foreach (GameEntity gun in guns)
             {
-                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.AimShoot);
+                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Aiming_Shot);
             }
         }
     }

@@ -1,7 +1,7 @@
-﻿using Code.ECS.Progress;
+﻿using Code.ECS.Effects;
+using Code.ECS.Gameplay.Features.Animations;
+using Code.ECS.Progress;
 using Code.ECS.View;
-using Code.Gameplay.Animations;
-using Code.Gameplay.Shootables.Visuals;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using UnityEngine;

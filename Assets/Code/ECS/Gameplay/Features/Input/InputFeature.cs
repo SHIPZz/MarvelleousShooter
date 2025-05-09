@@ -8,6 +8,7 @@ namespace Code.ECS.Gameplay.Features.Input
         public InputFeature(ISystemFactory systems)
         {
             Add(systems.Create<EmitMouseAxisInputSystem>());
+            Add(systems.Create<AllowDoubleShootingInputSystem>());
 
             Add(systems.Create<DisableAimInputsOnGunActionsSystem>());
             Add(systems.Create<DisableShootInputsOnGunActionsSystem>());
@@ -18,7 +19,9 @@ namespace Code.ECS.Gameplay.Features.Input
             Add(systems.Create<EmitJumpingInputSystem>());
             Add(systems.Create<EmitAimInputSystem>());
             Add(systems.Create<EmitAxisInputSystem>());
+            Add(systems.Create<EmitIdleFocusInputSystem>());
             Add(systems.Create<EmitReloadInputSystem>());
+            Add(systems.Create<EmitDoubleShootingInputSystem>());
             Add(systems.Create<EmitRunningInputSystem>());
             Add(systems.Create<EmitChangeGunInputSystem>());
         }

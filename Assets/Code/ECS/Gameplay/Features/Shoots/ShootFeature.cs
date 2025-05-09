@@ -1,8 +1,9 @@
-﻿using Code.ECS.Gameplay.Features.Movement.Systems;
-using Code.ECS.Gameplay.Features.Shoots.Systems;
+﻿using Code.ECS.Gameplay.Features.Shoots.Systems;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Aiming;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Ammo;
+using Code.ECS.Gameplay.Features.Shoots.Systems.Cleanups;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns;
+using Code.ECS.Gameplay.Features.Shoots.Systems.DoubleShoots;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Recoil;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Reload;
 using Code.ECS.Gameplay.Features.Shoots.Systems.Visuals;
@@ -15,26 +16,28 @@ namespace Code.ECS.Gameplay.Features.Shoots
         public ShootFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<AllowShootAvailableSystem>());
+            
             Add(systemFactory.Create<DisableShootingOnReloadSystem>());
             
             Add(systemFactory.Create<MarkShootingRequestedOnInputSystem>());
             
-            Add(systemFactory.Create<CalculateShootCooldownSystem>());
+            Add(systemFactory.Create<DoubleShootFeature>());
+            
+            Add(systemFactory.Create<ShootCooldownFeature>());
             
             Add(systemFactory.Create<ShootOnCooldownUpSystem>());
             
             Add(systemFactory.Create<DecreaseSpeedOnShootSystem>());
             
-            Add(systemFactory.Create<MarkShootCooldownProcessingOnShootSystem>());
-            
             Add(systemFactory.Create<ShootWithoutAmmoOnCooldownUpSystem>());
             
             Add(systemFactory.Create<MarkShootingAnimationProcessingSystem>());
             
-            Add(systemFactory.Create<ResetShootCooldownSystem>());
-            
             Add(systemFactory.Create<MarkShootingContinuouslySystem>());
-            Add(systemFactory.Create<CastRaycastByCameraOnShootingSystem>());
+            
+            Add(systemFactory.Create<CastRaycastOnShootingSystem>());
+            Add(systemFactory.Create<CastOnAnimationEndSystem>());
+            
             Add(systemFactory.Create<AlignEffectOnHitSystem>());
 
             Add(systemFactory.Create<PlayAnimationOnShootSystem>());
@@ -46,13 +49,10 @@ namespace Code.ECS.Gameplay.Features.Shoots
             Add(systemFactory.Create<PlayCameraShakeOnShootSystem>());
             
             Add(systemFactory.Create<RecoilFeature>());
-            
             Add(systemFactory.Create<ReloadFeature>());
+           
             Add(systemFactory.Create<AimingFeature>());
-            
-            Add(systemFactory.Create<SetLastShootTimeOnShootingSystem>());
-            Add(systemFactory.Create<CalculateAmmoCountOnShootSystem>());
-            Add(systemFactory.Create<MarkAmmoAvailableSystem>());
+            Add(systemFactory.Create<AmmoFeature>());
             
             Add(systemFactory.Create<CleanupShootRaycastHitsSystem>());
          

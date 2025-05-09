@@ -18,20 +18,17 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
                     GameMatcher.ShootCooldown,
                     GameMatcher.Shootable,
                     GameMatcher.ShootCooldownLeft
-                ));
+                ).NoneOf(GameMatcher.ShootCooldownUp));
         }
 
         public void Execute()
         {
             foreach (GameEntity gun in _guns.GetEntities(_buffer))
             {
-                gun.ReplaceShootCooldownLeft(gun.ShootCooldownLeft - _timeService.DeltaTime);
-                gun.isShootCooldownUp = false;
-
-                if (gun.ShootCooldownLeft <= 0)
+                if (gun.ShootCooldownLeft > 0)
                 {
-                    gun.isShootCooldownUp = true;
-                    gun.ReplaceShootCooldownLeft(gun.ShootCooldown);
+                    gun.ReplaceShootCooldownLeft(gun.ShootCooldownLeft - _timeService.DeltaTime);
+                    gun.isShootCooldownUp = gun.ShootCooldownLeft <= 0;
                 }
             }
         }

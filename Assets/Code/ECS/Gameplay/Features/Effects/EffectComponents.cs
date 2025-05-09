@@ -3,7 +3,7 @@ using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Effects
 {
-    [Game] public class Effect : IComponent { }
+    [Game] public class EffectComponent : IComponent { }
     
     [Game] public class Processed : IComponent { }
     

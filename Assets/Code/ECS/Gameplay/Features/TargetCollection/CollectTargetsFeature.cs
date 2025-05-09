@@ -13,6 +13,7 @@ namespace Code.ECS.Gameplay.Features.TargetCollection
             
             Add(systemFactory.Create<CastForTargetsNoLimitSystem>());
             Add(systemFactory.Create<CastForTargetsWithLimitSystem>());
+            Add(systemFactory.Create<SetCastPositionFromCameraSystem>());
             Add(systemFactory.Create<MarkReachedSystem>());
             
             Add(systemFactory.Create<CleanupTargetBuffersSystem>());

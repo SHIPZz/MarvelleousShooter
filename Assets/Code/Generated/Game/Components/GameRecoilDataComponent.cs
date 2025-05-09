@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent recoilData { get { return (Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent)GetComponent(GameComponentsLookup.RecoilData); } }
-    public Code.Gameplay.Shootables.Recoils.RecoilData RecoilData { get { return recoilData.Value; } }
+    public Code.ECS.Gameplay.Features.Shoots.Configs.RecoilData RecoilData { get { return recoilData.Value; } }
     public bool hasRecoilData { get { return HasComponent(GameComponentsLookup.RecoilData); } }
 
-    public GameEntity AddRecoilData(Code.Gameplay.Shootables.Recoils.RecoilData newValue) {
+    public GameEntity AddRecoilData(Code.ECS.Gameplay.Features.Shoots.Configs.RecoilData newValue) {
         var index = GameComponentsLookup.RecoilData;
         var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceRecoilData(Code.Gameplay.Shootables.Recoils.RecoilData newValue) {
+    public GameEntity ReplaceRecoilData(Code.ECS.Gameplay.Features.Shoots.Configs.RecoilData newValue) {
         var index = GameComponentsLookup.RecoilData;
         var component = (Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.Systems.Recoil.RecoilDataComponent));
         component.Value = newValue;

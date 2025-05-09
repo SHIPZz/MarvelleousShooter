@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Effects;
-using Code.Gameplay.Heroes.Enums;
-using Code.Gameplay.Shootables;
+using Code.ECS.Gameplay.Features.Effects;
+using Code.ECS.Gameplay.Features.Shoots.Enums;
 using DG.Tweening;
 using Entitas;
 using UnityEngine;
@@ -44,9 +43,7 @@ namespace Code.ECS.Gameplay.Features.Shoots
 
     [Game] public class ShootDistance : IComponent { public float Value; }
 
-    [Game] public class LastShootTime : IComponent { public float Value; }
-    
-    [Game] public class MoveGunZ : IComponent { public float Value; }
+    [Game] public class MoveGunPosition : IComponent { public Vector3 Value; }
     
     [Game] public class MoveGunDuration : IComponent { public float Value; }
     
@@ -57,6 +54,8 @@ namespace Code.ECS.Gameplay.Features.Shoots
     [Game] public class ShootCooldownLeft : IComponent { public float Value; }
     
     [Game] public class ShootCooldownUp : IComponent {  }
+    
+    [Game] public class EmptyGun : IComponent {  }
     
     [Game] public class ShootCooldownProcessing : IComponent {  }
     

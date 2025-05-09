@@ -8,7 +8,6 @@ namespace Code.ECS.Gameplay.Features.Cameras
     {
         public CameraFeature(ISystemFactory systems)
         {
-            Add(systems.Create<SetRecoilRotationToCameraSystem>());
             Add(systems.Create<SetBaseCameraRotationOnInputSystem>());
             Add(systems.Create<ApplyCameraFinalRotationSystem>());
         }

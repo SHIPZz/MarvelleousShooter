@@ -1,12 +1,10 @@
-﻿using Code.Gameplay.Shootables.Recoils;
+﻿using Code.ECS.Gameplay.Features.Shoots.Configs;
 using Entitas;
 using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 {
     [Game] public class HasRecoil : IComponent {}
-    
-    [Game] public class RecoilProgress : IComponent { public float Value; }
     
     [Game] public class RecoilPatternIndex : IComponent { public int Value; }
     
@@ -31,10 +29,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
     [Game] public class VerticalRecoil : IComponent  { public float Value; }
     
     [Game] public class AimJumpMultiplier : IComponent  { public float Value; }
-    
-    [Game] public class TotalVerticalRecoil : IComponent  { public float Value; }
-    
-    [Game] public class TotalHorizontalRecoil : IComponent  { public float Value; }
     
     [Game] public class MinHorizontalRecoilOnJump : IComponent  { public float Value; }
     

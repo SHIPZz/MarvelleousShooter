@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Heroes.Enums;
+using Code.ECS.Gameplay.Features.Shoots.Enums;
 using UnityEngine;
 
 namespace Code.Extensions
@@ -8,7 +8,7 @@ namespace Code.Extensions
     {
         private static readonly Dictionary<KeyCode, GunInputTypeId> _weaponSelectByKey = new()
         {
-            { KeyCode.Alpha0, GunInputTypeId.Nothing },
+            { KeyCode.Q, GunInputTypeId.Nothing },
             { KeyCode.Alpha1, GunInputTypeId.Main },
             { KeyCode.Alpha2, GunInputTypeId.Second },
             { KeyCode.Alpha3, GunInputTypeId.Knife },

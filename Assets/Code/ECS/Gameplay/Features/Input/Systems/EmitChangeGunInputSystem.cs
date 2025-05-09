@@ -1,5 +1,5 @@
-﻿using Code.Gameplay.Heroes.Enums;
-using Code.Gameplay.Input;
+﻿using Code.ECS.Common.Services;
+using Code.ECS.Gameplay.Features.Shoots.Enums;
 using Entitas;
 using UniRx;
 
@@ -35,7 +35,7 @@ namespace Code.ECS.Gameplay.Features.Input.Systems
 
         public void Initialize()
         {
-            _inputService.OnGunSelected.Subscribe(id => _selectedGunInputId = id).AddTo(_compositeDisposable);
+            _inputService.GunSelectedEvent.Subscribe(id => _selectedGunInputId = id).AddTo(_compositeDisposable);
         }
         
         public void TearDown()

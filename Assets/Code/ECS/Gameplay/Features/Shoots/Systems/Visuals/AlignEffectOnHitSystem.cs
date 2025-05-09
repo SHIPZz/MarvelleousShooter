@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.ECS.Extensions;
-using Code.Gameplay.Effects;
+using Code.ECS.Gameplay.Features.Effects;
 using Entitas;
 using UnityEngine;
 
@@ -8,15 +8,15 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Visuals
 {
     public class AlignEffectOnHitSystem : ReactiveSystem<GameEntity>
     {
-        private readonly IEffectFactory _effectFactory;
+        private readonly IEffectViewFactory _effectFactory;
         
-        public AlignEffectOnHitSystem(IContext<GameEntity> game, IEffectFactory effectFactory) : base(game)
+        public AlignEffectOnHitSystem(IContext<GameEntity> game, IEffectViewFactory effectFactory) : base(game)
         {
             _effectFactory = effectFactory;
         }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-            context.CreateCollector(GameMatcher.Shooting.Added());
+            context.CreateCollector(GameMatcher.HitDetected.Added());
 
         protected override bool Filter(GameEntity entity) => !entity.Hits.IsNullOrEmpty() 
                                                              && entity.isShootable

@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Animations;
+﻿using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
@@ -24,9 +24,9 @@ namespace Code.ECS.Gameplay.Features.Heroes.Systems.Visuals
             foreach (GameEntity gun in _guns)
             {
                 if (hero.isWalking && !hero.isRunning)
-                    gun.AnimancerAnimator.StartAnimation(AnimationTypeId.AimWalk);
+                    gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Aiming_Walk);
                 else
-                    gun.AnimancerAnimator.StartAnimation(AnimationTypeId.AimIdle);
+                    gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Aiming_Idle);
             }
         }
     }

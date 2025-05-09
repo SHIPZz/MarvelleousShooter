@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId hitEffectTypeId { get { return (Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId)GetComponent(GameComponentsLookup.HitEffectTypeId); } }
-    public Code.Gameplay.Effects.EffectTypeId HitEffectTypeId { get { return hitEffectTypeId.Value; } }
+    public Code.ECS.Gameplay.Features.Effects.EffectTypeId HitEffectTypeId { get { return hitEffectTypeId.Value; } }
     public bool hasHitEffectTypeId { get { return HasComponent(GameComponentsLookup.HitEffectTypeId); } }
 
-    public GameEntity AddHitEffectTypeId(Code.Gameplay.Effects.EffectTypeId newValue) {
+    public GameEntity AddHitEffectTypeId(Code.ECS.Gameplay.Features.Effects.EffectTypeId newValue) {
         var index = GameComponentsLookup.HitEffectTypeId;
         var component = (Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceHitEffectTypeId(Code.Gameplay.Effects.EffectTypeId newValue) {
+    public GameEntity ReplaceHitEffectTypeId(Code.ECS.Gameplay.Features.Effects.EffectTypeId newValue) {
         var index = GameComponentsLookup.HitEffectTypeId;
         var component = (Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.HitEffectTypeId));
         component.Value = newValue;

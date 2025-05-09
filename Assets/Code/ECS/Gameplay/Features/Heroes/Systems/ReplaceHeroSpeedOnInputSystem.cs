@@ -1,8 +1,7 @@
 ﻿using Code.ECS.Gameplay.Features.CharacterStats;
+using Code.ECS.Gameplay.Features.Heroes.Configs;
 using Code.ECS.Gameplay.Features.Movement.Configs;
-using Code.Gameplay.Heroes.Configs;
 using Entitas;
-using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Heroes.Systems
 {

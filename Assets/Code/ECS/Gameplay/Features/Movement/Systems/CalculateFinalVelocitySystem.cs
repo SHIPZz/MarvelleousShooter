@@ -2,37 +2,40 @@
 using Entitas;
 using UnityEngine;
 
-public class CalculateFinalVelocitySystem : IExecuteSystem
+namespace Code.ECS.Gameplay.Features.Movement.Systems
 {
-    private readonly IGroup<GameEntity> _entities;
-    private readonly ITimeService _timeService;
-
-    public CalculateFinalVelocitySystem(GameContext game, ITimeService timeService)
+    public class CalculateFinalVelocitySystem : IExecuteSystem
     {
-        _timeService = timeService;
+        private readonly IGroup<GameEntity> _entities;
+        private readonly ITimeService _timeService;
 
-        _entities = game.GetGroup(GameMatcher
-            .AllOf(GameMatcher.Active, GameMatcher.Speed)
-            .AnyOf(GameMatcher.Direction, GameMatcher.JumpVelocity));
-    }
-
-    public void Execute()
-    {
-        foreach (GameEntity entity in _entities)
+        public CalculateFinalVelocitySystem(GameContext game, ITimeService timeService)
         {
-            float deltaTime = _timeService.DeltaTime;
+            _timeService = timeService;
 
-            Vector3 direction = entity.Direction;
-            Vector3 jumpVelocity = entity.JumpVelocity;
+            _entities = game.GetGroup(GameMatcher
+                .AllOf(GameMatcher.Active, GameMatcher.Speed)
+                .AnyOf(GameMatcher.Direction, GameMatcher.JumpVelocity));
+        }
 
-            Vector3 targetVelocity = direction * entity.Speed + jumpVelocity;
-            Vector3 currentVelocity = entity.FinalVelocity;
+        public void Execute()
+        {
+            foreach (GameEntity entity in _entities)
+            {
+                float deltaTime = _timeService.DeltaTime;
 
-            float damping = 1f - Mathf.Exp(entity.Damping * deltaTime); 
-            Vector3 newVelocity = Vector3.Lerp(currentVelocity, targetVelocity, damping);
+                Vector3 direction = entity.Direction;
+                Vector3 jumpVelocity = entity.JumpVelocity;
 
-            entity.ReplaceFinalVelocity(newVelocity);
+                Vector3 targetVelocity = direction * entity.Speed + jumpVelocity;
+                Vector3 currentVelocity = entity.FinalVelocity;
+
+                float damping = 1f - Mathf.Exp(entity.Damping * deltaTime); 
+                Vector3 newVelocity = Vector3.Lerp(currentVelocity, targetVelocity, damping);
+
+                entity.ReplaceFinalVelocity(newVelocity);
             
+            }
         }
     }
 }

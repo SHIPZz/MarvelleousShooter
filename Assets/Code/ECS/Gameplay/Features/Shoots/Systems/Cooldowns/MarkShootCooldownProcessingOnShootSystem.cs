@@ -11,7 +11,8 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Cooldowns
             _entities = game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Shooting,
-                    GameMatcher.Shootable));
+                    GameMatcher.Shootable)
+                .NoneOf(GameMatcher.ShootCooldownUp));
         }
 
         public void Execute()

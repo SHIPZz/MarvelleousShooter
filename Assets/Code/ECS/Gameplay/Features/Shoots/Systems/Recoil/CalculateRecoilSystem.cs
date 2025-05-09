@@ -1,42 +1,51 @@
-﻿using Code.ECS.Common.Time;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
-public class CalculateRecoilSystem : IExecuteSystem
+namespace Code.ECS.Gameplay.Features.Shoots.Systems.Recoil
 {
-    private readonly IGroup<GameEntity> _shoots;
-    private readonly ITimeService _timeService;
-
-    public CalculateRecoilSystem(GameContext game, ITimeService timeService)
+    public class CalculateRecoilSystem : IExecuteSystem
     {
-        _timeService = timeService;
-        _shoots = game.GetGroup(GameMatcher.AllOf(
-            GameMatcher.Shootable,
-            GameMatcher.ShootCooldownProcessing,
-            GameMatcher.Active));
-    }
+        private readonly IGroup<GameEntity> _shoots;
 
-    public void Execute()
-    {
-        foreach (GameEntity shoot in _shoots)
+        public CalculateRecoilSystem(GameContext game)
         {
-            switch (shoot.isShooting)
+            _shoots = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Shootable,
+                GameMatcher.Active,
+                GameMatcher.CurrentRecoil,
+                GameMatcher.TargetRecoil));
+        }
+
+        public void Execute()
+        {
+            float deltaTime = Time.deltaTime;
+            
+            foreach (GameEntity shoot in _shoots)
             {
-                case true when shoot.isShootingStarted:
+                if (shoot.isShooting)
                 {
-                    shoot.ReplaceTargetRecoil(shoot.TargetRecoil + new Vector3(shoot.VerticalRecoil, shoot.HorizontalRecoil));
-
-                    Vector3 targetRecoil = Vector3.Lerp(shoot.CurrentRecoil, shoot.TargetRecoil, _timeService.DeltaTime * shoot.RecoilSpeed);
-                    shoot.ReplaceCurrentRecoil(targetRecoil);
-                    break;
+                    Vector3 targetRecoil = new Vector3(
+                        shoot.HorizontalRecoil,
+                        shoot.VerticalRecoil,
+                        0);
+                    
+                    shoot.ReplaceTargetRecoil(targetRecoil);
+                    
+                    float recoilFactor = 3 - Mathf.Exp(-shoot.RecoilSpeed * deltaTime);
+                    shoot.currentRecoil.Value = Vector3.Lerp(
+                        shoot.currentRecoil.Value,
+                        shoot.targetRecoil.Value,
+                        recoilFactor);
                 }
-                case false:
+                else
                 {
-                    Vector3 currentRecoil = Vector3.Lerp(shoot.CurrentRecoil, Vector3.zero, _timeService.DeltaTime * shoot.RecoilRecoverySpeed);
-                    shoot.ReplaceCurrentRecoil(currentRecoil);
-
-                    shoot.ReplaceTargetRecoil(currentRecoil);
-                    break;
+                    float recoveryFactor = 3 - Mathf.Exp(-shoot.RecoilRecoverySpeed * deltaTime);
+                    shoot.currentRecoil.Value = Vector3.Lerp(
+                        shoot.currentRecoil.Value,
+                        Vector3.zero,
+                        recoveryFactor);
+                    
+                    shoot.ReplaceTargetRecoil(shoot.currentRecoil.Value);
                 }
             }
         }

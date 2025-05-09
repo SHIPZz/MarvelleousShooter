@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.AvailableShoots availableShoots { get { return (Code.ECS.Gameplay.Features.Shoots.AvailableShoots)GetComponent(GameComponentsLookup.AvailableShoots); } }
-    public System.Collections.Generic.List<Code.Gameplay.Shootables.ShootTypeId> AvailableShoots { get { return availableShoots.Value; } }
+    public System.Collections.Generic.List<Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId> AvailableShoots { get { return availableShoots.Value; } }
     public bool hasAvailableShoots { get { return HasComponent(GameComponentsLookup.AvailableShoots); } }
 
-    public GameEntity AddAvailableShoots(System.Collections.Generic.List<Code.Gameplay.Shootables.ShootTypeId> newValue) {
+    public GameEntity AddAvailableShoots(System.Collections.Generic.List<Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId> newValue) {
         var index = GameComponentsLookup.AvailableShoots;
         var component = (Code.ECS.Gameplay.Features.Shoots.AvailableShoots)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.AvailableShoots));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceAvailableShoots(System.Collections.Generic.List<Code.Gameplay.Shootables.ShootTypeId> newValue) {
+    public GameEntity ReplaceAvailableShoots(System.Collections.Generic.List<Code.ECS.Gameplay.Features.Shoots.Enums.ShootTypeId> newValue) {
         var index = GameComponentsLookup.AvailableShoots;
         var component = (Code.ECS.Gameplay.Features.Shoots.AvailableShoots)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.AvailableShoots));
         component.Value = newValue;

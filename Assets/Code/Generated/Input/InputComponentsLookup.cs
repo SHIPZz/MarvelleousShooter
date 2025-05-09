@@ -11,29 +11,35 @@ public static class InputComponentsLookup {
     public const int AimingAvailable = 0;
     public const int AimingPressed = 1;
     public const int Axis = 2;
-    public const int GunChangePressed = 3;
-    public const int HasMouseAxis = 4;
-    public const int Input = 5;
-    public const int JumpingAvailable = 6;
-    public const int JumpingRequested = 7;
-    public const int MouseAxis = 8;
-    public const int MovementAvailable = 9;
-    public const int MovementRequested = 10;
-    public const int ReloadAvailable = 11;
-    public const int ReloadingPressed = 12;
-    public const int RunningPressed = 13;
-    public const int SelectedShoot = 14;
-    public const int ShootingAvailable = 15;
-    public const int ShootingPressed = 16;
+    public const int DoubleShootingAvailable = 3;
+    public const int DoubleShootingRequested = 4;
+    public const int GunChangePressed = 5;
+    public const int HasMouseAxis = 6;
+    public const int IdleFocusRequested = 7;
+    public const int Input = 8;
+    public const int JumpingAvailable = 9;
+    public const int JumpingRequested = 10;
+    public const int MouseAxis = 11;
+    public const int MovementAvailable = 12;
+    public const int MovementRequested = 13;
+    public const int ReloadAvailable = 14;
+    public const int ReloadingPressed = 15;
+    public const int RunningPressed = 16;
+    public const int SelectedShoot = 17;
+    public const int ShootingAvailable = 18;
+    public const int ShootingPressed = 19;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "AimingAvailable",
         "AimingPressed",
         "Axis",
+        "DoubleShootingAvailable",
+        "DoubleShootingRequested",
         "GunChangePressed",
         "HasMouseAxis",
+        "IdleFocusRequested",
         "Input",
         "JumpingAvailable",
         "JumpingRequested",
@@ -52,8 +58,11 @@ public static class InputComponentsLookup {
         typeof(Code.ECS.Gameplay.Features.Input.AimingAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.AimingPressed),
         typeof(Code.ECS.Gameplay.Features.Input.Axis),
+        typeof(Code.ECS.Gameplay.Features.Input.DoubleShootingAvailable),
+        typeof(Code.ECS.Gameplay.Features.Input.DoubleShootingRequested),
         typeof(Code.ECS.Gameplay.Features.Input.GunChangePressed),
         typeof(Code.ECS.Gameplay.Features.Input.HasMouseAxis),
+        typeof(Code.ECS.Gameplay.Features.Input.IdleFocusRequested),
         typeof(Code.ECS.Gameplay.Features.Input.Input),
         typeof(Code.ECS.Gameplay.Features.Input.JumpingAvailable),
         typeof(Code.ECS.Gameplay.Features.Input.JumpingRequested),

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
 {
     public class ShowGunOnHideSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _switchings;
         private readonly List<GameEntity> _buffer = new(2);
         private readonly GameContext _game;
 
@@ -14,7 +14,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
         {
             _game = game;
 
-            _entities = game.GetGroup(GameMatcher
+            _switchings = game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.HidingProcessed)
                 .NoneOf(GameMatcher.ShowingProcessed));
         }
@@ -22,38 +22,38 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems.Visuals
 
         public void Execute()
         {
-            foreach (GameEntity entity in _entities.GetEntities(_buffer))
+            foreach (GameEntity switching in _switchings.GetEntities(_buffer))
             {
-                GameEntity gun = _game.GetEntityWithId(entity.TargetSwitchGunId);
+                GameEntity newGun = _game.GetEntityWithId(switching.TargetSwitchGunId);
+                
+                ShowAnimation(switching, newGun);
 
-                ShowAnimation(entity, gun);
-
-                if (TryMarkProcessed(entity, gun))
+                if (TryMarkProcessed(switching, newGun))
                     return;
 
-                entity.isShowingProcessing = true;
+                switching.isShowingProcessing = true;
             }
         }
 
-        private static bool TryMarkProcessed(GameEntity entity, GameEntity gun)
+        private static bool TryMarkProcessed(GameEntity switching, GameEntity newGun)
         {
-            if (entity.isShowingProcessing && !gun.AnimancerAnimator.IsPlaying(AnimationTypeId.Get))
+            if (switching.isShowingProcessing && !newGun.AnimancerAnimator.IsPlaying(AnimationTypeId.Get))
             {
-                entity.isShowingProcessed = true;
-                gun.isActive = true;
-                entity.isShowingProcessing = false;
+                switching.isShowingProcessed = true;
+                newGun.isActive = true;
+                switching.isShowingProcessing = false;
                 return true;
             }
 
             return false;
         }
 
-        private static void ShowAnimation(GameEntity entity, GameEntity gun)
+        private static void ShowAnimation(GameEntity switching, GameEntity newGun)
         {
-            if (!entity.isShowingProcessing)
+            if (!switching.isShowingProcessing)
             {
-                gun.isViewActive = true;
-                gun.AnimancerAnimator.StartAnimation(AnimationTypeId.Get, 0.1f);
+                newGun.isViewActive = true;
+                newGun.AnimancerAnimator.StartAnimation(AnimationTypeId.Get, 0.1f);
             }
         }
     }

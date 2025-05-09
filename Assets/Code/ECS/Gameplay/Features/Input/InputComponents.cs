@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Heroes.Enums;
+﻿using Code.ECS.Gameplay.Features.Shoots.Enums;
 using Entitas;
 using UnityEngine;
 
@@ -11,6 +11,10 @@ namespace Code.ECS.Gameplay.Features.Input
     [Input] public class AimingAvailable : IComponent {}
     
     [Input] public class JumpingAvailable : IComponent {}
+    
+    [Input] public class DoubleShootingAvailable : IComponent {}
+    
+    [Input] public class DoubleShootingRequested : IComponent {}
     
     [Input] public class ShootingAvailable : IComponent {}
     
@@ -33,6 +37,8 @@ namespace Code.ECS.Gameplay.Features.Input
     [Input] public class MovementRequested : IComponent { }
     
     [Input] public class JumpingRequested : IComponent { }
+    
+    [Input] public class IdleFocusRequested : IComponent { }
     
     [Input] public class HasMouseAxis : IComponent { }
     

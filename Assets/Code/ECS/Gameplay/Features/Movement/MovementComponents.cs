@@ -29,6 +29,12 @@ namespace Code.ECS.Gameplay.Features.Movement
     
     [Game] public class Idle : IComponent {  }
     
+    [Game] public class IdleFocusRequested : IComponent {  }
+    
+    [Game] public class IdleFocusAvailable : IComponent {  }
+    
+    [Game] public class HasIdleFocus : IComponent {  }
+    
     [Game] public class OnGround : IComponent {  }
     
     [Game] public class DestructOnMovingFinished : IComponent {  }

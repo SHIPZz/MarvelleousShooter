@@ -1,4 +1,6 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Code.ECS.Gameplay.Features.Shoots.Enums;
+using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 {
@@ -7,6 +9,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly IGroup<GameEntity> _shootHolders;
         private readonly IGroup<GameEntity> _guns;
+        private readonly List<GameEntity> _buffer = new(3);
 
         public SetTargetRequestedGunOnSwitchingSystem(GameContext game)
         {
@@ -16,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
                     GameMatcher.ShootSwitchingAvailable,
                     GameMatcher.Switchable,
                     GameMatcher.TargetInputGun));
-            
+
             _guns = game.GetGroup(GameMatcher.AllOf(GameMatcher.Shootable,
                 GameMatcher.GunInputKey,
                 GameMatcher.Id));
@@ -24,24 +27,33 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Switching.Systems
 
         public void Execute()
         {
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
                 GameEntity targetGun = GetTargetGun(entity);
-                
-                if(targetGun == null)
+
+                if (targetGun == null)
+                {
+                    entity.isShootSwitchingAvailable = false;
                     continue;
+                }
 
                 entity.ReplaceTargetSwitchGunId(targetGun.Id);
             }
         }
 
-        private GameEntity GetTargetGun(GameEntity entity)
+        private GameEntity GetTargetGun(GameEntity switching)
+        {
+            return
+                GetGunByInput(switching.TargetInputGun);
+        }
+
+        private GameEntity GetGunByInput(GunInputTypeId gunInputType)
         {
             GameEntity targetGun = null;
 
             foreach (GameEntity gun in _guns)
             {
-                if (gun.GunInputKey == entity.TargetInputGun)
+                if (gun.GunInputKey == gunInputType)
                     targetGun = gun;
             }
 

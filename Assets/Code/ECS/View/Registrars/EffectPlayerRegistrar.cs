@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Shootables.Visuals;
+﻿using Code.ECS.Effects;
 using UnityEngine;
 
 namespace Code.ECS.View.Registrars

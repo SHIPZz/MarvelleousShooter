@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Common.AnimancerAnimator animancerAnimator { get { return (Code.ECS.Common.AnimancerAnimator)GetComponent(GameComponentsLookup.AnimancerAnimator); } }
-    public Code.Gameplay.Animations.AnimancerAnimatorPlayer AnimancerAnimator { get { return animancerAnimator.Value; } }
+    public Code.ECS.Gameplay.Features.Animations.AnimancerAnimatorPlayer AnimancerAnimator { get { return animancerAnimator.Value; } }
     public bool hasAnimancerAnimator { get { return HasComponent(GameComponentsLookup.AnimancerAnimator); } }
 
-    public GameEntity AddAnimancerAnimator(Code.Gameplay.Animations.AnimancerAnimatorPlayer newValue) {
+    public GameEntity AddAnimancerAnimator(Code.ECS.Gameplay.Features.Animations.AnimancerAnimatorPlayer newValue) {
         var index = GameComponentsLookup.AnimancerAnimator;
         var component = (Code.ECS.Common.AnimancerAnimator)CreateComponent(index, typeof(Code.ECS.Common.AnimancerAnimator));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceAnimancerAnimator(Code.Gameplay.Animations.AnimancerAnimatorPlayer newValue) {
+    public GameEntity ReplaceAnimancerAnimator(Code.ECS.Gameplay.Features.Animations.AnimancerAnimatorPlayer newValue) {
         var index = GameComponentsLookup.AnimancerAnimator;
         var component = (Code.ECS.Common.AnimancerAnimator)CreateComponent(index, typeof(Code.ECS.Common.AnimancerAnimator));
         component.Value = newValue;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Movement.Visuals
@@ -10,7 +10,8 @@ namespace Code.ECS.Gameplay.Features.Movement.Visuals
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
             context.CreateCollector(GameMatcher.Running.Added(),
-                GameMatcher.MovementAnimAvailable.Added(),GameMatcher.RunningAnimAvailable.Added());
+                GameMatcher.MovementAnimAvailable.Added(),
+                GameMatcher.RunningAnimAvailable.Added());
 
         protected override bool Filter(GameEntity entity) => entity.hasAnimancerAnimator 
                                                              && entity.isMovementAnimAvailable

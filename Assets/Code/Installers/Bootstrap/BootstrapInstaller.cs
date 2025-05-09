@@ -4,6 +4,9 @@ using Code.ECS.Common.Physics;
 using Code.ECS.Common.Services;
 using Code.ECS.Common.Time;
 using Code.ECS.Gameplay.Features.Cameras.Factories;
+using Code.ECS.Gameplay.Features.Effects;
+using Code.ECS.Gameplay.Features.Heroes.Factory;
+using Code.ECS.Gameplay.Features.Shoots.Factory;
 using Code.ECS.Infrastructure.StateMachine;
 using Code.ECS.Systems;
 using Code.ECS.View.Factory;
@@ -12,12 +15,7 @@ using Code.Gameplay.Cameras.Shake;
 using Code.Gameplay.Common;
 using Code.Gameplay.Common.Services.Raycast;
 using Code.Gameplay.Common.Timer;
-using Code.Gameplay.Effects;
-using Code.Gameplay.Heroes.Factory;
-using Code.Gameplay.Heroes.Services;
-using Code.Gameplay.Input;
 using Code.Gameplay.LevelDatas;
-using Code.Gameplay.Shootables.Factory;
 using Code.Gameplay.Sounds;
 using Code.InfraStructure.AssetManagement_1;
 using Code.InfraStructure.AssetManagement;
@@ -114,7 +112,6 @@ namespace Code.Installers.Bootstrap
         private void BindHeroServices()
         {
             Container.Bind<IHeroFactory>().To<HeroFactory>().AsSingle(); 
-            Container.BindInterfacesTo<HeroRepository>().AsSingle();
         }
 
         private void BindLevelDataProvider()
@@ -125,7 +122,7 @@ namespace Code.Installers.Bootstrap
 
         private void BindEffectServices()
         {
-            Container.Bind<IEffectFactory>().To<EffectFactory>().AsSingle();
+            Container.Bind<IEffectViewFactory>().To<EffectViewFactory>().AsSingle();
         }
 
         private void BindAssetManagementServices()

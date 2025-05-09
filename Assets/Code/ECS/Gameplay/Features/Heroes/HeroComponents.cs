@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.Heroes
 {
-    [Game] public class Hero : IComponent { }
+    [Game] public class HeroComponent : IComponent { }
     
     [Game] public class ConnectedWithHero : IComponent { }
     

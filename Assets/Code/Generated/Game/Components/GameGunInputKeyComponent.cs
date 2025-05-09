@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent gunInputKey { get { return (Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent)GetComponent(GameComponentsLookup.GunInputKey); } }
-    public Code.Gameplay.Heroes.Enums.GunInputTypeId GunInputKey { get { return gunInputKey.Value; } }
+    public Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId GunInputKey { get { return gunInputKey.Value; } }
     public bool hasGunInputKey { get { return HasComponent(GameComponentsLookup.GunInputKey); } }
 
-    public GameEntity AddGunInputKey(Code.Gameplay.Heroes.Enums.GunInputTypeId newValue) {
+    public GameEntity AddGunInputKey(Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId newValue) {
         var index = GameComponentsLookup.GunInputKey;
         var component = (Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceGunInputKey(Code.Gameplay.Heroes.Enums.GunInputTypeId newValue) {
+    public GameEntity ReplaceGunInputKey(Code.ECS.Gameplay.Features.Shoots.Enums.GunInputTypeId newValue) {
         var index = GameComponentsLookup.GunInputKey;
         var component = (Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent)CreateComponent(index, typeof(Code.ECS.Gameplay.Features.Shoots.GunInputKeyComponent));
         component.Value = newValue;

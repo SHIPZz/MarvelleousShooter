@@ -14,11 +14,7 @@ namespace Code.ECS.Gameplay.Features.Cameras
     
     [Game] public class MaxCameraRotation : IComponent { public float Value; }
     
-    [Game] public class CurrentCameraRotation : IComponent { public Quaternion Value; }
-    
     [Game] public class BaseCameraRotation : IComponent { public Quaternion Value; }
-    
-    [Game] public class FinalCameraRotation : IComponent { public Quaternion Value; }
     
     [Game] public class FinalRecoilRotation : IComponent { public Quaternion Value; }
     

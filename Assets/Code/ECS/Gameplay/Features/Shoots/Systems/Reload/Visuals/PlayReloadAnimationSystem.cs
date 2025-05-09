@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Gameplay.Animations;
+using Code.ECS.Gameplay.Features.Animations.Enums;
 using Entitas;
 
 namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload.Visuals
@@ -19,7 +19,7 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Reload.Visuals
         {
             foreach (GameEntity entity in entities)
             {
-                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Reload);
+                entity.AnimancerAnimator.StartAnimation(AnimationTypeId.Recharge);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using UnityEngine;
 
 namespace Code.ECS.Gameplay.Features.TargetCollection
 {
@@ -9,11 +10,27 @@ namespace Code.ECS.Gameplay.Features.TargetCollection
     
     [Game] public class CollectTargetsInterval : IComponent { public float Value; }
     
+    [Game] public class CastFromTargetTransform : IComponent { public Transform Value; }
+    
+    [Game] public class CastDirection : IComponent { public Vector3 Value; }
+    
+    [Game] public class CastDistance : IComponent { public float Value; }
+    
     [Game] public class CollectTargetsTimer : IComponent { public float Value; }
     
     [Game] public class Radius : IComponent { public float Value; }
     
     [Game] public class ReadyToCollectTargets : IComponent {  }
+    
+    [Game] public class CastFromCamera : IComponent {  }
+    
+    [Game] public class HitDetected : IComponent {  }
+    
+    [Game] public class OnAnimationEndCast : IComponent {  }
+    
+    [Game] public class OnAnimationEndCastRequested : IComponent {  }
+    
+    [Game] public class CastFromStartPosition : IComponent {  }
     
     [Game] public class CollectingAvailable : IComponent {  }
     

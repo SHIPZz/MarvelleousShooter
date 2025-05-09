@@ -20,8 +20,6 @@ namespace Code.ECS.Gameplay.Features.Shoots.Systems.Ammo
             foreach (GameEntity entity in _entities)
             {
                 entity.isAmmoAvailable = entity.AmmoCountLeft > 0;
-                
-                entity.isAmmoDecreased = entity.AmmoCountLeft < entity.AmmoCount;
             }
         }
     }
